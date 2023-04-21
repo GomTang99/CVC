@@ -1,7 +1,6 @@
 @import "reset.css";
 @import "mypage.css";
 @import "community.css";
-@import "dsadsa";
 body {
   display: flex;
   flex-direction: column;
