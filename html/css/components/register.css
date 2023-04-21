@@ -54,6 +54,8 @@ input[type="submit"]{
     border-radius: 25px;
     background-color: slateblue;
     color: white;
+    cursor: pointer;
+    border: 3px solid white;
 }
 
 input[type="reset"]{
@@ -62,4 +64,6 @@ input[type="reset"]{
     border-radius: 25px;
     background-color: slateblue;
     color: white;
+    cursor: pointer;
+    border: 3px solid white;
 }

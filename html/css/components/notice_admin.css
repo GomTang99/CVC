@@ -9,8 +9,12 @@ ul{
 }
 
 li{
+    width: 100px;
+    height: 50px;
     display: inline-block;
-    margin: 30px 50px;
+    margin: 10px 50px;
+    text-align: center;
+    line-height: 50px;
 }
 
 a{
@@ -25,6 +29,13 @@ a{
     height: 40px;
 }
 
+
+.header_top li:hover{
+    cursor: pointer;
+    background-color: rgba(255, 190, 255, .3);
+    border-radius: 25px;
+}
+
 .header_bottom{
     display: flex;
     position: relative;
@@ -37,6 +48,43 @@ a{
     transform: translate(-50%, -50%);
     color: rgb(92, 26, 123);
 }
+
+.login_register > li:first-child{
+    transform: translateX(40px);
+}
+
+#content1 > a{
+    width: 125px;
+    height: 30px;
+    position: absolute;
+    right: 4%;
+    top: 22.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s;
+}
+
+#content1 > .edit{
+    position: absolute;
+    right: 12%;
+    top: 22.5%;
+}
+
+#content1 > a:hover{
+    background-color: rgb(228, 210, 242);
+    border: 3px solid rgb(228, 74, 239);
+    color: white;
+}
+
+
+
+.login_register > li:last-child{
+    transform: translateX(-30px);
+}
+
+
+
 /* header_end */
 
 .con_top{

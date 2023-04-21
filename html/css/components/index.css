@@ -38,6 +38,9 @@ header{
 
 .logo{
     width: 10%;
+    height: 10px;
+    position: relative;
+    top: -45px;
 }
 
 .menu_wrap{
@@ -46,10 +49,38 @@ header{
     justify-content: space-between;
 }
 
+.menu_wrap > li:hover{
+    background-color: rgb(238, 198, 238);
+    border-radius: 25px;
+}
+
+.menu_wrap > li{
+    width: 40%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    transition: background-color .5s;
+    border-radius: 25px;
+}
+
 .menu_wrap_1{
     width: 10%;
     display: flex;
     justify-content: space-between;
+}
+
+.menu_wrap_1 > li:hover{
+    background-color: rgb(238, 198, 238);
+    border-radius: 25px;
+}
+
+.menu_wrap_1 > li{
+    width: 60%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    transition: background-color .5s;
+    border-radius: 25px;
 }
 
 /* header_end */
@@ -58,7 +89,7 @@ header{
     width: 100%;
     height: 360px;
 
-    background: url(../../img/banner.gif) no-repeat center / cover;
+    background: url(../../../img/banner.gif) no-repeat center / cover;
     margin: 0 auto;
 }
 
@@ -95,16 +126,20 @@ footer{
     padding: 50px 0;
 }
 
-.footer_txt{
+footer .footer_txt *{
     width: 80%;
+    font-size: 20px;
     margin: 0 auto;
     display: flex;
-    gap: 20px;
     color: white;
     font-size: 20px;
     flex-direction: column;
 }
 
-.inner p > b{
-    margin-right: 40px;
+footer .footer_txt > p{
+    line-height: 40px;
+}
+
+footer .footer_txt > p > b{
+    margin: 0;
 }
