@@ -106,7 +106,7 @@ header{
 .in_section{
     width: 80%;
     height: 900px;
-    background-color: bisque;
+    background-color: rgb(214, 190, 234);
     margin: 150px auto;
     display: flex;
     justify-content: space-around;
