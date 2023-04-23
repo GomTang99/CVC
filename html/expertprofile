@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>expertprofile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .menu_wrap{
+            width: 1200px;
+            height: 100px;
+            background-color: white;
+            margin: 0 auto;
+            display: flex;
+            margin:auto;
+        }
+
+        .logo{
+            width: 100px;
+            height: 50px;
+            background-color: blueviolet;
+            margin: 25px;
+            float:left;
+        }
+
+        .menu_bar{
+                width: 1000px;
+                height: 50px;
+                background-color: white;
+                display: inline-block;
+                text-align: center;
+                line-height: 50px;
+                margin-top: 25px;
+                margin-left: 25px;
+            }
+
+            .menu_bar > .menu > li:first-child{
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:nth-child(2){
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:nth-child(3){
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:last-child{
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left; 
+                margin-right: 20px;
+            }
+
+            .menu1_wrap{
+                width: 1200px;
+                display: flex;
+                justify-content: space-between;
+                background-color: rgb(194, 154, 186);
+                margin: 0px auto;
+            }
+
+            .menu1_wrap > li{
+                width: 25%;
+                height: 60px;
+                position: relative;
+            }
+
+            .menu1_wrap > li > a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color:black;
+                font-weight: bold;
+                position: relative;
+            }
+
+            .profile_section{
+                width: 1200px;
+                background-color: rgb(255, 246, 255);
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+                margin: 0px auto;
+                justify-content: space-between;
+                row-gap: 30px;
+            }
+
+            .profile_wrap{
+                width: 350px; background: white;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            
+            .profile_wrap .profile_box1 {
+                padding: 30px; border:1px solid #555;
+                display: flex; flex-flow: row nowrap; align-items: center;
+                position:relative;
+            }
+            .profile_wrap .profile_box1 .photo{
+                width:130px; height: 130px; background: rgb(173, 170, 170);
+                border-radius: 50%; margin-right: 16px;
+            }
+            .profile_wrap .profile_box1 .photo img{}
+            .profile_wrap .profile_box1 .right{}
+            .profile_wrap .profile_box1 .right h1{}
+            .profile_wrap .profile_box1 .right p{}
+            .profile_wrap .profile_box1 #profile_open{
+                width: 40px; height: 40px;
+                position: absolute; right: 0; bottom: 0;
+            }
+            .profile_wrap .profile_box2 {
+                height: 100px; border: 1px solid #222;
+                padding: 30px;
+                display: flex; flex-flow: column nowrap;
+            }
+            .profile_wrap .profile_box2 a {
+                margin-bottom: 16px;
+            }
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="menu_wrap">
+        <div class="logo">
+            logo
+        </div>
+
+        <div class="menu_bar">
+            <ul class="menu">
+                <li>커뮤니티</li>
+                <li>채용정보</li>
+                <li>컨설턴트</li>
+                <li>고객센터/공지사항</li>
+            </ul>
+        </div>
+    </div>
+
+    <ul class="menu1_wrap">
+        <li>
+            <a>전문가프로필</a>
+        </li>
+    </ul>
+
+    <div class="profile_section">
+         <div class="profile_wrap">
+            <div class="profile_box1">
+                <div class="photo"><img src="" alt=""></div>
+                  <div class="right">
+                     <h3>profile name</h3>
+                      <p>contents</p>
+                  </div>
+                 <button type="button" id="profile_open">
+                   <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+                <div class="profile_box2">
+                  <a>content1</a>
+                  <a>content2</a>
+                  <a>content3</a>
+                </div>
+
+        </div>
+
+            <div class="profile_wrap">
+                 <div class="profile_box1">
+                  <div class="photo"><img src="" alt=""></div>
+                   <div class="right">
+                     <h3>profile name</h3>
+                     <p>contents</p>
+                   </div>
+                  <button type="button" id="profile_open">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                 </div>
+                 <div class="profile_box2">
+                   <a>content1</a>
+                   <a>content2</a>
+                   <a>content3</a>
+                 </div>
+              </div>
+         
+            <div class="profile_wrap">
+                 <div class="profile_box1">
+                   <div class="photo"><img src="" alt=""></div>
+                    <div class="right">
+                      <h3>profile name</h3>
+                     <p>contents</p>
+                    </div>
+                 <button type="button" id="profile_open">
+                    <i class="fa-solid fa-arrow-right"></i>
+                 </button>
+                 </div>
+                <div class="profile_box2">
+                  <a>content1</a>
+                  <a>content2</a>
+                  <a>content3</a>
+               </div>
+            </div>
+
+            <div class="profile_wrap">
+                <div class="profile_box1">
+                  <div class="photo"><img src="" alt=""></div>
+                   <div class="right">
+                     <h3>profile name</h3>
+                    <p>contents</p>
+                   </div>
+                <button type="button" id="profile_open">
+                   <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                </div>
+               <div class="profile_box2">
+                 <a>content1</a>
+                 <a>content2</a>
+                 <a>content3</a>
+              </div>
+           </div>
+
+           <div class="profile_wrap">
+            <div class="profile_box1">
+              <div class="photo"><img src="" alt=""></div>
+               <div class="right">
+                 <h3>profile name</h3>
+                <p>contents</p>
+               </div>
+            <button type="button" id="profile_open">
+               <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            </div>
+           <div class="profile_box2">
+             <a>content1</a>
+             <a>content2</a>
+             <a>content3</a>
+          </div>
+       </div>
+
+       <div class="profile_wrap">
+        <div class="profile_box1">
+          <div class="photo"><img src="" alt=""></div>
+           <div class="right">
+             <h3>profile name</h3>
+            <p>contents</p>
+           </div>
+        <button type="button" id="profile_open">
+           <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        </div>
+       <div class="profile_box2">
+         <a>content1</a>
+         <a>content2</a>
+         <a>content3</a>
+      </div>
+   </div>
+
+     </div>
+    </div>
+
+</body>
+</html>
