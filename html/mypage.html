@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/css/style.css" />
+    <title>My page</title>
+  </head>
+  <body>
+    <header>
+      <a href="#">
+        <img src="../public/img/logo.png" alt="logo" />
+      </a>
+      <div class="header_menu1">
+        <a href="../html/community.html">커뮤니티</a>
+        <a href="../html/employ_infor.html">채용정보</a>
+        <a href="../html/expertprofile.html">컨설턴트</a>
+        <a href="../html/notice.html">고객센터 / 공지사항</a>
+      </div>
+
+      <div class="header_menu2">
+        <!-- <a href="#">로그인</a>
+        <a href="#">회원가입</a> -->
+        <a href="../html/mypage.html">마이페이지</a>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="mypage_profile col">
+        <img class="profile_avatar" src="../public/img/logo.png" alt="avatar" />
+        <input type="file" />
+        <br />
+        <span style="font-size: 20px">@사용자아이디</span>
+        <br />
+        <p style="padding: 5px; border: 1px solid black">
+          간단한
+          자기소개입니다.ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+        </p>
+        <br />
+        <span style="font-size: 18px">-자기소개서 보관함-</span>
+        <div class="profile_cvContainer">
+          <ul>
+            <li><span>1111</span><span>✏️</span></li>
+            <li><span>2222</span><span>✏️</span></li>
+            <li><span>3333</span><span>✏️</span></li>
+            <li><span>4444</span><span>✏️</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mypage_cv col">
+        <span
+          style="
+            font-size: 30px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: thistle;
+            color: white;
+          "
+          >나의 자기소개서</span
+        >
+        <br />
+        <span class="cv_title">1111</span>
+        <label for="cv_1">1. 지원동기 및 입사 후포부</label>
+        <textarea class="cv_content" name="" id="cv_1"></textarea>
+        <span>0/400</span>
+
+        <label for="cv_2">2. 경험(성장과정, 직무관련 경험 등)</label>
+        <textarea class="cv_content" name="" id="cv_2"></textarea>
+        <span>0/400</span>
+
+        <label for="cv_3">3. 성격의 장단점</label>
+        <textarea class="cv_content" name="" id="cv_3"></textarea>
+        <span>0/400</span>
+
+        <label for="cv_4">4. 직무역량</label>
+        <textarea class="cv_content" name="" id="cv_4"></textarea>
+        <span>0/400</span>
+        <br />
+        <div class="cv_btn">
+          <button class="cv_saveBtn">저장하기</button>
+          <button class="cv_deleteBtn">삭제</button>
+        </div>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

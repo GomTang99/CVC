@@ -1,0 +1,89 @@
+.community_content {
+    flex-direction: column;
+    background-color: thistle;
+  }
+  .content_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    background-color: mediumpurple;
+    color: white;
+    padding: 10px;
+  }
+  .content_header span {
+    margin-left: 40px;
+  }
+  .content_communitySearchForm {
+    display: flex;
+    width: 30%;
+    margin-right: 20px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 30px;
+  }
+  .content_communitySearchForm input {
+    width: 90%;
+    font-size: 20px;
+    margin: 0px 10px;
+    border: none;
+  }
+  .content_communitySearchForm input:focus {
+    outline: none;
+  }
+  .content_communitySearchForm i {
+    color: black;
+    margin-right: 10px;
+  }
+  
+  .content_community {
+    position: relative;
+    padding: 50px;
+    text-align: center;
+  }
+  .community_add {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: skyblue;
+  }
+  .community_header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px 0px;
+    color: white;
+    background-color: mediumpurple;
+  }
+  .community_list {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-bottom: 1px solid black;
+  }
+  .community_list:hover {
+    background-color: white;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .date {
+    width: 15%;
+  }
+  .title {
+    width: 45%;
+  }
+  .writer {
+    width: 20%;
+  }
+  .likes {
+    width: 10%;
+  }
+  .views {
+    width: 10%;
+  }
