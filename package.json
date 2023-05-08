@@ -18,5 +18,8 @@
     "url": "https://github.com/GomTang99/CVC/issues"
   },
   "homepage": "https://github.com/GomTang99/CVC#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
