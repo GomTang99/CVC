@@ -1,10 +1,11 @@
-import { mypage, resume } from "../controllers/userController";
+// import { mypage, resume, edit } from "../controllers/userController";
 
-const express = require("express");
+// const express = require("express");
 
-const userRouter = express.Router();
+// const userRouter = express.Router();
 
-userRouter.get("/mypage", mypage);
-userRouter.get("/resume", resume);
+// userRouter.get("/mypage", mypage); //마이페이지
+// userRouter.get("/resume", resume); //나의 자기소개서쓰기
+// userRouter.get("/edit", edit); //프로필 편집
 
-export default userRouter; //index.js로 익스포트
+// export default userRouter; //index.js로 익스포트
