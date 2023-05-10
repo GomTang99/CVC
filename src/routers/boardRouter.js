@@ -1,3 +1,4 @@
+import express from "express";
 import {
   recruit,
   recruitDetail,
@@ -7,11 +8,9 @@ import {
   freeboardDetail,
   notice,
   noticeDetail,
-  qa,
-  qaDetail,
-} from "../controllers/boardController";
-
-const express = require("express");
+  service,
+  serviceDetail,
+} from "../controllers/boardController.js";
 
 const boardRouter = express.Router();
 
@@ -23,7 +22,7 @@ boardRouter.get("/freeboard", freeboard); //자유게시판
 boardRouter.get("/freeboard/:id", freeboardDetail); //자유게시판 상세페이지
 boardRouter.get("/notice", notice); //공지사항
 boardRouter.get("/notice/:id", noticeDetail); //공지사항 상세페이지
-boardRouter.get("/QA", qa); //Q&A
-boardRouter.get("/QA/:id", qaDetail); //Q&A 상세페이지
+boardRouter.get("/service", service); //Q&A
+boardRouter.get("/service/:id", serviceDetail); //Q&A 상세페이지
 
 export default boardRouter; //index.js로 익스포트

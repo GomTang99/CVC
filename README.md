@@ -20,6 +20,6 @@
 /board/freeboard/:id -> 자유게시판 상세페이지
 /board/notice -> 공지사항
 /board/notice/:id -> 공지사항 상세페이지
-/board/QA(?) -> 고객센터/Q&A
-/board/QA/:id -> Q&A상세페이지
+/board/service -> 고객센터
+/board/service/:id -> Q&A상세페이지
 ....

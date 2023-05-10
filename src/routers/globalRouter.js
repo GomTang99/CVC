@@ -1,6 +1,6 @@
-import { main } from "../controllers/boardController";
-import { join, login, findpw } from "../controllers/userController";
-const express = require("express");
+import express from "express";
+import { main } from "../controllers/boardController.js";
+import { join, login, findpw } from "../controllers/userController.js";
 
 const globalRouter = express.Router();
 
