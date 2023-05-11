@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+/* reset */
+
+header {
+  width: 100%;
+  height: 100px;
+  top: 0;
+  left: 0;
+}
+
+.in_header {
+  width: 1600px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 10%;
+  height: 10px;
+  position: relative;
+  top: -45px;
+}
+
+.menu_wrap {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu_wrap > li:hover {
+  background-color: rgb(238, 198, 238);
+  border-radius: 25px;
+}
+
+.menu_wrap > li {
+  width: 40%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  transition: background-color 0.5s;
+  border-radius: 25px;
+}
+
+.menu_wrap_1 {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu_wrap_1 > li:hover {
+  background-color: rgb(238, 198, 238);
+  border-radius: 25px;
+}
+
+.menu_wrap_1 > li {
+  width: 60%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  transition: background-color 0.5s;
+  border-radius: 25px;
+}
+
+/* header_end */
+
+.section_1 {
+  width: 100%;
+  height: 360px;
+  background: url(../../public/img/banner.gif) no-repeat center / cover;
+  margin: 0 auto;
+}
+
+/* section_1_end */
+
+.section_2 {
+  width: 100%;
+}
+
+.playlist {
+  margin-right: 50px;
+}
+
+.in_section {
+  width: 80%;
+  height: 900px;
+  background-color: rgb(214, 190, 234);
+  margin: 150px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.left > textarea {
+  width: 90%;
+  height: 180px;
+  margin: 15px 10px;
+}
+
+footer {
+  background-color: #1c1c1c;
+  padding: 50px 0;
+}
+
+footer .footer_txt * {
+  width: 80%;
+  font-size: 20px;
+  margin: 0 auto;
+  display: flex;
+  color: white;
+  font-size: 20px;
+  flex-direction: column;
+}
+
+footer .footer_txt > p {
+  line-height: 40px;
+}
+
+footer .footer_txt > p > b {
+  margin: 0;
+}

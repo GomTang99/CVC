@@ -3,6 +3,8 @@ import morgan from "morgan"; //http메소드, url, status code등을 확인 할 
 import globalRouter from "./routers/globalRouter.js";
 import userRouter from "./routers/userRouter.js";
 import boardRouter from "./routers/boardRouter.js";
+import path from "path";
+const __dirname = path.resolve();
 
 const logger = morgan("dev");
 const PORT = 5948; //로컬호스트 포트번호
@@ -14,6 +16,7 @@ const handleServer = () => {
   console.log(`✅ 서버 가동 http://localhost:${PORT}`);
 };
 
+app.use(express.static("src/css"));
 app.use(logger); //모든 route에 미들웨어를 삽입 맨위에 올라와있어야 적용됨
 app.listen(PORT, handleServer); //서버 가동
 

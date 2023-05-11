@@ -1,4 +1,9 @@
-export const main = (req, res) => res.send("main");
+import path from "path";
+const __dirname = path.resolve();
+
+export const main = (req, res) => {
+  res.sendFile(__dirname + "/src/html/index.html");
+};
 export const recruit = (req, res) => res.send("recruit");
 export const recruitDetail = (req, res) => res.send("recruitDetail");
 export const expert = (req, res) => res.send("expert");
