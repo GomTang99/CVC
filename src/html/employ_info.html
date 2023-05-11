@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+<<<<<<< HEAD
+    <link rel="stylesheet" href="../employ_info.css">
+    <title>infor</title>
+</head>
+
+<body>
+
+    <div class="menu_wrap">
+        <h1 class="logo">
+            <a href="../html/index.html"><img src="../public/img/logo.png" alt="logo"></a>
+        </h1>
+        <div class="menu_bar">
+            <ul class="menu">
+                <li><a href="../html/community.html">커뮤니티</a></li>
+                <li><a href="../html/employ_infor.html">채용정보</a></li>
+                <li><a href="../html/expertprofile.html">컨설턴트</a></li>
+                <li><a href="../html/notice.html">고객센터/공지사항</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <ul class="menu1_wrap">
+        <li>
+            <a><h1>채용정보</h1></a>
+        </li>
+        <form class="box">
+            <input type="text" >
+            <input type="submit" value="검색">
+        </form>
+    </ul>
+
+    <div class="main_wrap">
+        <div class="main">
+        <div class="section_search">
+            <ul class="dep1">
+            <div class="container">
+                <div class="selectbox">
+                    <select name="" id="">
+                        <option value="">지역</option>
+                        <option value="">지역1</option>
+                        <option value="">지역2</option>
+                    </select>
+                </div>
+                <div class="selectbox">
+                    <select name="" id="">
+                        <option value="">경력</option>
+                        <option value="">유</option>
+                        <option value="">무</option>
+                    </select>
+                </div>
+                <div class="selectbox">
+                    <select name="" id="">
+                        <option value="">상세직무</option>
+                        <option value="">상세직무1</option>
+                        <option value="">상세직무2</option>
+                    </select>
+                </div>
+                    <li>
+                        <button>선택 조건 검색</button>
+                    </li>
+            </div>
+            </ul>
+        </div>
+
+=======
+    <title>infor</title>
+    
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .menu_wrap{
+            width: 1280px;
+            height: 100px;
+            background-color: white;
+            margin: 0 auto;
+            display: flex;
+            margin:auto;
+        }
+
+        .logo{
+            width: 100px;
+            height: 50px;
+            background-color: blueviolet;
+            margin: 25px;
+            float:left;
+        }
+
+        .menu_bar{
+                width: 1200px;
+                height: 50px;
+                background-color: white;
+                display: inline-block;
+                text-align: center;
+                line-height: 50px;
+                margin-top: 25px;
+                margin-left: 25px;
+            }
+
+            .menu_bar > .menu > li:first-child{
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:nth-child(2){
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:nth-child(3){
+                width: 184px;
+                height: 50px;
+                background-color: white;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .menu_bar > .menu > li:last-child{
+                width: 210px;
+                height: 50px;
+                background-color: white;
+                float: left; 
+                margin-right: 10px;
+            }
+
+            .menu1_wrap{
+                width: 1200px;
+                display: flex;
+                /* justify-content: space-between;*/
+                background-color: #bdb7cc;
+                margin: 30px auto;
+            }
+
+            .menu1_wrap > li{
+                width: 25%;
+                height: 60px;
+                position: relative;
+            }
+
+            .menu1_wrap > li > a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color:rgb(8, 7, 7);
+                font-weight: bold;
+                position: relative;
+            }
+
+            .menu1_wrap{
+                width: 1200px;
+                display: flex;
+                justify-content: space-between;
+                background-color: #bdb7cc;
+               /* margin: 30px auto;*/
+            }
+
+            .menu1_wrap > li{
+                width: 25%;
+                height: 60px;
+                position: relative;
+            }
+
+            .menu1_wrap > li > a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color:rgb(14, 14, 14);
+                font-weight: bold;
+                position: relative;
+            }
+
+
+            form.box input{
+                border: none;
+            }
+
+            form.box input[type=text] {
+                background-color: #fff;
+                width: 300px;
+                padding: 13px;
+                margin-top: -4px;
+                /* border-top-left-radius: 25px ;
+                border-bottom-left-radius: 25px ; */
+                border-radius: 25px 0 0 25px;
+            }
+
+            form.box input[type=submit]{
+                width : 80px;
+                height: 30px;
+                background-color: #fff;
+                padding: 5px;
+                border-radius: 0 25px 25px 0;
+                border: none;
+                margin-left: -6px;
+                margin-top: 20px;
+                font-size: 18px;
+            }
+
+            .main_wrap{
+                width : 1200px;
+                height: 1300px;
+                background-color: #fbf9fc;
+                display: flex;
+                margin: 30px auto;
+                margin-top: -30px;
+                /* margin-left: 26% ;
+                margin-top: -30px;  */
+                
+            }
+
+            .main > .section_search{
+                width:1100px;
+                height: 392px;
+                background-color: #fff;
+                margin-left: 50px;
+                margin-top: 40px;
+                display: flex;
+                border : 2px solid #bdb7cc;
+            }
+
+            ul , li{
+                list-style: none;
+            }
+
+            a{
+                text-decoration: none;
+                color : inherit
+            }
+
+            .main_wrap .dep1{
+                font-size: 0;
+            }
+
+            .main_wrap .dep1 > li {
+                display: inline-block;
+                width: 270px;
+                vertical-align: top;
+                background: #fff;
+                text-align: left;
+                font-size: 16px;
+            }
+
+
+            .main_wrap .dep1 > li:hover > a{
+                background: #ddd;
+            }
+
+            .main_wrap .dep1 > li:hover > .dep2{
+                display: block;
+            }
+
+            .main_wrap .dep1 > li > a {
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .container{
+                width: 1000px;
+                height: 80px;
+                overflow: hidden;
+                display: flex;
+                justify-items: center;
+                align-items: center;
+                margin-top: 20px;
+                margin-left: 30px;
+            }
+
+            .selectbox{
+                width:270px;
+                position: relative;
+            }
+
+            .selectbox::before{
+                content: '';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: .5rem;
+                
+            }
+
+            select{
+                width: 250px;
+                height: 50px;
+                border: 1px solid #EEE;
+                border-radius: .25rem;
+                padding: .5rem;
+                display: flex;
+                background-color: white;
+                outline: 0;
+                cursor: pointer;
+                font-size: 20px;
+            }
+          
+            .main > .infor_box{
+                width: 1100px;
+                height: 800px;
+                margin-top: 40px;
+                margin-left: 50px;
+                background-color: white;
+                display: flex;
+                border: 2px solid #bdb7cc;
+            }
+
+            
+
+            button{
+                width: 220px;
+                height: 40px;
+                background-color: #bdb7cc;
+                text-align: center; font-size: 24px;
+                color: white;
+                position : relative;  top:-2px;   margin-left: 40px;     
+                border: 2px solid #bdb7cc ;
+            }
+
+            button:focus{
+                outline: 0;
+            }
+
+            button:hover{
+                cursor: pointer;
+            }
+
+
+            .infor{
+                width: 1000px;
+                height: 150px;
+                display: flex;
+
+            }
+            
+            .infor > li{
+                width: 120px;
+                height: 20px;
+                position: relative;
+                padding: 60px;
+                font-size: 20px;
+            }
+
+            .infor > li > a{
+                display: block;
+                width: 80%;
+                height: 80%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color:black;
+                position: relative;
+            }
+
+
+            .tab_content{
+                margin-left: 50px;
+            }
+
+            input[type="radio"]{display: none;}
+            input[type="radio"] + label {display: inline-block; margin-top:20px; width: 150px; padding:20px;
+                background: #fefefe; color:#000000;font-size:24px;cursor:pointer;}
+            input[type="radio"]:checked + label{background: #bdb7cc; color:#fffdfd;}
+
+            .conbox{width:1100px; height: 600px;background: #ffffff; border: 2px solid #b597e1; 
+                margin-left : 50px; margin: auto; display: none;}
+            input[id="tab01"]:checked ~ .con1 {display: block;}
+            input[id="tab02"]:checked ~ .con2 {display: block;}
+            input[id="tab03"]:checked ~ .con3 {display: block;}
+            
+
+    </style>
+
+    <head>
+        <body>
+         
+            <div class="menu_wrap">
+                <div class="logo">
+                    로고
+                </div>
+        
+                <div class="menu_bar">
+                    <ul class="menu">
+                        <li><h2>커뮤니티</h2></li>
+                        <li><h2>채용정보</h2></li>
+                        <li><h2>컨설턴트</h2></li>
+                        <li><h2>고객센터/공지사항</h2></li>
+                    </ul>
+                </div>
+            </div>
+        
+
+            <ul class="menu1_wrap">
+                <li>
+                    <a><h1>채용정보</h1></a>
+                </li>
+                <form class="box">
+                    <input type="text" >
+                    <input type="submit" value="검색">
+                </form>
+            </ul>
+
+            <div class="main_wrap">
+                <div class="main">
+                <div class="section_search">
+                  <ul class="dep1">
+                    <div class="container">
+                        <div class="selectbox">
+                            <select name="" id="">
+                                <option value="">지역</option>
+                                <option value="">지역1</option>
+                                <option value="">지역2</option>
+                            </select>
+                        </div>
+                        <div class="selectbox">
+                            <select name="" id="">
+                                <option value="">경력</option>
+                                <option value="">유</option>
+                                <option value="">무</option>
+                            </select>
+                        </div>
+                        <div class="selectbox">
+                            <select name="" id="">
+                                <option value="">상세직무</option>
+                                <option value="">상세직무1</option>
+                                <option value="">상세직무2</option>
+                            </select>
+                        </div>
+                         <li>
+                          <button>선택 조건 검색</button>
+                          </li>
+                    </div>
+                  </ul>
+                </div>
+        
+>>>>>>> c96d133c5a5014c1fc72f1a77d85a89b26af7346
+                <div class="tab_content">
+                    <input type="radio" name="tabmenu" id="tab01" checked>
+                    <label for = "tab01">진행중</label>
+                    <input type="radio" name="tabmenu" id="tab02">
+                    <label for = "tab02">마감</label>
+                    <input type="radio" name="tabmenu" id="tab03">
+                    <label for = "tab03">예상일정</label>
+
+                    <div class="conbox con1"> 
+                        <div class="infor">
+                        <li>(주)ㅇㅇㅇㅇ</li>
+                        <li>신입공개채용</li>
+                        <li>~2023.02.12</li>
+                        <li><button>자소서 작성해보기</button></li>
+                        </div>
+
+                        <div class="infor">
+                            <li>(주)ㅇㅇㅇㅇ</li>
+                            <li>신입공개채용</li>
+                            <li>~2023.02.12</li>
+                            <li><button>자소서 작성해보기</button></li>
+                            </div>
+                    </div>
+                    <div class="conbox con2"> 
+                        <div class="infor">
+                            <li>(주)ㄴㄴㄴㄴ</li>
+                            <li>신입공개채용</li>
+                            <li>~2023.02.12</li>
+                            <li><button>자소서 작성해보기</button></li>
+                        </div>
+
+                        <div class="infor">
+                            <li>(주)ㄴㄴㄴㄴ</li>
+                            <li>신입공개채용</li>
+                            <li>~2023.02.12</li>
+                            <li><button>자소서 작성해보기</button></li>
+                            </div>
+                    </div>
+                    <div class="conbox con3"> 
+                        <div class="infor">
+                            <li>(주)ㅁㅁㅁㅁ</li>
+                            <li>신입공개채용</li>
+                            <li>~2023.02.12</li>
+                            <li><button>자소서 작성해보기</button></li>
+                        </div>
+
+                        <div class="infor">
+                            <li>(주)ㅁㅁㅁㅁ</li>
+                            <li>신입공개채용</li>
+                            <li>~2023.02.12</li>
+                            <li><button>자소서 작성해보기</button></li>
+                            </div>
+                    </div>
+                 </div>
+<<<<<<< HEAD
+
+=======
+                 
+>>>>>>> c96d133c5a5014c1fc72f1a77d85a89b26af7346
+                </div>
+              </div>
+            </div>
+        </body>
+<<<<<<< HEAD
+</html>
+=======
+    </head>
+>>>>>>> c96d133c5a5014c1fc72f1a77d85a89b26af7346

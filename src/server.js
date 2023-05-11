@@ -16,7 +16,7 @@ const handleServer = () => {
   console.log(`✅ 서버 가동 http://localhost:${PORT}`);
 };
 
-app.use(express.static("src/css"));
+app.use(express.static("src/css")); //css연결을 위한 정적폴더 설정 html에서 css:href설정시 css안적어도됨
 app.use(logger); //모든 route에 미들웨어를 삽입 맨위에 올라와있어야 적용됨
 app.listen(PORT, handleServer); //서버 가동
 
