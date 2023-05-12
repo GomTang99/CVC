@@ -16,10 +16,14 @@ const handleServer = () => {
   console.log(`✅ 서버 가동 http://localhost:${PORT}`);
 };
 
-app.use(express.static("src/css")); //css연결을 위한 정적폴더 설정 html에서 css:href설정시 css안적어도됨
+app.set("view engine", "ejs");
+app.set("views", process.cwd() + "/src/views");
 app.use(logger); //모든 route에 미들웨어를 삽입 맨위에 올라와있어야 적용됨
-app.listen(PORT, handleServer); //서버 가동
+app.use(express.static("src/css")); //css연결을 위한 정적폴더 설정 html에서 css:href설정시 css안적어도됨
 
+//route
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/board", boardRouter);
+
+app.listen(PORT, handleServer); //서버 가동
