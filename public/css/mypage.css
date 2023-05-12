@@ -1,3 +1,97 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul{
+  list-style: none;
+}
+
+li{
+  width: 100px;
+  height: 50px;
+  display: inline-block;
+  margin: 10px 50px;
+  text-align: center;
+  line-height: 50px;
+}
+
+a{
+  text-decoration: none;
+  color: initial;
+}
+
+
+.header_top{
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+}
+
+
+.header_top li:hover{
+  cursor: pointer;
+  background-color: rgba(255, 190, 255, .3);
+  border-radius: 25px;
+}
+
+.header_bottom{
+  display: flex;
+  position: relative;
+  border-bottom: 2px solid black;
+}
+
+.sub_title{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(92, 26, 123);
+}
+
+.login_register > li:first-child{
+  transform: translateX(40px);
+}
+
+.logo{
+  padding-bottom: 30px;
+}
+
+#content1 > a{
+  width: 125px;
+  height: 30px;
+  position: absolute;
+  right: 4%;
+  top: 22.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s;
+}
+
+#content1 > a:hover{
+  background-color: rgb(228, 210, 242);
+  border: 3px solid rgb(228, 74, 239);
+  color: white;
+}
+
+
+
+.login_register > li:last-child{
+  transform: translateX(-30px);
+}
+
+.sub_title > h1{
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* header_end */
+
+
 .header_menu1 {
     display: flex;
     width: 70%;
@@ -29,10 +123,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 3px dotted black;
+    border: 3px dotted rgb(15, 14, 14);
     margin-top: 5px;
   }
   .profile_cvContainer li {
+    width: auto;
     display: flex;
     justify-content: space-between;
     margin: 10px;

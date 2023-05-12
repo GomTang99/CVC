@@ -4,82 +4,92 @@
     list-style: none;
 }
 
-.menu_wrap{
-    width: 1280px;
-    height: 100px;
-    background-color: white;
-    margin: 0 auto;
+ul{
+    list-style: none;
+  }
+  
+  li{
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    margin: 10px 50px;
+    text-align: center;
+    line-height: 50px;
+  }
+  
+  a{
+    text-decoration: none;
+    color: initial;
+  }
+  
+  
+  .header_top{
     display: flex;
-}
+    justify-content: end;
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  
+  .header_top li:hover{
+    cursor: pointer;
+    background-color: rgba(255, 190, 255, .3);
+    border-radius: 25px;
+  }
+  
+  .header_bottom{
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid black;
+  }
+  
+  .sub_title{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(92, 26, 123);
+  }
+  
+  .login_register > li:first-child{
+    transform: translateX(40px);
+  }
+  
+  .logo{
+    padding-bottom: 30px;
+  }
+  
+  #content1 > a{
+    width: 125px;
+    height: 30px;
+    position: absolute;
+    right: 4%;
+    top: 22.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s;
+  }
+  
+  #content1 > a:hover{
+    background-color: rgb(228, 210, 242);
+    border: 3px solid rgb(228, 74, 239);
+    color: white;
+  }
+  
+  
+  
+  .login_register > li:last-child{
+    transform: translateX(-30px);
+  }
+  
+  .sub_title > h1{
+    font-size: 32px;
+    font-weight: bold;
+  }
 
-.menu_wrap > .menu{
-    width: 60%;
-    display: flex;  
-    justify-content: space-between;
-    margin: 60px auto;
-}
-
-.logo{
-    width: 10%;
-    height: 10px;
-    margin-top: 25px;
-    float:left;
-    margin-right: 50px;
-}
-
-.menu_bar{
-        width: 1200px;
-        height: 50px;
-        background-color: white;
-        display: inline-block;
-        text-align: center;
-        line-height: 50px;
-        margin-top: 25px;
-        margin-left: 25px;
-    }
-
-    .menu a{
-        transition: background-color .5s;
-    }
-    
-    .menu a:hover{
-        background-color: rgb(238, 198, 238);
-        border-radius: 25px;
-        display: inline-block;
-        width: 150px;
-    }
-
-    .menu_bar > .menu > li:first-child{
-        width: 184px;
-        height: 50px;
-        background-color: white;
-        float: left;
-        margin-right: 20px;
-    }
-
-    .menu_bar > .menu > li:nth-child(2){
-        width: 184px;
-        height: 50px;
-        background-color: white;
-        float: left;
-        margin-right: 20px;
-    }
-
-    .menu_bar > .menu > li:nth-child(3){
-        width: 184px;
-        height: 50px;
-        background-color: white;
-        float: left;
-        margin-right: 20px;
-    }
-
-    .menu_bar > .menu > li:last-child{
-        width: 210px;
-        height: 50px;
-        background-color: white;
-        float: left; 
-        margin-right: 10px;
-    }
+  /* header_end */
 
     .menu1_wrap{
         width: 1200px;
@@ -197,6 +207,7 @@
     }
 
     .main_wrap .dep1{
+        width: 100%;
         font-size: 0;
     }
 
@@ -224,14 +235,14 @@
     }
 
     .container{
-        width: 1000px;
+        width: 100%;
         height: 80px;
         overflow: hidden;
         display: flex;
         justify-items: center;
         align-items: center;
         margin-top: 20px;
-        margin-left: 30px;
+        margin-left: 20px;
     }
 
     .selectbox{
@@ -274,12 +285,14 @@
 
 
     button{
-        width: 220px;
+        width: 250px;
         height: 40px;
         background-color: #bdb7cc;
         text-align: center; font-size: 24px;
         color: white;
-        position : relative;  top:-2px;   margin-left: 40px;     
+        position : relative;
+        top: 3px;
+        left: -40px;
         border: 2px solid #bdb7cc ;
     }
 
@@ -291,31 +304,20 @@
         cursor: pointer;
     }
 
-
     .infor{
-        width: 1000px;
+        width: 100%;
         height: 150px;
         display: flex;
-
+        justify-content: space-between;
     }
 
     .infor > li{
-        width: 120px;
+        width: 200px;
         height: 20px;
         position: relative;
         padding: 60px;
         font-size: 20px;
-    }
-
-    .infor > li > a{
-        display: block;
-        width: 80%;
-        height: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color:black;
-        position: relative;
+        margin: initial;
     }
 
 
