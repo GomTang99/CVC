@@ -2,24 +2,24 @@
 @import "mypage.css";
 @import "community.css";
 
-body {
+/* body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 header {
-  display: flex;
   width: 100%;
   padding: 20px;
   border-bottom: 2px solid black;
 }
 
 header img {
-  width: 100px;
-  margin-left: 40px;
+  width: 100%;
+  display: block;
+  
 }
 .content {
   display: flex;
   width: 80%;
   margin-top: 10px;
-}
+} */
