@@ -1,14 +1,16 @@
 export const join = (req, res) => {
-  res.render("register.ejs", { pageTitle: "register" });
+  res.render("join.ejs", { pageTitle: "join" });
 };
 export const login = (req, res) => {
-  res.sendFile(process.cwd() + "/src/html/register.html");
+  res.render("login.ejs", { pageTitle: "login" });
 };
 
 export const edit = (req, res) => res.send("editprofile");
 
 export const mypage = (req, res) => {
-  res.sendFile(process.cwd() + "/src/html/mypage.html");
+  res.render("mypage.ejs", { pageTitle: "mypage" });
 };
 export const resume = (req, res) => res.send("resume");
-export const findpw = (req, res) => res.send("findpw");
+export const findpw = (req, res) => {
+  res.render("find_pw.ejs", { pageTitle: "findpw" });
+};
