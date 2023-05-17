@@ -1,9 +1,12 @@
-export const join = (req, res) => {
+export const getJoin = (req, res) => {
   res.render("join.ejs", { pageTitle: "join" });
 };
-export const login = (req, res) => {
+export const postJoin = (req, res) => {};
+
+export const getLogin = (req, res) => {
   res.render("login.ejs", { pageTitle: "login" });
 };
+export const postLogin = (req, res) => {};
 
 export const edit = (req, res) => res.send("editprofile");
 
