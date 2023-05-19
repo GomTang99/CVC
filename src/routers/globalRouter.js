@@ -4,7 +4,7 @@ import {
   getJoin,
   postJoin,
   getLogin,
-  postLoin,
+  postLogin,
   findpw,
 } from "../controllers/userController.js";
 
