@@ -1,10 +1,9 @@
 import express from "express"; //express
 import morgan from "morgan"; //http메소드, url, status code등을 확인 할 수 있는 미들웨어
+import "./db.js";
 import globalRouter from "./routers/globalRouter.js";
 import userRouter from "./routers/userRouter.js";
 import boardRouter from "./routers/boardRouter.js";
-import path from "path";
-const __dirname = path.resolve();
 
 const logger = morgan("dev");
 const PORT = 5948; //로컬호스트 포트번호
