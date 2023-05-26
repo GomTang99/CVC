@@ -1,19 +1,33 @@
-import mysql from "mysql2"; //보안문제로 mysql2사용권장
+import dotenv from "dotenv";
+import mysql from "mysql2";
+dotenv.config();
 
 //연결정보 .env파일에서 불러옴
-const connection = mysql.createConnection({
+const connection = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
+};
+
+const db = mysql.createConnection(connection); // DB 커넥션 생성
+db.connect(); // mysql과 연결
+
+db.connect((err) => {
+  if (err) {
+    console.log("❌ DB 연결실패!");
+  } else {
+    console.log("✅ DB 연결!");
+  }
 });
 
-connection.query("SELECT * FROM CVC", function (err, results, fields) {
-  if (err) {
+db.query("SELECT * FROM cvc.user", function (err, results, fields) {
+  if (!err) {
+    console.log(results);
+  } else {
     console.log(err);
   }
-  console.log(results);
 });
 
-connection.end();
+db.end(); // 연결 해제

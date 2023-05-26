@@ -4,7 +4,8 @@ import {
   recruitDetail,
   expert,
   expertDetail,
-  freeboard,
+  getFreeboard,
+  postFreeboard,
   freeboardDetail,
   notice,
   noticeDetail,
@@ -18,7 +19,7 @@ boardRouter.get("/recruit", recruit); //채용정보
 boardRouter.get("/recruit/:id", recruitDetail); //채용정보 상세페이지
 boardRouter.get("/expert", expert); //전문가정보
 boardRouter.get("/expert/:id", expertDetail); //전문가정보 상세페이지
-boardRouter.get("/freeboard", freeboard); //자유게시판
+boardRouter.route("/freeboard").get(getFreeboard).post(postFreeboard); //자유게시판
 boardRouter.get("/freeboard/:id", freeboardDetail); //자유게시판 상세페이지
 boardRouter.get("/notice", notice); //공지사항
 boardRouter.get("/notice/:id", noticeDetail); //공지사항 상세페이지

@@ -14,8 +14,11 @@ export const expert = (req, res) => {
 export const expertDetail = (req, res) => {
   res.render("expert.ejs", { pageTitle: "expert:detail" });
 };
-export const freeboard = (req, res) => {
+export const getFreeboard = (req, res) => {
   res.render("freeboard.ejs", { pageTitle: "freeboard" });
+};
+export const postFreeboard = (req, res) => {
+  return res.redirect("/");
 };
 export const freeboardDetail = (req, res) => {
   res.render("freeboard.ejs", { pageTitle: "freeboard:detail" });

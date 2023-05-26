@@ -19,6 +19,7 @@ app.set("view engine", "ejs");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger); //모든 route에 미들웨어를 삽입 맨위에 올라와있어야 적용됨
 app.use(express.static("src/css")); //css연결을 위한 정적폴더 설정 html에서 css:href설정시 css안적어도됨
+app.use(express.json());
 
 //route
 app.use("/", globalRouter);
