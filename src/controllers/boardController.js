@@ -1,3 +1,5 @@
+import db from "../db.js";
+
 export const main = (req, res) => {
   res.render("index.ejs", { pageTitle: "index" });
 };
@@ -15,6 +17,14 @@ export const expertDetail = (req, res) => {
   res.render("expert.ejs", { pageTitle: "expert:detail" });
 };
 export const getFreeboard = (req, res) => {
+  const queryString = "SELECT * FROM user";
+
+  db.query(queryString, (err, rows, fields) => {
+    if (err) {
+      throw err;
+    }
+    console.log(rows);
+  });
   res.render("freeboard.ejs", { pageTitle: "freeboard" });
 };
 export const postFreeboard = (req, res) => {

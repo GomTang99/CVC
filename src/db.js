@@ -15,6 +15,7 @@ const db = mysql.createConnection(connection); // DB 커넥션 생성
 db.connect(); // mysql과 연결
 
 db.connect((err) => {
+  //에러처리를 먼저해주어야 한다
   if (err) {
     console.log("❌ DB 연결실패!");
   } else {
@@ -22,12 +23,5 @@ db.connect((err) => {
   }
 });
 
-db.query("SELECT * FROM cvc.user", function (err, results, fields) {
-  if (!err) {
-    console.log(results);
-  } else {
-    console.log(err);
-  }
-});
-
-db.end(); // 연결 해제
+//컨트롤러에서 쿼리할 수 있도록 db 익스포트
+export default db;
