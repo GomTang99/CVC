@@ -1,19 +1,12 @@
 import express from "express"; //express
 import morgan from "morgan"; //http메소드, url, status code등을 확인 할 수 있는 미들웨어
-import "./db.js";
 import globalRouter from "./routers/globalRouter.js";
 import userRouter from "./routers/userRouter.js";
 import boardRouter from "./routers/boardRouter.js";
 
-const logger = morgan("dev");
-const PORT = 5948; //로컬호스트 포트번호
 const app = express(); //express 어플리케이션
+const logger = morgan("dev");
 //express application 이 만들어진 이후로 코드를 작성-------------------------------------------------
-
-//controller
-const handleServer = () => {
-  console.log(`✅ 서버 가동 http://localhost:${PORT}`);
-};
 
 app.set("view engine", "ejs");
 app.set("views", process.cwd() + "/src/views");
@@ -26,4 +19,4 @@ app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/board", boardRouter);
 
-app.listen(PORT, handleServer); //서버 가동
+export default app;

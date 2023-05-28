@@ -17,15 +17,19 @@ export const expertDetail = (req, res) => {
   res.render("expert.ejs", { pageTitle: "expert:detail" });
 };
 export const getFreeboard = (req, res) => {
-  const queryString = "SELECT * FROM user";
+  const queryString = "SELECT * FROM freeboard";
 
   db.query(queryString, (err, rows, fields) => {
     if (err) {
       throw err;
     }
     console.log(rows);
+    const freeboard = rows;
+    res.render("freeboard.ejs", {
+      pageTitle: "freeboard",
+      freeboard: rows,
+    });
   });
-  res.render("freeboard.ejs", { pageTitle: "freeboard" });
 };
 export const postFreeboard = (req, res) => {
   return res.redirect("/");
