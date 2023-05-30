@@ -113,6 +113,14 @@ header{
     border-radius: 25px;
 }
 
+.right > .save{
+    position: absolute;
+    right: 380px;
+    bottom: -500px;
+    width: 300px;
+    height: 80px;
+}
+
 .left > textarea{
     width: 90%;
     height: 180px;
