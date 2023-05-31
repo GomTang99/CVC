@@ -3,8 +3,8 @@
   <%-include("partials/head.ejs")%>
   <body>
     <%-include("partials/main_header.ejs")%>
-    <h1>내용------------------------------</h1>
-    <h2>자유게시판</h2>
+    <a href="/board/upload">글쓰기</a>
+
     <div style="display: flex; flex-direction: column; border: 1px solid black">
       <div style="display: flex; justify-content: space-between">
         <span>날짜</span>
@@ -13,15 +13,18 @@
         <span>추천수</span>
         <span>조회수</span>
       </div>
-      <div style="display: flex; justify-content: space-between">
-        <span><%= freeboard[0].freeboard_date %></span>
-        <span><%= freeboard[0].freeboard_writer %></span>
-        <span><%= freeboard[0].freeboard_title %></span>
-        <span><%= freeboard[0].freeboard_like %></span>
-        <span><%= freeboard[0].freeboard_views %></span>
-      </div>
+      <% freeboards.forEach(freeboard=>{%> 
+      <div style="display: flex;
+      justify-content: space-between; cursor: pointer"
+      onclick="location.href=`/board/freeboard/+<%= freeboard.id %>`" >
+      <span><%=freeboard.date%></span>
+      <span><%=freeboard.writer%></span>
+      <span><%=freeboard.title%></span>
+      <span><%=freeboard.like%></span>
+      <span><%=freeboard.views%></span>
+      <%}) %>
     </div>
-    <h1>------------------------------</h1>
+
     <%-include("partials/footer.ejs")%>
   </body>
 </html>

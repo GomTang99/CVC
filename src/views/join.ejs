@@ -3,9 +3,36 @@
   <%-include("partials/head.ejs")%>
   <body>
     <%-include("partials/main_header.ejs")%>
-    <h1>내용------------------------------</h1>
-    <h2>회원가입</h2>
-    <h1>------------------------------</h1>
+
+    <form method="POST">
+      <label for="id">ID</label>
+      <input id="id" name="id" type="text" />
+      <label for="password">비밀번호</label>
+      <input id="password" name="password" type="password" />
+      <label for="confirmPassword">비밀번호 확인</label>
+      <input id="confirmPassword" name="confirmPassword" type="password" />
+      <label for="name">이름</label>
+      <input id="name" name="name" type="text" />
+      <label for="nickname">닉네임</label>
+      <input id="nickname" name="nickname" type="text" />
+      <label for="radioGroup_gender">성별</label>
+      <div id="radioGroup_gender">
+        <input name="male" type="radio" />남성
+        <input name="female" type="radio" />여성
+      </div>
+      <label for="checkBoxGroup_interests">관심분야 (※1개이상 필수)</label>
+      <div id="checkBoxGroup_interests">
+        <input name="devData" type="checkbox" />개발/데이터
+        <input name="design" type="checkbox" />디자인
+        <input name="trade" type="checkbox" />물류무역
+        <input name="manufacture" type="checkbox" />제조생산
+        <input name="education" type="checkbox" />교육
+        <input name="medicalBio" type="checkbox" />의료/바이오
+        <input name="sales" type="checkbox" />영업
+        <input name="HR" type="checkbox" />인사HR
+      </div>
+    </form>
+
     <%-include("partials/footer.ejs")%>
   </body>
 </html>

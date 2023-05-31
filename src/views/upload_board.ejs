@@ -5,13 +5,14 @@
     <%-include("partials/main_header.ejs")%>
 
     <form method="POST">
-      <input id="id" name="id" type="text" placeholder="아이디" />
       <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="비밀번호"
+        id="title"
+        name="title"
+        type="text"
+        placeholder="제목을 입력해 주세요."
       />
+      <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      <input type="file" />
     </form>
 
     <%-include("partials/footer.ejs")%>
