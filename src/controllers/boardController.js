@@ -8,7 +8,32 @@ export const getUpload = (req, res) => {
   res.render("upload_board.ejs", { pageTitle: "Posting" });
 };
 export const postUpload = (req, res) => {
-  return res.render("/");
+  const { title, content } = req.body;
+  const queryString = "INSERT INTO freeboards (title, content) VALUES( ?,?)";
+  const params = [title, content];
+
+  db.query(queryString, params, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+    } else {
+      const gotoFreeboard = "SELECT * FROM freeboards";
+
+      db.query(gotoFreeboard, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/");
+        } else {
+          console.log(rows);
+          const freeboards = rows;
+          res.render("freeboard.ejs", {
+            pageTitle: "freeboard",
+            freeboards,
+          });
+        }
+      });
+    }
+  });
 };
 
 export const recruit = (req, res) => {
@@ -29,16 +54,19 @@ export const getFreeboard = (req, res) => {
 
   db.query(queryString, (err, rows, fields) => {
     if (err) {
-      throw err;
+      console.log(err);
+      res.redirect("/");
+    } else {
+      console.log(rows);
+      const freeboards = rows;
+      res.render("freeboard.ejs", {
+        pageTitle: "freeboard",
+        freeboards,
+      });
     }
-    console.log(rows);
-    const freeboards = rows;
-    res.render("freeboard.ejs", {
-      pageTitle: "freeboard",
-      freeboards,
-    });
   });
 };
+
 export const postFreeboard = (req, res) => {
   return res.redirect("/");
 };

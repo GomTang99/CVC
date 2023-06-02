@@ -1,8 +1,22 @@
+import db from "../db.js";
+
 export const getJoin = (req, res) => {
   res.render("join.ejs", { pageTitle: "join" });
 };
 export const postJoin = (req, res) => {
-  return res.redirect("/");
+  const { id, password, name, nickname } = req.body;
+  const queryString =
+    "INSERT INTO users (id,password,name,nickname) VALUES(?,?,?,?)";
+  const params = [id, password, name, nickname];
+
+  db.query(queryString, params, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+    } else {
+      res.render("login.ejs", { pageTitle: "login" });
+    }
+  });
 };
 
 export const getLogin = (req, res) => {

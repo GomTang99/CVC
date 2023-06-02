@@ -5,23 +5,30 @@
     <%-include("partials/main_header.ejs")%>
     <a href="/board/upload">글쓰기</a>
 
-    <div style="display: flex; flex-direction: column; border: 1px solid black">
-      <div style="display: flex; justify-content: space-between">
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        border: 1px solid black;
+      "
+    >
+      <div style="background-color: antiquewhite">
         <span>날짜</span>
-        <span>작성자</span>
         <span>제목</span>
         <span>추천수</span>
         <span>조회수</span>
       </div>
-      <% freeboards.forEach(freeboard=>{%> 
-      <div style="display: flex;
-      justify-content: space-between; cursor: pointer"
-      onclick="location.href=`/board/freeboard/+<%= freeboard.id %>`" >
-      <span><%=freeboard.date%></span>
-      <span><%=freeboard.writer%></span>
-      <span><%=freeboard.title%></span>
-      <span><%=freeboard.like%></span>
-      <span><%=freeboard.views%></span>
+      <% freeboards.forEach(freeboard=>{%>
+      <div
+        style="background-color: salmon; border-bottom: 1px solid black"
+        onclick="location.href=`/board/freeboard/+<%= freeboard.id %>`"
+      >
+        <span><%=freeboard.createdAt.substr(0,10)%></span>
+        <span><%=freeboard.title%></span>
+        <span><%=freeboard.like%></span>
+        <span><%=freeboard.views%></span>
+      </div>
       <%}) %>
     </div>
 

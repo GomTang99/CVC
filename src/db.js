@@ -9,6 +9,7 @@ const connection = {
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
+  dateStrings: "date", //시간을 문자열로 바꿔서 이쁘게 출력하려고
 };
 
 const db = mysql.createConnection(connection); // DB 커넥션 생성
