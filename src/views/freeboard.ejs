@@ -13,25 +13,25 @@
         border: 1px solid black;
       "
     >
-      <div style="background-color: antiquewhite">
+      <div style="background-color: thistle">
         <span>날짜</span>
         <span>제목</span>
         <span>추천수</span>
         <span>조회수</span>
+        <span>내용</span>
       </div>
       <% freeboards.forEach(freeboard=>{%>
       <div
-        style="background-color: salmon; border-bottom: 1px solid black"
-        onclick="location.href=`/board/freeboard/+<%= freeboard.id %>`"
+        style="background-color: aliceblue; border-bottom: 1px solid black"
+        onclick="location.href=`/board/freeboard/<%= freeboard.UID %>`"
       >
-        <span><%=freeboard.createdAt.substr(0,10)%></span>
+        <span><%=freeboard.createdAt.substr(0,18)%></span>
         <span><%=freeboard.title%></span>
         <span><%=freeboard.like%></span>
         <span><%=freeboard.views%></span>
+        <span><%=freeboard.content%></span>
       </div>
       <%}) %>
     </div>
-
-    <%-include("partials/footer.ejs")%>
   </body>
 </html>

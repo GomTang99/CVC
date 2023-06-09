@@ -9,7 +9,8 @@ export const getUpload = (req, res) => {
 };
 export const postUpload = (req, res) => {
   const { title, content } = req.body;
-  const queryString = "INSERT INTO freeboards (title, content) VALUES( ?,?)";
+  const queryString =
+    "INSERT INTO freeboards (title, content, UID) VALUES(?,?,LEFT(MD5(RAND()), 12))";
   const params = [title, content];
 
   db.query(queryString, params, (err, rows, fields) => {
@@ -71,7 +72,26 @@ export const postFreeboard = (req, res) => {
   return res.redirect("/");
 };
 export const freeboardDetail = (req, res) => {
-  res.render("index.ejs", { pageTitle: "freeboard:detail" });
+  const { id } = req.params;
+  const queryString = `SELECT * FROM freeboards where UID="${id}"`;
+
+  console.log(queryString);
+
+  db.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+    } else {
+      console.log(rows);
+      console.log("--------------");
+      const freeboards = rows[0];
+      console.log(freeboards);
+      res.render("boardDetail.ejs", {
+        pageTitle: freeboards.title,
+        freeboards,
+      });
+    }
+  });
 };
 export const notice = (req, res) => {
   res.render("notice.ejs", { pageTitle: "notice" });

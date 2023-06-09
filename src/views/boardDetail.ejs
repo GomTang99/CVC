@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include("partials/head.ejs")%>
+  <body>
+    <%-include("partials/main_header.ejs")%>
+
+    <h3><%=freeboards.title%></h3>
+    <div>
+      <span><%=freeboards.title%></span> |
+      <span><%=freeboards.createdAt%></span> |
+      <span><%=freeboards.views%></span> |
+      <span><%=freeboards.like%></span>
+    </div>
+    <div>
+      <p><%=freeboards.content%></p>
+    </div>
+  </body>
+</html>
