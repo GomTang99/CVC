@@ -20,7 +20,7 @@
             <div class="register_con">
                 <h3>아이디</h3>
                 <div class="con">
-                    <input type="text" placeholder="아이디" name="user_id">
+                    <input type="text" placeholder="아이디" name="user_id" id="user_name">
                     <input type="button" value="중복확인">
                 </div>
             </div>
@@ -29,23 +29,24 @@
             <div class="register_con">
                 <h3>비밀번호</h3>
                 <div class="con">
-                    <input type="password" placeholder="비밀번호" name="user_pw">
+                    <input type="password" placeholder="비밀번호" name="user_pw" id="user_pw">
                 </div>
             </div>
 
+            <!--
             <div class="register_con">
                 <h3>비밀번호 확인</h3>
                 <div class="con">
                     <input type="password" placeholder="비밀번호 확인">
                 </div>
             </div>
-            
+            -->
 
             <!-- 이름 -->
             <div class="register_con">
                 <h3>이름</h3>
                 <div class="con">
-                    <input type="text" placeholder="이름" name="user_name">
+                    <input type="text" placeholder="이름" name="user_name" id="user_name">
                 </div>
             </div>
 
@@ -65,14 +66,7 @@
             <div class="register_con">
                 <h3>이메일</h3>
                 <div class="con">
-                    <input type="email" name="user_email"> @
-                <select>
-                    <option>---이메일을 선택하세요---</option>
-                    <option>naver.com</option>
-                    <option>gmail.com</option>
-                    <option>dhu.ac.kr</option>
-                    <option>hanmail.net</option>
-                </select>
+                    <input type="email" id="email" name="user_email">
                 </div>
                 
             </div>
@@ -123,16 +117,40 @@
                 <input type = "submit" value = "가입하기" class="btn"/>
                 <input type = "reset" value = "취소" class="btn"/>
             </div>
-            
-
         </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
+    <!--<script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault(); //폼의 기본동작 중지
 
-        <script>
-            
-            
-        </script>
+                // 입력된 데이터 추출
+                let id = $('#user_id').val();
+                let pw = $('#user_pw').val();
+                let name = $('#user_name').val();
+                //let gender = $('#gender').val();
+                //let email = $('#email').val();
 
+                //Ajax 요청
+                $.ajax({
+                    type : 'POST',
+                    url : '/register',
+                    data : {id: user_id, pw: user_pw, name: user_name},
+                    success: function (response) {
+                        alert('데이터 삽입 성공3');
+                    },
+                    error: function (xhr, status, error) {
+                        alert('데이터 삽입 실패 : ' + error);
+                    }
+                });
+            });
+        });
+    </script>
 
+-->
 </body>
 </html>

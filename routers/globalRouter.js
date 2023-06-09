@@ -13,8 +13,15 @@ globalRouter.get("/login",(req, res) => {
 });
 
 globalRouter.get("/register",(req, res) => {
+    console.log("fffff")
     res.sendFile(process.cwd() + "/html/register.html");
 });
+
+globalRouter.post("/register",(req, res) => {
+    console.log("yyyyyy")
+
+    res.sendFile(process.cwd() + "/html/index.html");
+})
 
 globalRouter.get("/find_pw", (req, res) => {
     res.sendFile(process.cwd() + "/html/find_pw.html");

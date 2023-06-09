@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../public/css/writing_form.css">
+
+<title> C.V.C 자기소개서 작성 </title>
+
+</head>
+
+<body style="background-color:#e8c0f1">
+    <center>
+ <h1> C.V.C 자기소개서 작성</h1>
+ <table style="background-color: rgb(236, 169, 203);" boder = "" cellspacing = "1" >
+<FORM>
+  <tr>
+   <td>
+    <meta charset="UTF-8">
+    <title>글자수 세기</title>
+    <script>
+      function calc(){
+        document.getElementById('result').value =
+        document.getElementById('content').value.length;
+      }
+      </script>
+      </head>
+      <body>
+        <textarea id="content" rows="30" cols="75" onkeydown="calc()" onkeyup="calc()" onkeypress="cals()"></textarea>
+        <br>
+        공백 포함 <input type="number" id ="result" value="0" readonly> 자
+      </body>
+      </html>
+   <button type="button" class="btn btn-primary" style="float:right;">맞춤법검사</button>
+   </td>
+  </tr>
+ </FORM>
+</table>
+<br/>
+<button type="button" class="btn btn-primary" style="float:center;">저장</button>
+<button type="button" class="btn btn-primary" style="float:center;">취소</button>
+</html>
+

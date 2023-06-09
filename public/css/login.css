@@ -101,9 +101,16 @@ input[type="password"]{
     background-color: white;
 }
 
-.login_btn:hover > a{
+.login_btn:hover > input[type="submit"]{
     color: black;
 }
+
+input[type="submit"]{
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
 
 .caption{
     position: relative;

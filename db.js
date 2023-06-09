@@ -1,7 +1,9 @@
-import { response } from "express";
+import { request, response } from "express";
 import express from "express";
 import mysql from "mysql2";
 const app = express();
+import bodyParser from 'body-parser';
+//const bodyParser = require('body-parser');
 
 //Database connection pool
 const conn = mysql.createConnection({  // mysql 접속 설정
@@ -12,7 +14,7 @@ const conn = mysql.createConnection({  // mysql 접속 설정
     database: 'CVC'
 });
 
-conn.connect();
+//conn.connect();
 
 conn.connect((err) => {
     if (err) {
@@ -22,44 +24,41 @@ conn.connect((err) => {
     }
 });
 
+// JSON 데이터 파싱을 위한 body-parser 미들웨어 등록
+app.use(bodyParser.json());
 
+// POST 요청을 처리하는 라우트핸들러
+app.post('/register', (req, res) => {   
+    // 클라이언트에서 전송된 데이터 추출
+    const id = req.body.user_id;
+    const pw = req.body.user_pw;
+    const name = req.body.user_name;
+    //const gender = req.body.user_gender;
+    //const email = req.body.user_email;
 
-app.get('/register', function (req, res) {
-    conn.query('SELECT * FROM cvc.users',function (err, result, field) {
-        if (err) {
-            console.log(err);
-        }else {
-            console.log(result);
-        }
-    })
-    res.sendFile(path.join(__dirname + '/html/register.html'));
-});
+    //conn.connect((err) => {
+    //    if (err) {
+    //        console.error('MySQL 연결오류 : ', err);
+    //        res.status(500).json({error : 'MySQL 연결 오류'});
+    //    } else {
+    //        console.log('MySQL 연결 성공');
+    //    }
 
-app.post('/register', function (req, res) {
-    /*
-    var user_id = request.body.user_id;
-    console.log(user_id);
-    if (user_id) {
-        conn.query('SELECT * FROM cvc.users WHERE user_id = ?',[user_id], function (err, result, field) {
-            if (err) throw err;
-            if (result.length <= 0) {
-                conn.query('INSERT INTO cvc.users(user_id) VALUES(?)', [user_id], function (err, data) {
-                    if (err) {
-                        console.log(err);
-                    }else {
-                        console.log(data);
-                    }
-                });
-                res.send('아이디 입력성공');
+        // 데이터 삽입 쿼리 실행
+        console.log('데이터 삽입ffffff');
+        const sql = 'INSERT INTO cvc.users (user_id, user_pw, user_name) VALUSE (?, ?, ?)';
+        conn.query(sql, [id, pw, name], (err, result) => {
+            if (err) {
+                console.error('데이터 삽입 오류 : ', err);
+                //res.status(500).json({error: '데이터 삽입 오류'});
+                res.sendFile('/html/register');
+            } else {
+                console.log('데이터 삽입 성공1');
+                //res.status(200).json({Message : '데이터 삽입 성공2'});
+                res.sendFile('/html/index.html');
             }
         })
-    }
-    */
-   console.log("zzzzzzzzzzzzzzzz");
-    return res.redirect("/");
-});
-
-
+    })
 
 
 conn.end();
