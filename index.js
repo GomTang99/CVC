@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import session from "express-session";
 
 import "./db.js";
 
@@ -17,6 +18,14 @@ app.use(express.static(__dirname + "/C.V.C"));
 app.use('/public', express.static('public'));
 app.use('/img', express.static('img'));
 app.use(express.urlencoded({extended: true}));
+
+//세션 미들웨어
+app.use(session({
+    secret: 'cvc',
+    resave: false,
+    saveUninitialized: true
+}));
+
 
 app.use("/", globalRouter);
 app.use("/user", userRouter);

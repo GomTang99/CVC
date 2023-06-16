@@ -21,7 +21,7 @@
                 <h3>아이디</h3>
                 <div class="con">
                     <input type="text" placeholder="아이디" name="user_id" id="user_id">
-                    <input type="button" value="중복확인">
+                    <button id="check_Id">중복확인</button>
                 </div>
             </div>
 
@@ -123,34 +123,11 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
-    <!--<script>
-        $(document).ready(function() {
-            $('form').submit(function(event) {
-                event.preventDefault(); //폼의 기본동작 중지
+    <script>
 
-                // 입력된 데이터 추출
-                let id = $('#user_id').val();
-                let pw = $('#user_pw').val();
-                let name = $('#user_name').val();
-                //let gender = $('#gender').val();
-                //let email = $('#email').val();
 
-                //Ajax 요청
-                $.ajax({
-                    type : 'POST',
-                    url : '/register',
-                    data : {id: user_id, pw: user_pw, name: user_name},
-                    success: function (response) {
-                        alert('데이터 삽입 성공3');
-                    },
-                    error: function (xhr, status, error) {
-                        alert('데이터 삽입 실패 : ' + error);
-                    }
-                });
-            });
-        });
     </script>
 
--->
+
 </body>
 </html>

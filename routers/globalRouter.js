@@ -3,6 +3,8 @@ import conn from "../db.js";
 
 const globalRouter = express.Router();
 
+const app = express();
+
 //main홈페이지에서 넘어가는 페이지
 //globalRouter(index, login, register, find_pw)
 globalRouter.get("/", (req, res) => {
@@ -26,15 +28,14 @@ globalRouter.post("/login", (req, res) => {
     conn.query(sql, value, (err, result) => {
         if (err) {  
             console.log("로그인 실패 : ", err);
-            alert('로그인 실패');
             res.sendFile(process.cwd() + '/html/login.html');
-        }else if(result.length===0){
+        }else if(result.length === 0){
             console.log("로그인 실패 : ", err);
             res.sendFile(process.cwd() + '/html/login.html');
         } 
         else {
             console.log("로그인 성공!!");
-            res.sendFile(process.cwd() + '/html/index.html');
+            res.sendFile(process.cwd() + '/html/index(login).html');
         }
     });
 });
