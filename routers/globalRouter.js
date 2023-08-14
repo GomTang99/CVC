@@ -1,6 +1,7 @@
 import express from "express";
 import conn from "../db.js";
 
+
 const globalRouter = express.Router();
 
 const app = express();
@@ -10,6 +11,15 @@ const app = express();
 globalRouter.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/html/index.html");
 });
+
+/*
+globalRouter.get("/index(login)", (req, res) => {
+    const {id, pw} = req.session.user;
+    console.log(id);
+    console.log(pw);
+    res.sendFile(process.cwd() + "/html/index(login).html");
+});
+*/
 
 globalRouter.get("/login",(req, res) => {
     res.sendFile(process.cwd() + "/html/login.html");
@@ -34,7 +44,11 @@ globalRouter.post("/login", (req, res) => {
             res.sendFile(process.cwd() + '/html/login.html');
         } 
         else {
+            // 세션 설정
+            req.session.user = { id: id, pw: pw };
+
             console.log("로그인 성공!!");
+            //res.redirect("/index(login)");
             res.sendFile(process.cwd() + '/html/index(login).html');
         }
     });
@@ -70,6 +84,7 @@ globalRouter.post("/register",(req, res) => {
 globalRouter.get("/find_pw", (req, res) => {
     res.sendFile(process.cwd() + "/html/find_pw.html");
 });
+
 
 export default globalRouter;
 

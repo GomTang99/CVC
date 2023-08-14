@@ -57,6 +57,7 @@ a{
 
 .logo{
   padding-bottom: 30px;
+  z-index: -2;
 }
 
 #content1 > a{
@@ -180,4 +181,14 @@ a{
   }
   .views {
     width: 10%;
+  }
+
+
+  .write-click > a{
+    width: 5%;
+    line-height: 30px;
+    background-color: whitesmoke;
+    position: absolute;
+    top: 1.3%;
+    right: 4%;
   }
