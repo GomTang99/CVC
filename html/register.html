@@ -88,8 +88,7 @@
                     <select>
                         <option> 010 </option>
                     </select>
-                    <input type="phone_number" name="user_number">
-                    <input type="phone_number" name="user_number">
+                    <input type="phone_number" name="user_phone" id="user_phone">
                 </div>
             </div>
             
@@ -114,7 +113,7 @@
 
             <!-- 가입하기 버튼 -->
             <div class="register_btn">
-                <input type = "submit" value = "가입하기" class="btn"/>
+                <input type = "submit" value = "가입하기" class="btn" id="register_submit"/>
                 <input type = "reset" value = "취소" class="btn"/>
             </div>
         </form>
@@ -124,10 +123,227 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <script>
+/*
+document.addEventListener("DOMContentLoaded", () => {
+    const checkIdButton = document.getElementById("check_Id");
+    const registerButton = document.getElementById("register_Button");
+
+    checkIdButton.addEventListener("click", () => {
+        // 아이디 중복 확인 로직
+        const id = document.getElementById("user_id").value;
+        fetch(`/checkId?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.isDuplicate) {
+                    alert("이미 존재하는 아이디입니다.");
+                    registerButton.disabled = true; // 중복일 경우 가입 버튼 비활성화
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                    registerButton.disabled = false; // 중복이 아닐 경우 가입 버튼 활성화
+                }
+            });
+    });
+
+    registerButton.addEventListener("click", () => {
+        if (registerButton.disabled) {
+            alert("아이디 중복 확인이 필요합니다.");
+            return; // 중복인 경우 가입 처리 중단
+        }
+
+        // 회원 가입 처리 로직
+        const id = document.getElementById("user_id").value;
+        const pw = document.getElementById("user_pw").value;
+        const name = document.getElementById("user_name").value;
+        const email = document.getElementById("user_email").value;
+        const phone = document.getElementById("user_phone").value;
+
+        const userData = {
+            user_id: id,
+            user_pw: pw,
+            user_name: name,
+            user_email: email,
+            user_phone: phone
+        };
+
+        fetch("/register", {
+            method: "POST",
+            body: JSON.stringify(userData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("회원 가입이 완료되었습니다.");
+                window.location.href = "/login.html"; // 로그인 페이지로 이동
+            } else {
+                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
+            }
+        });
+    });
+});
+
+*/
+
+/*
+document.addEventListener("DOMContentLoaded", () => {
+    const checkIdButton = document.getElementById("check_Id");
+    const registerButton = document.getElementById("register_Button");
+
+    let isIdAvailable = false; 
+
+    checkIdButton.addEventListener("click", () => {
+        // 아이디 중복 확인 로직
+        const id = document.getElementById("user_id").value;
+        if (!id) {
+            alert("아이디를 입력하세요.");
+            return;
+        }
+        fetch(`/checkId?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.isDuplicate) {
+                    alert("이미 존재하는 아이디입니다.");
+                    registerButton.disabled = true;
+                    isIdAvailable = false;
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                    registerButton.disabled = false;
+                    isIdAvailable = true;
+                }
+            });
+    });
+
+    registerButton.addEventListener("click", () => {
+        if (!isIdAvailable) {
+            alert("아이디 중복 확인이 필요합니다.");
+            return;
+        }
+        
+        // 회원 가입 처리 로직
+        const id = document.getElementById("user_id").value;
+        const pw = document.getElementById("user_pw").value;
+        const name = document.getElementById("user_name").value;
+        const email = document.getElementById("user_email").value;
+        const phone = document.getElementById("user_phone").value;
+
+        if (!id || !pw || !name || !email || !phone) {
+            alert("필수사항을 입력하세요.");
+            return;
+        }
+
+        const userData = {
+            user_id: id,
+            user_pw: pw,
+            user_name: name,
+            user_email: email,
+            user_phone: phone
+        };
+
+        fetch("/register", {
+            method: "POST",
+            body: JSON.stringify(userData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("회원 가입이 완료되었습니다.");
+                window.location.href = "/login.html";
+            } else {
+                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
+            }
+        })
+        .catch(error => {
+            console.error("회원 가입 오류:", error);
+            alert("회원 가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+        });
+    });
+});
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    const checkIdButton = document.getElementById("check_Id");
+    const registerButton = document.getElementById("register_submit");
+    let isIdAvailable = false; // 
+
+
+    checkIdButton.addEventListener("click", (event) => {
+        event.preventDefault(); // 기본 클릭 동작 중지
+        const id = document.getElementById("user_id").value;
+        
+        // 아이디 중복 확인 로직 수행
+        fetch(`/checkId?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.isDuplicate) {
+                    alert("이미 존재하는 아이디입니다.");
+                    isIdAvailable = false;
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                    isIdAvailable = true;
+                }
+            })
+            .catch(error => {
+                console.error("아이디 중복 확인 오류:", error);
+                alert("아이디 중복 확인 중 오류가 발생했습니다.");
+            });
+    });
+
+    registerButton.addEventListener("click", (event) => {
+        event.preventDefault(); // 기본 제출 동작 중지
+
+        if (!isIdAvailable) {
+            alert("아이디 중복 확인이 필요합니다.");
+            return; // 중복확인이 필요한 경우 회원 가입 중단
+        }
+        
+        // 회원 가입 로직 수행
+        const id = document.getElementById("user_id").value;
+        const pw = document.getElementById("user_pw").value;
+        const name = document.getElementById("user_name").value;
+        const phone = document.getElementById("user_phone").value;
+
+        if (!id || !pw || !name || !phone) {
+            alert("필수 데이터가 누락되었습니다.");
+            return; // 회원 가입 중단
+        }
+        
+        const userData = {
+            user_id: id,
+            user_pw: pw,
+            user_name: name,
+            user_phone: phone
+        };
+        
+        fetch("/register", {
+            method: "POST",
+            body: JSON.stringify(userData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("회원 가입이 완료되었습니다.");
+                window.location.href = "login.html"; // 로그인 페이지로 이동
+            } else {
+                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
+            }
+        })
+        .catch(error => {
+            console.error("회원 가입 오류:", error);
+            //alert("회원 가입 중 오류가 발생했습니다.");
+        });
+    });
+});
 
 
     </script>
-
 
 </body>
 </html>
