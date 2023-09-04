@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import session from "express-session";
+import bodyParser from "body-parser";
 
 import "./db.js";
 
@@ -19,12 +20,16 @@ app.use('/public', express.static('public'));
 app.use('/img', express.static('img'));
 app.use(express.urlencoded({extended: true}));
 
-//세션 미들웨어
+
+// 세션 미들웨어
 app.use(session({
     secret: 'cvc',
     resave: false,
     saveUninitialized: true
 }));
+
+// Body-parser 설정
+app.use(bodyParser.urlencoded({ extended : true}));
 
 
 app.use("/", globalRouter);

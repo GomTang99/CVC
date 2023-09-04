@@ -15,7 +15,7 @@
     </div>
 
     <div class="info">
-        <form method="post" action="/register">
+        <form id="register_form" method="post" action="/register">
             <!-- 아이디 -->
             <div class="register_con">
                 <h3>아이디</h3>
@@ -123,222 +123,67 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <script>
-/*
-document.addEventListener("DOMContentLoaded", () => {
+
+    document.addEventListener("DOMContentLoaded", () => {
     const checkIdButton = document.getElementById("check_Id");
-    const registerButton = document.getElementById("register_Button");
+    const registerSubmit = document.getElementById("register_submit"); // form 요소 가져오기
+    let isIdAvailable = false;
 
-    checkIdButton.addEventListener("click", () => {
-        // 아이디 중복 확인 로직
-        const id = document.getElementById("user_id").value;
-        fetch(`/checkId?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.isDuplicate) {
-                    alert("이미 존재하는 아이디입니다.");
-                    registerButton.disabled = true; // 중복일 경우 가입 버튼 비활성화
-                } else {
-                    alert("사용 가능한 아이디입니다.");
-                    registerButton.disabled = false; // 중복이 아닐 경우 가입 버튼 활성화
-                }
-            });
-    });
-
-    registerButton.addEventListener("click", () => {
-        if (registerButton.disabled) {
-            alert("아이디 중복 확인이 필요합니다.");
-            return; // 중복인 경우 가입 처리 중단
+    async function checkId() {
+      const id = document.getElementById("user_id").value;
+      try {
+        const response = await fetch(`/checkId?id=${id}`);
+        const data = await response.json();
+        if (data.isDuplicate) {
+          alert("이미 존재하는 아이디입니다.");
+          isIdAvailable = false;
+        } else {
+          alert("사용 가능한 아이디입니다.");
+          isIdAvailable = true;
+          document.getElementById("register_submit").disabled = false;
         }
-
-        // 회원 가입 처리 로직
-        const id = document.getElementById("user_id").value;
-        const pw = document.getElementById("user_pw").value;
-        const name = document.getElementById("user_name").value;
-        const email = document.getElementById("user_email").value;
-        const phone = document.getElementById("user_phone").value;
-
-        const userData = {
-            user_id: id,
-            user_pw: pw,
-            user_name: name,
-            user_email: email,
-            user_phone: phone
-        };
-
-        fetch("/register", {
-            method: "POST",
-            body: JSON.stringify(userData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("회원 가입이 완료되었습니다.");
-                window.location.href = "/login.html"; // 로그인 페이지로 이동
-            } else {
-                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
-            }
-        });
-    });
-});
-
-*/
-
-/*
-document.addEventListener("DOMContentLoaded", () => {
-    const checkIdButton = document.getElementById("check_Id");
-    const registerButton = document.getElementById("register_Button");
-
-    let isIdAvailable = false; 
-
-    checkIdButton.addEventListener("click", () => {
-        // 아이디 중복 확인 로직
-        const id = document.getElementById("user_id").value;
-        if (!id) {
-            alert("아이디를 입력하세요.");
-            return;
-        }
-        fetch(`/checkId?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.isDuplicate) {
-                    alert("이미 존재하는 아이디입니다.");
-                    registerButton.disabled = true;
-                    isIdAvailable = false;
-                } else {
-                    alert("사용 가능한 아이디입니다.");
-                    registerButton.disabled = false;
-                    isIdAvailable = true;
-                }
-            });
-    });
-
-    registerButton.addEventListener("click", () => {
-        if (!isIdAvailable) {
-            alert("아이디 중복 확인이 필요합니다.");
-            return;
-        }
-        
-        // 회원 가입 처리 로직
-        const id = document.getElementById("user_id").value;
-        const pw = document.getElementById("user_pw").value;
-        const name = document.getElementById("user_name").value;
-        const email = document.getElementById("user_email").value;
-        const phone = document.getElementById("user_phone").value;
-
-        if (!id || !pw || !name || !email || !phone) {
-            alert("필수사항을 입력하세요.");
-            return;
-        }
-
-        const userData = {
-            user_id: id,
-            user_pw: pw,
-            user_name: name,
-            user_email: email,
-            user_phone: phone
-        };
-
-        fetch("/register", {
-            method: "POST",
-            body: JSON.stringify(userData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("회원 가입이 완료되었습니다.");
-                window.location.href = "/login.html";
-            } else {
-                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
-            }
-        })
-        .catch(error => {
-            console.error("회원 가입 오류:", error);
-            alert("회원 가입 중 오류가 발생했습니다. 다시 시도해주세요.");
-        });
-    });
-});
-*/
-
-document.addEventListener("DOMContentLoaded", () => {
-    const checkIdButton = document.getElementById("check_Id");
-    const registerButton = document.getElementById("register_submit");
-    let isIdAvailable = false; // 
-
+      } catch (error) {
+        console.error("아이디 중복 확인 오류:", error);
+        alert("아이디 중복 확인 중 오류가 발생했습니다.");
+      }
+    }
 
     checkIdButton.addEventListener("click", (event) => {
-        event.preventDefault(); // 기본 클릭 동작 중지
-        const id = document.getElementById("user_id").value;
-        
-        // 아이디 중복 확인 로직 수행
-        fetch(`/checkId?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.isDuplicate) {
-                    alert("이미 존재하는 아이디입니다.");
-                    isIdAvailable = false;
-                } else {
-                    alert("사용 가능한 아이디입니다.");
-                    isIdAvailable = true;
-                }
-            })
-            .catch(error => {
-                console.error("아이디 중복 확인 오류:", error);
-                alert("아이디 중복 확인 중 오류가 발생했습니다.");
-            });
+      event.preventDefault();
+      checkId();
     });
 
-    registerButton.addEventListener("click", (event) => {
-        event.preventDefault(); // 기본 제출 동작 중지
+    registerSubmit.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!isIdAvailable) {
+        alert("아이디 중복 확인이 필요합니다.");
+        return;
+      }
 
-        if (!isIdAvailable) {
-            alert("아이디 중복 확인이 필요합니다.");
-            return; // 중복확인이 필요한 경우 회원 가입 중단
-        }
-        
-        // 회원 가입 로직 수행
-        const id = document.getElementById("user_id").value;
-        const pw = document.getElementById("user_pw").value;
-        const name = document.getElementById("user_name").value;
-        const phone = document.getElementById("user_phone").value;
+      const formData = new FormData(registerForm);
+      const userData = {};
+      formData.forEach((value, key) => {
+        userData[key] = value;
+      });
 
-        if (!id || !pw || !name || !phone) {
-            alert("필수 데이터가 누락되었습니다.");
-            return; // 회원 가입 중단
-        }
-        
-        const userData = {
-            user_id: id,
-            user_pw: pw,
-            user_name: name,
-            user_phone: phone
-        };
-        
-        fetch("/register", {
-            method: "POST",
-            body: JSON.stringify(userData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("회원 가입이 완료되었습니다.");
-                window.location.href = "login.html"; // 로그인 페이지로 이동
-            } else {
-                alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
-            }
-        })
-        .catch(error => {
-            console.error("회원 가입 오류:", error);
-            //alert("회원 가입 중 오류가 발생했습니다.");
+      try {
+        const response = await fetch("/register", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
+
+        const data = await response.json();
+        if (data.success) {
+          alert("회원 가입이 완료되었습니다.");
+        } else {
+          alert("회원 가입에 실패했습니다. 다시 시도해주세요.");
+        }
+      } catch (error) {
+        console.error("회원 가입 오류:", error);
+      }
     });
 });
 
