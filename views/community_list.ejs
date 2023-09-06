@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../public/css/community.css">
+    <title>Community_List</title>
+  </head>
+  <body>
+    <header>
+      <div class="header_top">
+          <ul>
+              <li><a href="/board/employ_infor">채용정보</a></li>|
+              <li><a href="/board/expertprofile">컨설턴트</a></li>|
+              <li><a href="/board/notice">공지사항</a></li>
+          </ul>
+          <ul class="login_register">
+            <li><a href="/user/mypage">마이페이지</a></li>
+            <li><a href="/">로그아웃</a></li>
+          </ul>
+      </div>
+      <div class="header_bottom">
+          <div class="logo">
+              <h1><a href="/"><img src="../public/img/logo.png" alt="logo"></a></h1>
+          </div>
+          <div class="sub_title">
+              <h1>커뮤니티</h1>
+          </div>
+      </div>
+    </header>
+
+    <div class="community_content content">
+        <div class="content_header row">
+          <span>커뮤니티</span>
+          <form class="content_communitySearchForm">
+            <input type="text" />
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </form>
+        </div>
+        <div class="content_community">
+          <div class="write-click">
+            <a href="/board/write_community">작성</a>
+          </div>
+          <div class="community_header">
+            <span class="date">날짜</span>
+            <span class="title">제목</span>
+            <span class="writer">작성자</span>
+            <span class="views">조회수</span>
+          </div>
+          <ul id="postList" class="community_list">
+            <% posts.forEach(function(post) { %>
+              <li class="community_list">
+                <span class="date"><%= post.writedate %></span>
+                <span class="title"><%= post.subject %></span>
+                <span class="writer"><%= post.name %></span>
+                <!-- 조회수 필드 추가 -->
+                <span class="views"><%= post.views %></span>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+      <div class="dim" id="dim"></div>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- 여기에 추가적인 클라이언트 측 스크립트를 포함시킬 수 있습니다. -->
+
+  </body>
+</html>

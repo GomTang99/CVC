@@ -12,15 +12,6 @@ globalRouter.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/html/index.html");
 });
 
-/*
-globalRouter.get("/index(login)", (req, res) => {
-    const {id, pw} = req.session.user;
-    console.log(id);
-    console.log(pw);
-    res.sendFile(process.cwd() + "/html/index(login).html");
-});
-*/
-
 globalRouter.get("/login",(req, res) => {
     res.sendFile(process.cwd() + "/html/login.html");
 });
@@ -83,15 +74,16 @@ globalRouter.post("/register", (req, res) => {
     const pw = req.body.user_pw;
     const name = req.body.user_name;
     const phone = req.body.user_phone;
+    const email = req.body.user_email;
   
     // 필수 데이터 누락 여부 확인
-    if (!id || !pw || !name || !phone) {
+    if (!id || !pw || !name || !email || !phone) {
       res.status(400).json({ error: "필수 데이터가 누락되었습니다." });
       return;
     }
   
-    const sql = "INSERT INTO cvc.users (users_id, users_pw, users_name, users_phone) VALUES (?, ?, ?, ?)";
-    const values = [id, pw, name, phone];
+    const sql = "INSERT INTO cvc.users (users_id, users_pw, users_name, users_email, users_phone) VALUES (?, ?, ?, ?, ?)";
+    const values = [id, pw, name, email, phone];
   
     conn.query(sql, values, (err, result) => {
       if (err) {
@@ -110,6 +102,34 @@ globalRouter.post("/register", (req, res) => {
 globalRouter.get("/find_pw", (req, res) => {
     res.sendFile(process.cwd() + "/html/find_pw.html");
 });
+
+// 이메일 인증번호 발송
+globalRouter.post("/find_pw"), async (req, res) => {
+    // 클라이언트에서 전송한 email 주소 가져오기
+    const userEmail = req.body.user_email;
+    
+    // 인증번호 생성
+    const verificationCode = Math.floor(1000 + Math.randon() * 9000).toString();
+
+    // 이메일 전송 설정
+    const mailOptions = {
+        from: "parkjuneyoung194786@gmail.com",
+        to: userEmail , // 수신자 이메일 주소
+        subject: "비밀번호 재설정 인증 코드",
+        text: "인증코드: $(verificationCode)",
+    };
+
+    // 이메일 전송
+    transpoter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error("이메일 전송 중 오류 발생: ", error);
+            res.status(500).send("이메일 전송 오류");
+        } else {
+            console.log("인증코드가 발송되었습니다.");
+            res.status(200).send("이메일 전송 완료");
+        }
+    });
+}
 
 
 export default globalRouter;

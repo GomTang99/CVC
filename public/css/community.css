@@ -156,6 +156,7 @@ a{
     color: white;
     background-color: mediumpurple;
   }
+
   .community_list {
     display: flex;
     width: 100%;
@@ -163,11 +164,23 @@ a{
     padding: 10px 0px;
     border-bottom: 1px solid black;
   }
-  .community_list:hover {
-    background-color: white;
-    transition: 0.2s ease-in-out;
+
+  #postList {
+    flex-direction: column;
   }
   
+  #postList > .community_list:hover {
+    background-color: white;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  #postList > .community_list{
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: 10px 0px;
+  }  
+
   .date {
     width: 20%;
   }
