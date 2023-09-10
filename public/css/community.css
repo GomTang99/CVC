@@ -181,6 +181,12 @@ a{
     margin: 10px 0px;
   }  
 
+  #postList > .community_list > a{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }  
+
   .date {
     width: 20%;
   }

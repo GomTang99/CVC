@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/public/css/postDetail.css">
+    <title>게시글 상세 페이지</title>
+</head>
+<body>
+    <header>
+        <div class="header_top">
+            <ul>
+                <li><a href="/board/employ_infor">채용정보</a></li>|
+                <li><a href="/board/expertprofile">컨설턴트</a></li>|
+                <li><a href="/board/notice">공지사항</a></li>
+            </ul>
+            <ul class="login_register">
+              <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="header_bottom">
+            <div class="logo">
+                <h1><a href="/"><img src="/public/img/logo.png" alt="logo"></a></h1>
+            </div>
+            <div class="sub_title">
+                <h1>게시글</h1>
+            </div>
+        </div>
+      </header>
+
+        <div class="community_content content">
+            <div class="post-detail">
+                <h1><%= post.subject %></h1>
+                <p class="name"><strong>작성자:</strong> <%= post.name %></p>
+                <p class="write-date"><strong>작성일:</strong> <%= post.writedate %></p>
+                <div class="post-content">
+                    <%= post.content %>
+                </div>
+            </div>
+
+            <!-- 댓글표시 -->
+            <div class="comments">
+                <h2>댓글</h2>
+                <ul>
+                  <% comments.forEach(function(comment) { %>
+                    <li>
+                      <strong><%= comment.author %></strong>
+                      <p><%= comment.content %></p>
+                    </li>
+                  <% }); %>
+                </ul>
+            </div>
+
+            <!-- 댓글 작성 폼 -->
+            <div class="comment-form">
+                <h3>댓글 작성</h3>
+                <form action="/board/community/<%= post.idx %>/comment" method="post"> <!-- 게시글 ID를 라우트에 포함 -->
+                    <input type="text" id="content" name="content">
+                    <button type="submit" id="submit_comment">댓글 작성</button>
+                </form>
+            </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+          
+
+</body>
+</html>

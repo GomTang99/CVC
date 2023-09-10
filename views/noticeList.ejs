@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/notice.css">
+    <title>Notice</title>
+</head>
+<body>
+    
+    <div class="wraps">
+        <header>
+            <div class="header_top">
+                <ul>
+                    <li><a href="/board/community">커뮤니티</a></li>|
+                    <li><a href="/board/employ_infor">채용정보</a></li>|
+                    <li><a href="/board/expertprofile">컨설턴트</a></li>
+                </ul>
+                <ul class="login_register">
+                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/register">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="header_bottom">
+                <div class="logo">
+                    <h1><a href="/"><img src="../public/img/logo.png" alt="logo"></a></h1>
+                </div>
+                <div class="sub_title">
+                    <h1>공지사항 / 고객센터</h1>
+                </div>
+            </div>
+        </header>
+        <!-- header_end -->
+
+        <section class="section_1">
+            <div class="con_top">
+                <!-- 탭 및 컨텐츠 구조 (위치와 내용은 필요에 따라 수정) -->
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1">전체</label>
+                
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2">공지사항</label>
+                
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3">가이드</label>
+                
+                <div class="con_bottom">
+                    <section id="content1">
+                        <table class="content_1">
+                            <!-- 서버에서 가져온 공지사항 및 가이드 정보 표시 -->
+                            <% posts.forEach(function(post) { %>
+                                <tr>
+                                    <td><%= post.category %></td>
+                                    <td class="title">
+                                        <a href="#"><%= post.title %></a>
+                                    </td>
+                                    <td class="date"><%= post.date %></td>
+                                </tr>
+                            <% }); %>
+                        </table>
+                    </section>
+                    
+                    <section id="content2">
+                        <table class="content_2">
+                            <!-- 서버에서 가져온 공지사항 정보 표시 -->
+                            <!-- 가이드 정보도 비슷한 방식으로 표시할 수 있음 -->
+                        </table>
+                    </section>
+                    
+                    <section id="content3">
+                        <table class="content_3">
+                            <!-- 서버에서 가져온 가이드 정보 표시 -->
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
+
+    

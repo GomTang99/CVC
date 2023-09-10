@@ -53,15 +53,18 @@
             <span class="views">조회수</span>
           </div>
           <ul id="postList" class="community_list">
-            <% posts.forEach(function(post) { %>
-              <li class="community_list">
-                <span class="date"><%= post.writedate %></span>
-                <span class="title"><%= post.subject %></span>
-                <span class="writer"><%= post.name %></span>
-                <!-- 조회수 필드 추가 -->
-                <span class="views"><%= post.views %></span>
-              </li>
-            <% }); %>
+            <!-- 게시글 링크 클릭 시 해당 페이지 이동(URL 설정) -->
+              <% posts.forEach(function(post) { %>
+                <li class="community_list">
+                  <a href="/board/community/<%= post.idx %>">
+                    <span class="date"><%= post.writedate %></span>
+                    <span class="title"><%= post.subject %></span>
+                    <span class="writer"><%= post.name %></span>
+                    <!-- 조회수 필드 추가 -->
+                    <span class="views"><%= post.views %></span>
+                  </a>
+                </li>
+              <% }); %>
           </ul>
         </div>
       </div>

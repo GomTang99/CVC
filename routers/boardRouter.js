@@ -6,8 +6,9 @@ const boardRouter = express.Router();
 const app = express();
 
 
-// 게시판 라우터
 
+// 게시판 라우터
+// 게시판 목록 조회
 boardRouter.get("/community", async (req, res) => {
   if (req.session.user) {
     // 세션에 로그인 정보가 있는 경우
@@ -34,7 +35,7 @@ boardRouter.get("/community", async (req, res) => {
       await connection.end();
 
       // 조회 결과를 클라이언트에 전달
-      res.render("community_list", { userId, posts: result });
+      res.render("community_list(login)", { userId, posts: result });
     } catch (error) {
       console.error("게시글 목록 조회 오류:", error);
       res.status(500).send("게시글 목록 조회 중 오류 발생");
@@ -61,7 +62,7 @@ boardRouter.post("/write_community", (req, res) => {
     // console.log(name, subject, content);
 
     // 현재 시간 구하기
-    const writedate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const writedate = new Date().toISOString().slice(0, 10);
 
     // 데이터베이스 글 저장
     const sql = "INSERT INTO cvc.board (writedate, subject, name, content) VALUES (?, ?, ?, ?)";
@@ -80,34 +81,59 @@ boardRouter.post("/write_community", (req, res) => {
   
 });
 
-// 게시글 상세페이지
-boardRouter.get("/community/:id", (req, res) => {
-  const postId = req.params.id; // 상세 페이지로 이동할 게시글의 ID
 
-  // 데이터베이스에서 해당 이름에 해당하는 게시글 정보 가져오기
-  const sql = "SELECT writedate, subject, CONCAT(SUBSTRING_INDEX(name, ' ', 1), ' ', REPEAT('*', LENGTH(SUBSTRING_INDEX(name, ' ', -1)))) AS name, content FROM cvc.board WHERE id = ?";
-  const values = [postName];
+// 게시글 상세 페이지 라우트
+boardRouter.get('/community/:postIdx', (req, res) => {
+  const postIdx = req.params.postIdx;
 
-  conn.query(sql, values, (err, result) => {
+  // 게시글 정보를 데이터베이스에서 조회
+  const sql = 'SELECT * FROM board WHERE idx = ?';
+  conn.query(sql, [postIdx], (err, result) => {
     if (err) {
-      console.error("Error fetching post :", err);
+      console.error('게시글 조회 오류:', err);
+      res.status(500).send('게시글 조회 중 오류 발생');
       return;
     }
 
-    if (result.length === 0) {
-      // 해당이름에 해당하는게시글이 없을경우
-      console.log("게시글을 찾을수 없습니다.");
+    const post = result[0]; // 조회한 게시글 정보
+
+    // 댓글 정보를 데이터베이스에서 조회
+    const commentSql = 'SELECT * FROM comments WHERE post_id = ?';
+    conn.query(commentSql, [postIdx], (err, comments) => {
+      if (err) {
+        console.error('댓글 조회 오류:', err);
+        res.status(500).send('댓글 조회 중 오류 발생');
+        return;
+      }
+
+      res.render('postDetail', { post, comments });
+    });
+  });
+});
+
+// 댓글 추가 라우트
+boardRouter.post('/community/:postIdx/comment', (req, res) => {
+  const postIdx = req.params.postIdx;
+  const author = req.session.user.name; // 현재 로그인한 사용자 이름
+  const content = req.body.content;
+
+  // 현재 시간 구하기
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  // 댓글 데이터베이스에 저장
+  const sql = 'INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, ?)';
+  conn.query(sql, [postIdx, author, content, created_at], (err, result) => {
+    if (err) {
+      console.error('댓글 작성 오류:', err);
+      res.status(500).send('댓글 작성 중 오류 발생');
       return;
     }
 
-    const post = result[0];  // 가져온 게시글 정보
-
-    //게시글 상세 페이지 
-    res.render("postDetail", { post: post }); // postDetail은 상세 페이지의 템플릿 이름입니다.
-  })
-
-})
-
+    // 댓글을 작성한 게시글로 리다이렉트
+    res.redirect(`/board/community/${postIdx}`);
+    console.log('댓글이 성공적으로 작성되었습니다.');
+  });
+});
 
 // 공지게시판 라우터
 
@@ -166,7 +192,7 @@ boardRouter.get("/notice", async (req, res) => {
       // 데이터베이스 연결
       const connection = await mysql.createConnection(dbConfig);
 
-      // 데이터베이스에서 모든 공지 게시글 목록 조회
+      // 데이터베이스에서 모든 공지사항 게시글 목록 조회
       const sql = "SELECT idx, category, title, writedate FROM cvc.notice";
       const [result] = await connection.execute(sql);
 
@@ -174,16 +200,18 @@ boardRouter.get("/notice", async (req, res) => {
       await connection.end();
 
       // 조회 결과를 클라이언트에 전달
-      res.render("notice_list", { userId, posts: result });
+      res.render("noticeList", { userId, posts: result });
     } catch (error) {
-      console.error("공지글 목록 조회 오류:", error);
-      res.status(500).send("공지글 목록 조회 중 오류 발생");
+      console.error("공지사항 목록 조회 오류:", error);
+      res.status(500).send("공지사항 목록 조회 중 오류 발생");
     }
   } else {
     // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
     res.redirect('/login');
   }
 });
+
+
 
 // 전문가 라우터
 
