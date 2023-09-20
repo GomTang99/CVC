@@ -3,8 +3,6 @@ import path from "path";
 import session from "express-session";
 import bodyParser from "body-parser";
 
-//이메일 인증을 위한 import
-import nodemailer from "nodemailer";
 
 import "./db.js";
 
@@ -24,15 +22,6 @@ app.use('/img', express.static('img'));
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-// Gmail SMTP 설정
-const verificationCode = nodemailer.createTransport({
-    servic: "Gmail", // 이메일 서비스 제공자 선택
-    auth: {
-        user: "parkjuneyoung194786@gmail.com", // 이메일 발신자 계정
-        psss: "wnsdud5948", // 발신자 계정 비번
-    },
-});
-
 
 // 세션 미들웨어
 app.use(session({
@@ -43,6 +32,9 @@ app.use(session({
 
 // Body-parser 설정
 app.use(bodyParser.urlencoded({ extended : true}));
+
+// JSON 파싱 미들웨어 추가
+app.use(express.json());
 
 
 app.use("/", globalRouter);

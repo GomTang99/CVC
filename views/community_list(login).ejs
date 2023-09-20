@@ -56,12 +56,12 @@
             <!-- 게시글 링크 클릭 시 해당 페이지 이동(URL 설정) -->
               <% posts.forEach(function(post) { %>
                 <li class="community_list">
-                  <a href="/board/community/<%= post.idx %>">
+                  <a href="/board/community/<%= post.idx %>" onclick="increaseView(<%= post.idx %>)">
                     <span class="date"><%= post.writedate %></span>
                     <span class="title"><%= post.subject %></span>
                     <span class="writer"><%= post.name %></span>
                     <!-- 조회수 필드 추가 -->
-                    <span class="views"><%= post.views %></span>
+                    <span class="views" id="views_<%= post.idx %>"><%= post.views %></span>
                   </a>
                 </li>
               <% }); %>
@@ -72,7 +72,25 @@
   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <!-- 여기에 추가적인 클라이언트 측 스크립트를 포함시킬 수 있습니다. -->
+    <script>
+
+      // 클릭시 조회수 증가
+      function increaseView(postIdx) {
+        $.ajax({
+          type: "POST",
+          url: `/board/community/${postIdx}/increaseView`,  // 서버 측 라우터 URL
+          success: function (res) {
+            // 서버에서 조회수 업데이트가 성공적으로 처리되면 페이지 이동
+            window.location.href = `/board/community/${postIdx}`;
+          },
+          error: function (err) {
+            console.log("조회수 증가 오류", err);
+          },
+        });
+      }
+      
+
+    </script>
 
   </body>
 </html>

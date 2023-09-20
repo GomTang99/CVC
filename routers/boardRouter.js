@@ -28,7 +28,7 @@ boardRouter.get("/community", async (req, res) => {
       const connection = await mysql.createConnection(dbConfig);
 
       // 데이터베이스에서 모든 게시글 목록 조회
-      const sql = "SELECT idx, writedate, subject, name FROM cvc.board";
+      const sql = "SELECT idx, writedate, subject, name, views FROM cvc.board";
       const [result] = await connection.execute(sql);
 
       // 연결 종료
@@ -42,7 +42,7 @@ boardRouter.get("/community", async (req, res) => {
     }
   } else {
     // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-    res.redirect('/html/community');
+    res.redirect('/login');
   }
 });
 
@@ -106,10 +106,31 @@ boardRouter.get('/community/:postIdx', (req, res) => {
         return;
       }
 
-      res.render('postDetail', { post, comments });
+      res.render('postDetail(login)', { post, comments });
     });
   });
 });
+
+
+// 조회수 증가 라우트
+boardRouter.post('/community/:postIdx/increaseView', (req, res) => {
+  const postIdx = req.params.postIdx;
+
+  // 해당 게시글의 조회수 1 증가
+  const increaseSql = `UPDATE cvc.board SET views = views + 1 WHERE idx = ${postIdx}`;
+  conn.query(increaseSql, (err, result) => {
+    if (err) {
+      console.error('조회수 증가 오류', err);
+      res.status(500).send('조회수 증가 중 오류 발생');
+      return;
+    }
+    
+    // 조회수 증가에 성공하면 응답
+    res.send('조회수가 증가되었습니다.');
+  });
+});
+
+
 
 // 댓글 추가 라우트
 boardRouter.post('/community/:postIdx/comment', (req, res) => {
@@ -224,7 +245,7 @@ boardRouter.get("/expertprofile", (req, res) => {
       res.sendFile(process.cwd() + '/html/expertprofile.html', { user: user });
     } else {
       // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-      res.redirect(process.cwd() + '/html/login.html');
+      res.redirect('/login');
     }
   // res.sendFile(process.cwd() + "/html/expertprofile.html");
 });

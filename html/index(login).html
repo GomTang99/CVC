@@ -38,16 +38,18 @@
 
             <div class="in_section">
                 <div class="left">
-                    <textarea id="txt_1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea>
-                    <textarea id="txt_2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea>
-                    <textarea id="txt_3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea>
-                    <textarea id="txt_4" cols="100" rows="12" placeholder="4. 직무역량"></textarea>
+                    <form action="/login" method="post" id="textForm">
+                        <textarea name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea>
+                        <textarea name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea>
+                        <textarea name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea>
+                        <textarea name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량"></textarea>
+                        <input type="submit" class="save" value="저장하기">
+                    </form>
                 </div>
                 <div class="right">
                     <div class="playlist">
                         <iframe width="600" height="400" src="https://www.youtube.com/embed/ov0Mbm6FHu8?autoplay=1&mute=1" title="자소서 쓸때 듣는 음악ㅣ딱 2시간 집중해서 글쓰기ㅣ가사 없는 음악 playlist" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
-                    <input type="submit" class="save" value="저장하기">
                 </div>
             </div>
 
@@ -73,6 +75,51 @@
     </div>
     
 
+
+    <script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      const textForm = document.getElementById("textForm");
+
+      textForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(textForm);
+
+        const txt1Value = formData.get("txt1");
+    const txt2Value = formData.get("txt2");
+    const txt3Value = formData.get("txt3");
+    const txt4Value = formData.get("txt4");
+
+    console.log("텍스트 1:", txt1Value);
+    console.log("텍스트 2:", txt2Value);
+    console.log("텍스트 3:", txt3Value);
+    console.log("텍스트 4:", txt4Value);
+
+        // fetch를 사용하여 서버로 데이터 전송
+        fetch("/saveText", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+        .then((response) => response.json()) // JSON 파싱
+        .then((data) => {
+          if (data.success) {
+            console.log("텍스트 데이터 저장 완료");
+            // 저장이 성공하면 필요한 작업을 수행하십시오.
+          } else {
+            console.error("텍스트 데이터 저장 실패");
+          }
+        })
+        .catch((error) => {
+          console.error("오류 발생:", error);
+        });
+      });
+    });
+    
+    </script>
     
 </body>
 </html>

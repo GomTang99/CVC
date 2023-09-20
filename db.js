@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 // JSON 데이터 파싱을 위한 body-parser 미들웨어 등록
 app.use(bodyParser.json());
 
+//app.use(express.json());
 //const bodyParser = require('body-parser');
 
 
