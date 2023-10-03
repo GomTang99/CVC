@@ -12,7 +12,7 @@ li{
   width: 150px;
   height: 50px;
   display: inline-block;
-  margin: 10px 50px;
+  margin: 10px 70px;
   text-align: center;
   line-height: 50px;
 }
@@ -34,7 +34,7 @@ a{
 
 .header_top li:hover{
   cursor: pointer;
-  background-color: rgba(255, 190, 255, .3);
+  background-color: rgb(238, 198, 238);
   border-radius: 25px;
 }
 

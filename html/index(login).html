@@ -19,8 +19,8 @@
                 </h1>
                 <ul class="menu_wrap">
                     <li><a href="/board/community">커뮤니티</a></li>
-                    <li><a href="/board/employ_infor">채용정보</a></li>
-                    <li><a href="/board/expertprofile">컨설턴트</a></li>
+                    <li><a href="/board/">참고문헌</a></li>
+                    <li><a href="/board/">ChatGPT 컨설팅</a></li>
                     <li><a href="/board/notice">고객센터 / 공지사항</a></li>
                 </ul>
                 <ul class="menu_wrap_1">
@@ -77,48 +77,47 @@
 
 
     <script>
-    
-    document.addEventListener("DOMContentLoaded", function () {
-      const textForm = document.getElementById("textForm");
+       
+    document.addEventListener("DOMContentLoaded", () => {
+            const textForm = document.getElementById("textForm");
 
-      textForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+            textForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
 
-        const formData = new FormData(textForm);
+                // FormData 객체를 사용하여 폼 데이터를 가져옵니다.
+                const formData = new FormData(textForm);
 
-        const txt1Value = formData.get("txt1");
-    const txt2Value = formData.get("txt2");
-    const txt3Value = formData.get("txt3");
-    const txt4Value = formData.get("txt4");
+                // FormData를 객체로 변환합니다.
+                const formDataObject = {};
+                formData.forEach((value, key) => {
+                    formDataObject[key] = value;
+                });
 
-    console.log("텍스트 1:", txt1Value);
-    console.log("텍스트 2:", txt2Value);
-    console.log("텍스트 3:", txt3Value);
-    console.log("텍스트 4:", txt4Value);
+                // JSON 형식으로 변환합니다.
+                const jsonData = JSON.stringify(formDataObject);
 
-        // fetch를 사용하여 서버로 데이터 전송
-        fetch("/saveText", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-        .then((response) => response.json()) // JSON 파싱
-        .then((data) => {
-          if (data.success) {
-            console.log("텍스트 데이터 저장 완료");
-            // 저장이 성공하면 필요한 작업을 수행하십시오.
-          } else {
-            console.error("텍스트 데이터 저장 실패");
-          }
-        })
-        .catch((error) => {
-          console.error("오류 발생:", error);
+                try {
+                    const response = await fetch("/saveText", {
+                        method: "POST",
+                        body: jsonData,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        alert("자기소개서 저장 완료!");
+                    } else {
+                        alert("자기소개서 저장 실패!");
+                    }
+                } catch (error) {
+                    console.error("데이터 전송 오류:", error);
+                }
+            });
         });
-      });
-    });
-    
+
+
     </script>
     
 </body>

@@ -9,7 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="stylesheet" type="text/css" href="/public/css/postDetail.css">
-    <title>게시글 상세 페이지</title>
+    <title>공지사항 상세 페이지</title>
 </head>
 <body>
     <header>
@@ -29,14 +29,14 @@
                 <h1><a href="/"><img src="/public/img/logo.png" alt="logo"></a></h1>
             </div>
             <div class="sub_title">
-                <h1>게시글</h1>
+                <h1>공지사항</h1>
             </div>
         </div>
       </header>
 
         <div class="community_content content">
             <div class="post-detail">
-                <h1><%= post.subject %></h1>
+                <h1><%= post.title %></h1>
                 <p class="name"><strong>작성자:</strong> <%= post.name %></p>
                 <p class="write-date"><strong>작성일:</strong> <%= post.writedate %></p>
                 <div class="post-content">
@@ -60,7 +60,7 @@
             <!-- 댓글 작성 폼 -->
             <div class="comment-form">
                 <h3>댓글 작성</h3>
-                <form action="/board/community/<%= post.idx %>/comment" method="post"> <!-- 게시글 ID를 POST요청으로 전달 -->
+                <form action="/board/notice/<%= post.idx %>/noticecomment" method="post"> <!-- 게시글 ID를 POST요청으로 전달 -->
                     <input type="hidden" name="postId" value="<%= post.idx %>">
                     <input type="text" id="content" name="content">
                     <button type="submit">댓글 작성</button>

@@ -43,4 +43,9 @@ userRouter.get("/mypage", (req, res) => {
     
 });
 
+
+// 마이페이지 자기소개서 상세 라우트
+
+
+
 export default userRouter;

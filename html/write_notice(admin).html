@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/write_community.css">
-    <title>커뮤니티 게시판 작성</title>
+    <title>공지사항/고객센터 게시글 작성</title>
 </head>
 <body>
 
     <header>
         <div class="header_top">
             <ul>
+                <li><a href="/board/community">커뮤니티</a></li>|
                 <li><a href="/board/">참고문헌</a></li>|
-                <li><a href="/board/">ChatGPT 컨설팅</a></li>|
-                <li><a href="/board/notice">공지사항</a></li>
+                <li><a href="/board/">ChatGPT 컨설팅</a></li>
             </ul>
             <ul class="login_register">
               <li><a href="/user/mypage">마이페이지</a></li>
@@ -25,17 +25,17 @@
                 <h1><a href="/"><img src="../public/img/logo.png" alt="logo"></a></h1>
             </div>
             <div class="sub_title">
-                <h1>커뮤니티</h1>
+                <h1>공지사항</h1>
             </div>
         </div>
     </header>
 
     
     <div class="write_board">
-        <h1>커뮤니티 글 작성</h1>
+        <h1>공지사항 작성</h1>
         <form method="post">
             <div class="subject_write">
-                <input type="text" id="subject" name="subject" placeholder="제목을 입력하세요." required> <!-- required = 필수입력필드 -->
+                <input type="text" id="subject" name="title" placeholder="제목을 입력하세요." required> <!-- required = 필수입력필드 -->
             </div>
             <div class="content_write">
                 <textarea name="content" id="content" cols="120" rows="45" placeholder="내용을 입력하세요." required></textarea>

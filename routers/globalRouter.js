@@ -21,29 +21,22 @@ globalRouter.get("/", (req, res) => {
 
 // 자기소개서 저장
 globalRouter.post("/saveText", (req, res) => {
-  const userId = req.session.user.name;  // 현재 로그인한 사용자의 이름
-  const txt1 = req.body.txt1; // 클라이언트에서 전송된 텍스트
-  const txt2 = req.body.txt2;
-  const txt3 = req.body.txt3;
-  const txt4 = req.body.txt4;
+  const userId = req.session.user.id; // 현재 로그인한 사용자의 이름
+  const requestData = req.body;
 
-  // FormData에서 데이터가 제대로 들어오는지 확인
-  console.log("txt1:", txt1);
-  console.log("txt2:", txt2);
-  console.log("txt3:", txt3);
-  console.log("txt4:", txt4);
-
-  // DB에 저장
-  const sql = "INSERT INTO cvc.mypage (user_id, text_1, text_2, text_3, text_4) VALUES (?, ?, ?, ?, ?)";
-  const values = [userId, txt1, txt2, txt3, txt4];
+  console.log("세션 내용:", req.session);
+  const sql = `INSERT INTO cvc.mypage (user_id, text_1, text_2, text_3, text_4) VALUES (?, ?, ?, ?, ?)`;
+  
+  const values = [userId, requestData.txt1, requestData.txt2, requestData.txt3, requestData.txt4];
 
   conn.query(sql, values, (err, result) => {
     if (err) {
-      console.log("텍스트 데이터 저장 오류 ", err);
-      res.status(500).json({ success: false });
+      console.error('데이터 삽입 오류:', err);
+      res.status(500).json({ success: false, message: '데이터 삽입 실패' });
     } else {
-      console.log("텍스트 데이터 저장 완료");
-      res.status(200).json({ success: true }); 
+      console.log('데이터가 성공적으로 삽입되었습니다.');
+      res.json({ success: true, message: '데이터 전송 및 저장 성공!' });
+      res.redirect("/login");
     }
   });
 });
@@ -75,8 +68,12 @@ globalRouter.post("/login", (req, res) => {
         else {
             // 세션 설정
             const user = result[0];
-            req.session.user = {name : user.users_name};
+            req.session.user = {
+              name: user.users_name,
+              id: user.users_id
+            };
             console.log(user);
+
 
             console.log("로그인 성공!!");
             //res.redirect("/index(login)");

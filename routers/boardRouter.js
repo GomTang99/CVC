@@ -156,16 +156,18 @@ boardRouter.post('/community/:postIdx/comment', (req, res) => {
   });
 });
 
+
 // 공지게시판 라우터
 
+
 // 공지게시판 작성 페이지
-boardRouter.get("/write_notice", (req, res) => {
-  res.sendFile(process.cwd() + "/html/write_notice.html");
+boardRouter.get("/write_notice(admin)", (req, res) => {
+  res.sendFile(process.cwd() + "/html/write_notice(admin).html");
 })
 
-boardRouter.post("/write_notice", (req, res) => {
+boardRouter.post("/write_notice(admin)", (req, res) => {
   if (req.session.user) {
-    const category = req.body.category;
+    const category = "공지사항";
     const title = req.body.title;
     const name = req.session.user.name;
     const content = req.body.content;
@@ -186,15 +188,17 @@ boardRouter.post("/write_notice", (req, res) => {
       }
 
       console.log("Post saved sucessfully:", result);
-      res.redirect("/board/notice"); // 글작성이 완료되면 게시글목록 페이지로 이동
+      res.redirect("/board/notice(admin)"); // 글작성이 완료되면 게시글목록 페이지로 이동
     });
   }
   
 });
 
 
+// 관리자 끝
 
-// 공지사항 게시판 목록 조회
+
+// 공지사항 게시판 목록 조회(유저)
 boardRouter.get("/notice", async (req, res) => {
   if (req.session.user) {
     // 세션에 로그인 정보가 있는 경우
@@ -214,14 +218,14 @@ boardRouter.get("/notice", async (req, res) => {
       const connection = await mysql.createConnection(dbConfig);
 
       // 데이터베이스에서 모든 공지사항 게시글 목록 조회
-      const sql = "SELECT idx, category, title, writedate FROM cvc.notice";
+      const sql = "SELECT idx, category, title, writedate, name FROM cvc.notice";
       const [result] = await connection.execute(sql);
 
       // 연결 종료
       await connection.end();
 
       // 조회 결과를 클라이언트에 전달
-      res.render("noticeList", { userId, posts: result });
+      res.render("noticeList(login)", { userId, posts: result });
     } catch (error) {
       console.error("공지사항 목록 조회 오류:", error);
       res.status(500).send("공지사항 목록 조회 중 오류 발생");
@@ -232,7 +236,60 @@ boardRouter.get("/notice", async (req, res) => {
   }
 });
 
+// 공지사항 상세 페이지 라우트(유저)
+boardRouter.get('/notice/:postIdx', (req, res) => {
+  const postIdx = req.params.postIdx;
 
+  // 공지사항 정보를 데이터베이스에서 조회
+  const sql = 'SELECT * FROM notice WHERE idx = ?';
+  conn.query(sql, [postIdx], (err, result) => {
+    if (err) {
+      console.error('게시글 조회 오류:', err);
+      res.status(500).send('게시글 조회 중 오류 발생');
+      return;
+    }
+
+    const post = result[0]; // 조회한 게시글 정보
+
+    // 댓글 정보를 데이터베이스에서 조회
+    const commentSql = 'SELECT * FROM noticecomments WHERE post_id = ?';
+    conn.query(commentSql, [postIdx], (err, comments) => {
+      if (err) {
+        console.error('댓글 조회 오류:', err);
+        res.status(500).send('댓글 조회 중 오류 발생');
+        return;
+      }
+
+      res.render('postDetailNotice(login)', { post, comments });
+    });
+  });
+});
+
+// 댓글 추가 라우트
+boardRouter.post('/notice/:postIdx/noticecomment', (req, res) => {
+  const postIdx = req.params.postIdx;
+  const author = req.session.user.name; // 현재 로그인한 사용자 이름
+  const content = req.body.content;
+
+  // 현재 시간 구하기
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  // 댓글 데이터베이스에 저장
+  const sql = 'INSERT INTO noticecomments (post_id, author, content, created_at) VALUES (?, ?, ?, ?)';
+  conn.query(sql, [postIdx, author, content, created_at], (err, result) => {
+    if (err) {
+      console.error('댓글 작성 오류:', err);
+      res.status(500).send('댓글 작성 중 오류 발생');
+      return;
+    }
+
+    // 댓글을 작성한 게시글로 리다이렉트
+    res.redirect(`/board/notice/${postIdx}`);
+    console.log('댓글이 성공적으로 작성되었습니다.');
+  });
+});
+
+// 유저 끝
 
 // 전문가 라우터
 
