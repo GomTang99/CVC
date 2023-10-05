@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/pw_reset.css">
+    <title>비밀번호 재설정</title>
+</head>
+<body>
+
+        <header>
+            <div class="in_header">
+                <h1 class="logo">
+                    <a href="/"><img src="../public/img/logo.png" alt="logo"></a>
+                </h1>
+                <ul class="menu_wrap">
+                    <li><a href="/board/community">커뮤니티</a></li>
+                    <li><a href="/board/">참고문헌</a></li>
+                    <li><a href="/board/">AI 컨설팅</a></li>
+                    <li><a href="/board/notice">고객센터 / 공지사항</a></li>
+                </ul>
+                <ul class="menu_wrap_1">
+                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/register">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="out_header">
+                <h1>비밀번호 재설정</h1>
+            </div>
+        </header>
+        <!-- header_end -->
+        
+
+        <div class="content">
+            <form>
+                <div class="new_pw">
+                    <h2>새 비밀번호 : </h2>
+                    <input type="password" placeholder="새 비밀번호 작성" id="new_pw">
+                </div>
+                <div class="check_pw">
+                    <h2>비밀번호 확인 : </h2>
+                    <input type="password" placeholder="비밀번호 확인" id="check_pw">
+                </div>
+                <div class="check_btn">
+                    <button id="submit_btn">확인</button>
+                    <button id="cancel_btn">취소</button>
+                </div>
+            </form>            
+        </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</body>
+</html>

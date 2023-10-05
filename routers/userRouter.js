@@ -1,7 +1,10 @@
 import express from "express";
 import multer from "multer";
+import conn from "../db.js";
 
 const userRouter = express.Router();
+
+const app = express();
 
 // 파일 업로드를 저장할 디렉토리 설정
 const storage = multer.diskStorage({

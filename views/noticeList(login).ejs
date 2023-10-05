@@ -65,7 +65,16 @@
                     <section id="content2">
                         <table class="content_2">
                             <!-- 서버에서 가져온 공지사항 정보 표시 -->
-                            <!-- 가이드 정보도 비슷한 방식으로 표시할 수 있음 -->
+                            <% posts.forEach(function(post) { %>
+                                <tr>
+                                    <td><%= post.category %></td>
+                                    <td class="title">
+                                        <a href="/board/notice/<%= post.idx %>"><%= post.title %></a>
+                                    </td>
+                                    <td class="writer"><%= post.name %></td>
+                                    <td class="date"><%= post.writedate %></td>
+                                </tr>
+                            <% }); %>
                         </table>
                     </section>
                     

@@ -176,6 +176,19 @@ globalRouter.post("/find_pw"), async (req, res) => {
   });
 };
 
+
+// 인증번호 확인
+globalRouter.get("/", (req, res) => {
+  res.sendFile(process.cwd() + "/html/");
+});
+
+
+// 비밀번호 재설정
+globalRouter.get("/pw_reset", (req, res) => {
+  res.sendFile(process.cwd() + "/html/pw_reset.html");
+});
+
+
 export default globalRouter;
 
 
