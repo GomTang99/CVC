@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale-1.0">
+        <link rel="stylesheet" href="../public/css/admin_register.css">
+    </head>
+
+    <body>
+        <div class="title">
+            <h1>관리자 회원가입</h1>
+        </div>
+
+        <form id="register_admin" method="post" accept="/admin_register">
+            <div class="main_box">
+                <div class="box">
+                    <h4>아이디</h4>
+                    <input type="text" name="admin_id" id="admin_id">
+                    <input type="button" id="check_Id" class="btn"
+                    name="btn" value="중복확인">
+                </div>
+
+                <div class="box">
+                    <h4>비밀번호</h4>
+                    <input type="password" name="admin_pw" id="adimn_pw">
+                </div>
+
+                <div class="box">
+                    <h4>이름</h4> <input type="text" name="admin_name" id="adimn_name">
+                </div>
+
+                <div class="box">
+                    <h4>이메일</h4>
+                    <input type="email" name="admin_email" id="adimn_email">
+                </div>
+
+                <div class="box">
+                    <h4>통신사</h4>
+                    <input id="radio" type="radio" name="phone" > SKT
+                    <input id="radio" type="radio" name="phone"> KT
+                    <input id="radio" type="radio" name="phone"> LGU+
+                </div>
+
+                <div class="box">
+                    <h4>전화 번호</h4>
+                    <input type="text" name="admin_phone" id="adimn_phone">
+                </div>
+
+                <div class="box">
+                    <h4>고유 번호</h4>
+                    <input type="text" name="admin_num" id="admin_num">
+                </div>
+
+                <div class="box">
+                    <input type="submit" id="register_submit" value="회원 가입" class="lbtn" name="btn">
+                    <input type="reset" value="가입 취소" class="lbtn" name="btn">
+                </div>
+            </div>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const checkIdButton = document.getElementById("check_Id");
+    const registerSubmit = document.getElementById("register_submit"); // form 요소 가져오기
+    let isIdAvailable = false;
+
+    async function checkId() {
+      const id = document.getElementById("admin_id").value;
+      try {
+        const response = await fetch(`/checkId?id=${id}`);
+        const data = await response.json();
+        if (data.isDuplicate) {
+          alert("이미 존재하는 아이디입니다.");
+          isIdAvailable = false;
+        } else {
+          alert("사용 가능한 아이디입니다.");
+          isIdAvailable = true;
+          document.getElementById("register_submit").disabled = false;
+        }
+      } catch (error) {
+        console.error("아이디 중복 확인 오류:", error);
+        alert("아이디 중복 확인 중 오류가 발생했습니다.");
+      }
+    }
+
+    checkIdButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      checkId();
+    });
+
+    // 폼 요소에 이벤트 리스너 추가
+    registerSubmit.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!isIdAvailable) {
+        alert("아이디 중복 확인이 필요합니다.");
+        return;
+      }
+
+      const formData = new FormData(registerForm);
+      const userData = {};
+      formData.forEach((value, key) => {
+        userData[key] = value;
+      });
+
+      try {
+        const response = await fetch("/admin_register", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          alert(" 회원가입이 완료되었습니다."); 
+        } else {
+          alert("회원가입에 실패했습니다. 다시 시도해주세요."); 
+        }
+      } catch (error) {
+        console.error("회원 가입 오류:", error);
+      }
+    });
+});
+            
+
+        </script>
+
+    </body>
+</html>

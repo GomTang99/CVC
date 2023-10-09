@@ -3,6 +3,9 @@ import express from "express";
 import conn from "../db.js";
 import dotenv from "dotenv";
 
+import { callChatGPT } from '../public/js/chatgpt.js';
+
+
 // .env 파일 로드
 dotenv.config();
 
@@ -47,40 +50,110 @@ globalRouter.get("/login",(req, res) => {
 });
 
 
-//로그인 구현
+//로그인 구현(관리자 / 사용자 통합)
 globalRouter.post("/login", (req, res) => {
-    const id = req.body.id;
-    const pw = req.body.pw;
+  const id = req.body.id;
+  const pw = req.body.pw;
+
+  const sql = `
+    SELECT 'user' AS user_type, users_name AS name, users_id AS id
+    FROM cvc.users
+    WHERE users_id = ? AND users_pw = ?
     
-    console.log(req.body);
-    console.log(id, pw);
+    UNION
 
-    const sql = "SELECT * FROM cvc.users WHERE users_id = ? AND users_pw = ?";
-    const value = [id, pw];
-    conn.query(sql, value, (err, result) => {
-        if (err) {  
-            console.log("로그인 실패 : ", err);
-            res.sendFile(process.cwd() + '/html/login.html');
-        }else if(result.length === 0){
-            console.log("로그인 실패 : ", err);
-            res.sendFile(process.cwd() + '/html/login.html');
-        } 
-        else {
-            // 세션 설정
-            const user = result[0];
-            req.session.user = {
-              name: user.users_name,
-              id: user.users_id
-            };
-            console.log(user);
+    SELECT 'admin' AS user_type, admin_name AS name, admin_id AS id
+    FROM cvc.admin
+    WHERE admin_id = ? AND admin_pw = ?
+  `;
+  const values = [id, pw, id, pw];
 
+  conn.query(sql, values, (err, result) => {
+    if (err) {
+      console.log("로그인 실패 : ", err);
+      res.sendFile(process.cwd() + '/html/login.html');
+    } else if (result.length === 0) {
+      console.log("로그인 실패 : 아이디 또는 비밀번호가 올바르지 않습니다.");
+      res.sendFile(process.cwd() + '/html/login.html');
+    } else {
+      // 세션 설정
+      const user = result[0];
+      req.session.user = {
+        name: user.users_name,
+        id: user.users_id,
+        type: user.user_type
+      };
 
-            console.log("로그인 성공!!");
-            //res.redirect("/index(login)");
-            res.sendFile(process.cwd() + '/html/index(login).html');
-        }
-    });
+      console.log("로그인 성공!!");
+      if (user.user_type === 'admin') {
+        res.sendFile(process.cwd() + '/html/index(login).html');
+      } else {
+        res.sendFile(process.cwd() + '/html/index(login).html');
+      }
+    }
+  });
 });
+
+
+//회원가입 선택
+
+globalRouter.get("/select_register", (req, res) => {
+  res.sendFile(process.cwd() + "/html/select_register.html");
+});
+
+
+// 관리자 회원가입
+globalRouter.get("/admin_register", (req, res) => {
+  res.sendFile(process.cwd() + "/html/admin_register.html");
+});
+
+// 관리자 회원가입(아이디 중복 확인)
+globalRouter.get("/checkId_admin", (req, res) => {
+  const id = req.query.id;
+  const checkIdsql = "SELECT admin_id FROM cvc.admin WHERE admin_id = ?";
+  const checkIdValue = [id];
+
+  conn.query(checkIdsql, checkIdValue, (err, result) => {
+    if(err) {
+      console.log("아이디 중복 체크 오류 : " ,err);
+      res.status(500).json({error: '아이디 중복 체크 오류'});
+    } else {
+      const isDuplicate = result.length > 0;
+      res.status(200).json({isDuplicate});
+    }
+  })
+});
+
+// 관리자 회원가입 기능
+globalRouter.post("/admin_register", (req, res) => {
+  const id = req.body.admin_id;
+  const pw = req.body.admin_pw;
+  const name = req.body.admin_name;
+  const phone = req.body.admin_phone;
+  const email = req.body.admin_email;
+  const uniqueNumber = req.body.admin_num;
+
+  // 필수 데이터 누락 여부 확인
+  if (!id || !pw || !name || !email || !phone || !uniqueNumber) {
+    res.status(400).json({ error: "필수 데이터가 누락되었습니다." });
+    return;
+  }
+
+  const sql = "INSERT INTO cvc.admin (admin_id, admin_pw, admin_name, admin_email, admin_phone, admin_un) VALUES (?, ?, ?, ?, ?, ?)";
+  const values = [id, pw, name, email, phone, uniqueNumber];
+
+  conn.query(sql, values, (err, result) => {
+    if (err) {
+      console.log("데이터 삽입 오류 : ", err);
+      res.status(500).json({ error: "회원 가입 오류" });
+    } else {
+      console.log("데이터 삽입 성공");
+      res.redirect("/login");
+     // res.status(200).json({ success: true }); // 클라이언트에게 성공 메시지를 반환
+    }
+  });
+});
+
 
 globalRouter.get("/register",(req, res) => {
     res.sendFile(process.cwd() + "/html/register.html");
@@ -187,6 +260,7 @@ globalRouter.get("/", (req, res) => {
 globalRouter.get("/pw_reset", (req, res) => {
   res.sendFile(process.cwd() + "/html/pw_reset.html");
 });
+
 
 
 export default globalRouter;

@@ -33,6 +33,7 @@ userRouter.post('/user/uploadImage', upload.single('avatar'), (req, res) => {
   }
 });
 
+
 //마이페이지
 userRouter.get("/mypage", (req, res) => {
     // res.sendFile(process.cwd() + "/html/mypage.html");

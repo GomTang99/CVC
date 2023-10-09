@@ -56,6 +56,8 @@ boardRouter.get("/write_community", (req, res) => {
 boardRouter.post("/write_community", (req, res) => {
   if (req.session.user) {
     const name = req.session.user.name;
+
+    console.log(req.session.user);
     const subject = req.body.subject;
     const content = req.body.content;
 
@@ -323,5 +325,29 @@ boardRouter.get("/employ_infor", (req, res) => {
     }
   // res.sendFile(process.cwd() + "/html/employ_infor.html");
 });
+
+
+
+
+// AI컨설팅
+boardRouter.get("/AI_consult", async (req, res) => {
+  res.render('gptConsult');
+});
+
+boardRouter.post("/AI_consult", async (req, res) => {
+  const prompt = req.body.prompt;
+  try {
+    const response = await callChatGPT(prompt);
+    if (response) {
+      res.json({ response: response });
+    } else {
+      res.status(500).json({ error: 'Failed to get a response from ChatGPT API' });
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+    res.status(500).json({ error: 'An error occurred while processing your request' });
+  }
+});
+
 
 export default boardRouter;

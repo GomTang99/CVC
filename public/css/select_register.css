@@ -1,0 +1,96 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    border: none;
+    color: white;
+}
+
+
+.title{
+    width: 1800px;
+    height: 200px;
+    margin: auto;
+    text-align: center;
+    line-height: 200px;
+}
+
+
+.selbox{
+    width: 1500px;
+    height: 650px;
+    margin: auto;
+    display: flex;
+    border: 8px solid #B5A6DE;
+    background: #D2C8ED;
+}
+
+.selbox > .selbox_in{
+    width: 95%;
+    height: 530px;
+    margin: auto;
+    display: flex;
+    background: #fff;
+}
+
+
+.selbox > .selbox_in > .sel1{
+    width: 700px;
+    height: 95%;
+    border-right: 4px solid #D2C8ED;
+    margin-top: 15px;
+    
+}
+
+.selbox > .selbox_in > .sel2{
+    width: 700px;
+    height: 95%;
+    margin-top: 15px;
+
+    
+}
+
+.selbox > .selbox_in > .sel > h1{
+    margin-top: 150px;
+    margin-bottom: 60px;
+     margin-left: 60px;
+}
+
+.selbox > .selbox_in > .sel > h2{
+    margin-left: 150px;
+}
+
+
+.adbtn{
+    width: 230px;
+    margin-left: 420px;
+    margin-top: 30px;
+    font-size: 30px;
+    color: #fff;
+    font-weight: bolder;
+    line-height: 100px;
+    background: #D2C8ED;
+    border: 2px solid #D2C8ED;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+
+.usbtn{
+    width: 230px;
+    margin-left: 420px;
+    margin-top: 30px;
+    font-size: 30px;
+    color: #fff;
+    font-weight: bolder;
+    line-height: 100px;
+    background: #D2C8ED;
+    border: 2px solid #D2C8ED;
+    line-height: 60px;
+    cursor: pointer;
+}
