@@ -310,24 +310,6 @@ boardRouter.get("/expertprofile", (req, res) => {
 });
 
 
-// 채용정보 라우터
-
-boardRouter.get("/employ_infor", (req, res) => {
-  if (req.session.user) {
-      // 세션에 로그인 정보가 있는 경우
-      const user = req.session.user;
-      // 로그인된 사용자의 정보를 활용하여 원하는 작업 수행
-  
-      res.sendFile(process.cwd() + '/html/employ_infor.html', { user: user });
-    } else {
-      // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-      res.sendFile(process.cwd() + '/html/login.html');
-    }
-  // res.sendFile(process.cwd() + "/html/employ_infor.html");
-});
-
-
-
 
 // AI컨설팅
 boardRouter.get("/AI_consult", async (req, res) => {

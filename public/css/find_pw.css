@@ -96,6 +96,25 @@ input[type="email"]{
     color: black;
 }
 
+#send_btn{
+    font-size: 30px;
+    background-color: rgb(220, 160, 232);
+    border: initial;
+    border-radius: 25px;
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    transition: all .5s;
+}
+
+#send_btn:hover{
+    color: black;
+}
+
+
 #submit_btn{
     font-size: 30px;
     background-color: rgb(220, 160, 232);
@@ -108,6 +127,10 @@ input[type="email"]{
     line-height: 50px;
     color: white;
     transition: all .5s;
+}
+
+.submit_btn > .submit {
+    color: white;
 }
 
 #submit_btn:hover{

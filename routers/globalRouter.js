@@ -3,8 +3,6 @@ import express from "express";
 import conn from "../db.js";
 import dotenv from "dotenv";
 
-import { callChatGPT } from '../public/js/chatgpt.js';
-
 
 // .env 파일 로드
 dotenv.config();
@@ -211,49 +209,60 @@ globalRouter.get("/find_pw", (req, res) => {
     res.sendFile(process.cwd() + "/html/find_pw.html");
 });
 
+// 랜덤한 6자리의 코드 생성 함수
+function generateRandomCode() {
+  const length = 6;
+  const characters = '0123456789';
+  let randomCode = '';
 
-// 이메일 인증번호 발송
-globalRouter.post("/find_pw"), async (req, res) => {
-    // 환경 변수에서 SMTP 설정 정보 로드
-  const smtpEmail = process.env.SMTP_EMAIL;
-  const smtpPassword = process.env.SMTP_PASSWORD;
-  const subject = "비밀번호 재설정 인증 코드";
-  const text = `인증코드: ${verificationCode}`;
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomCode += characters.charAt(randomIndex);
+  }
+  return randomCode;
+}
 
-  // 이메일 전송을 위한 Nodemailer 설정
+// 현재 인증코드를 저장할 변수
+let currentVerificationCode = generateRandomCode();
+
+// 이메일 인증코드 전송
+globalRouter.post('/send_verification_email', (req, res) => {
+  const { name, email } = req.body;
+
+  // 이메일 전송 로직
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    service: 'Naver',
     auth: {
-      user: smtpEmail,
-      pass: smtpPassword,
-    },
-  });
-
-  // 이메일 옵션 구성
-  const mailOptions = {
-    from: smtpEmail,
-    to: req.body.user_email, // 수신자 이메일 주소
-    subject: subject,
-    text: text,
-  };
-
-  // 이메일 전송
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('이메일 전송 중 오류 발생:', error);
-      res.status(500).send('이메일 전송 오류');
-    } else {
-      console.log('이메일이 성공적으로 전송되었습니다.');
-      res.status(200).send('이메일 전송 완료');
+      user: 'tngkd15@naver.com',
+      pass: 'wnsdud1947!@'
     }
   });
-};
 
+  const mailOptions = {
+    from: 'tngkd15@naver.com',
+    to: email,
+    subject: 'CVC 비밀번호 재설정 인증코드',
+    text : '인증코드 : ' + generateRandomCode()
+  };
 
-// 인증번호 확인
-globalRouter.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "/html/");
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.json({ success: false });
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.json({ success: true });
+    }
+  })
 });
+
+globalRouter.post('/check_code', (req, res) => {
+  const {code} = req.body;
+
+  if(currentVerificationCode === code) {
+    res.redirect("pw_reset");
+  } 
+})
 
 
 // 비밀번호 재설정

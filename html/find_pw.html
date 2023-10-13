@@ -26,10 +26,15 @@
                             </div>
                         <div class="email_find">
                             <h3>이메일</h3>
-                            <input type="email" id="user_email">
+                            <input type="email" placeholder="이메일" id="user_email">
+                        </div>
+                        <div class="email_code">
+                            <h3>인증번호</h3>
+                            <input type="text" placeholder="인증번호" id="code">
                         </div>
                         <div class="btn">
-                            <button id="submit_btn">확인</button>
+                            <button id="send_btn">전송</button>
+                            <button id="submit_btn"><a href="/pw_reset" class="submit">확인</a></button>
                             <a href="/login" class="cancel">취소</a>
                         </div>
                     </div>
@@ -42,22 +47,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script>
+    $(document).ready(function() {
+        $("#send_btn").click(function() {
+            var userName = $("#user_name").val();
+            var userEmail = $("#user_email").val();
 
-        // 이메일 주소를 가져와서 서버에 보내는 작업
-        $(document).ready(function () {
-            $("#submit_btn").click(function () {
-                // 이메일 주소 가져오기
-                let userEmail = $("#user_email").val();
-                
-                // 서버로 이메일 주소 전송
-                $.post("/find_pw", {user_email: userEmail}, function (response) {
-                    alert(response);
-                });
-                alert("인증 번호가 전송되었습니다.");
+            // 이 정보를 서버로 보내서 인증 이메일을 요청합니다
+            $.post("/send_verification_email", { name: userName, email: userEmail }, function(data) {
+                // 서버에서의 응답에 따라 처리를 수행합니다
+                if (data.success) {
+                    alert("인증 이메일을 전송했습니다. 이메일을 확인하세요.");
+                } else {
+                    alert("인증 이메일을 보내는 데 문제가 발생했습니다.");
+                }
             });
         });
+    });
 
-    </script>
+</script>
+
     
 </body>
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <link rel="stylesheet" href="../public/css/email_cert.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="in_header">
+            <h1 class="logo">
+                <a href="/"><img src="../public/img/logo.png" alt="logo"></a>
+            </h1>
+            <ul class="menu_wrap">
+                <li><a href="/board/community">커뮤니티</a></li>
+                <li><a href="/board/AI_consult">AI 컨설팅</a></li>
+                <li><a href="/board/notice">고객센터 / 공지사항</a></li>
+            </ul>
+            <ul class="menu_wrap_1">
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/register">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="out_header">
+            <h1>이메일 인증</h1>
+        </div>
+    </header>
+    <!-- header_end -->
+
+    <div class="img" >
+        <img src="../public/img/lock.PNG" width="300", height="300">
+    </div>
+   
+    <div class="main_box">
+        <div class="inbox">
+            <div class="box box2" >
+                <h1>이메일 인증번호를 입력해주세요.</h1>
+            </div>
+            <div class="box box2">
+                <input type="text">
+                <button type="submit" class="btn1" name="btn1"><a href="/pw_reset">인증하기</a></button>
+            </div>
+
+            <div>
+                <input type="button" class="btn" name="btn" 
+                value="인증번호 재전송하기">
+            </div>
+           
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+
+    $(document).ready(function() {
+        // '인증하기' 버튼 클릭 이벤트
+        $(".btn1").click(function() {
+            // 입력된 인증번호 가져오기
+            var verificationCode = $("#verificationCodeInput").val();
+        
+            // 서버로 인증번호를 보내는 AJAX 요청
+            $.ajax({
+                type: "POST",
+                url: "/check_verification_code", // 서버 측 라우트 URL로 변경
+                data: {
+                    verificationCode: verificationCode
+                },
+                success: function(response) {
+                    // 서버로부터의 응답 처리
+                    if (response.success) {
+                        // 인증 성공: 비밀번호 재설정 페이지로 이동
+                        window.location.href = "/pw_reset"; // 리다이렉트 URL로 변경
+                    } else {
+                        alert("인증에 실패했습니다. 올바른 인증번호를 입력하세요.");
+                    }
+                },
+                error: function() {
+                    alert("서버와 통신 중 오류가 발생했습니다.");
+                }
+            });
+        });
+    });
+
+    </script>
+    
+
+</body>
+
+</html>

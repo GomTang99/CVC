@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,11 +11,6 @@ a{
 
 li{
     list-style: none;
-}
-
-img{
-    display: block;
-    width: 100%;
 }
 
 /* reset */
@@ -94,71 +89,70 @@ header{
 
 .out_header > h1 {
     margin-bottom: 50px;
-    color: rgb(183, 167, 226);
+    color: rgb(92, 26, 123);
     font-weight: bold;
 }
 
 /* header_end */
 
-.content{
-    width: 60%;
-    padding-top: 12%;
-    margin: 0 auto;
-}
-
-.content > form {
-    background-color: rgb(210, 200, 237);
-}
-
-.new_pw {
+.main{
+    width: 1440px;
+    height: 1000px;
+    background: #D4CDDC;
     display: flex;
-    width: 80%;
-    margin-left: 30%;
-    padding-top: 6%;
-    margin-bottom: 20px;
+    margin: 7% auto;
 }
 
-.new_pw > h2 {
-    margin-right: 30px;
+.tab_content{
+    margin-left: 50px;
+    padding-top: 50px;
 }
 
-#new_pw {
-    font-size: 24px;
-}
+input[type="radio"]{display: none;}
+input[type="radio"] + label {display: inline-block; margin-top:20px; width: 330px; height: 150px; padding:30px;
+    align-items: center; background: #fefefe; color:#000000;font-size:24px;cursor:pointer;}
+input[type="radio"]:checked + label{background:#B5A6DE; color:#fff}
 
-.check_pw {
+.conbox{width:1340px; height: 75%; background: #ffffff; border: 2px solid #b597e1; 
+    text-align: center; align-items: center; margin-left : 50px; margin: auto; display: none;}
+input[id="tab01"]:checked ~ .con1 {display: block;}
+input[id="tab02"]:checked ~ .con2 {display: block;}
+input[id="tab03"]:checked ~ .con3 {display: block;}
+input[id="tab04"]:checked ~ .con4 {display: block;}
+
+.infor{
+    width: 95%;
+    height: 150px;
     display: flex;
-    width: 80%;
-    margin-left: 30%;
-    padding-top: 6%;
-    margin-bottom: 20px;
+    border-bottom:2px solid #8A7DB1;
+    margin-left: 15px;
 }
 
 
-.check_pw > h2 {
-    margin-right: 10px;
+
+.infor > li:first-child{
+    width: 33%;
+    height: 20px;
+    position: relative;
+    padding: 60px;
+    font-size: 30px;
 }
 
-#check_pw {
-    font-size: 24px;
+.infor > li:last-child{
+    width: 65%;
+    height: 20px;
+    position: relative;
+    padding: 30px;
+    font-size: 25px;
 }
 
-.check_btn {
-    margin-top: 100px;
-    text-align: center;
-    padding-bottom: 60px;
+li{
+    list-style: none;
 }
 
-#submit_btn {
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#cancel_btn {
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
-    font-weight: bold;
+h3{
+    width: 100px;
+    display: inline;
+    margin-left: 15px;
+    font-size: 35px;
 }

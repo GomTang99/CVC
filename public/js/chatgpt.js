@@ -1,20 +1,28 @@
-import openai from "openai";
+import { config } from 'dotenv';
+config();
 
-async function callChatGPT(prompt) {
-    openai.configure({
-        apiKey: process.env.OPEN_AI_KEY,
+//const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi } from "openai";
+
+export async function callChatGPT(prompt) {
+    
+    const configuration = new Configuration({
+        apiKey : process.env.OPENAI_API_KEY,
     });
-
+    
     try {
-        const response = await openai.ChatCompletion.create({
+        const openai = new OpenAIApi(configuration);
+
+        const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt }],
+            message: [{role: "user", content: prompt}],
         });
-        return response.choices[0].message.content;
+        return response.data.choices[0].message;
+
     } catch (error) {
-        console.error('Error calling ChatGPT API:', error);
+        console.error("ChatGPT API 불러오기 중 오류:", error);
         return null;
     }
 }
 
-export { callChatGPT };
+module.exports = { callChatGPT };

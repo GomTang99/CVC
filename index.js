@@ -3,7 +3,6 @@ import path from "path";
 import session from "express-session";
 import bodyParser from "body-parser";
 
-
 import "./db.js";
 
 import globalRouter from "./routers/globalRouter.js";
