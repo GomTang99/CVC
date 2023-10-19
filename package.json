@@ -18,7 +18,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.3.2",
     "nodemailer": "^6.9.4",
-    "openai": "^4.11.1"
+    "openai": "^4.12.4",
+    "readline-sync": "^1.4.10"
   },
   "type": "module"
 }

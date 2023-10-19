@@ -8,46 +8,78 @@ const userRouter = express.Router();
 const app = express();
 
 //마이페이지
-userRouter.get("/mypage", async (req, res) => {
-    if (req.session.user) {
-        // 세션에 로그인 정보가 있으면 프로필 페이지 표시
-        const userId = req.session.user.id; // 사용자 아이디
-        try {
-          // DB 연결
-          const dbConfig = {
-            host: '127.0.0.1',
-            port: '3306',
-            user: 'root',
-            password: 'wnsdud5948!@',
-            database: 'CVC',
-          };
+userRouter.get("/mypage_login", async (req, res) => {
+  try {
+    // 데이터베이스 연결 설정
+    const dbConfig = {
+      host: '127.0.0.1',
+      port: '3306',
+      user: 'root',
+      password: 'wnsdud5948!@',
+      database: 'CVC',
+    };
 
-          // DB 연결
-          const connection = await mysql.createConnection(dbConfig);
+    
+    // 데이터베이스 연결
+    const connection = await mysql.createConnection(dbConfig);
 
-          // DB 자소서 목록 조회
-          const sql = "SELECT idx, user_id, text_1, text_2, text_3, text_4 FROM cvc.mypage WHERE user_id = ?";
-          const [result] = await connection.execute(sql);
+    // 세션에서 사용자 ID 가져오기
+    const userName = req.session.user.name;
 
-          // 연결 종료
-          await connection.end();
+    // 데이터베이스에서 마이페이지 정보 가져오기
+    const sql = 'SELECT * FROM mypage WHERE user_id = ?';
+    const [rows] = await connection.execute(sql, [userName]);
 
-          // 조회 결과를 클라이언트에 전달
-          res.render("mypage(login)", {userId, posts: result});
-        }
-        catch (error) {
-          console.error("자기소개서 목록 조회 오류:", error);
-          res.status(500).send("자기소개서 목록 조회 중 오류 발생");
-        }
-      } else {
-        // 로그인 X
-        res.redirect('/login');
-      }
+    if (rows.length === 0) {
+      res.status(404).send('사용자 정보를 찾을 수 없음');
+      return;
+    }
+
+    const userMypageData = rows;
+
+    res.render('mypage(login)', {
+      userId: userName,
+      posts: userMypageData,
+    });
+
+    // 연결 종료
+    connection.end();
+  } catch (error) {
+    console.error('DB 오류:', error);
+    res.status(500).send('서버 오류');
+  }
+
 });
 
-userRouter.post("/", (req, res) => {
-  
-})
+// 마이페이지 자기소개서 내용 불러오기
+userRouter.get("/getCVContent", async (req, res) => {
+    try {
+      // 데이터베이스 연결 설정
+      const dbConfig = {
+        host: '127.0.0.1',
+        port: '3306',
+        user: 'root',
+        password: 'wnsdud5948!@',
+        database: 'CVC',
+      };
+
+      const idx = req.query.idx;
+
+      const sql = "SELECT text_1, text_2, text_3, text_4 FROM mypage WHERE idx = ?";
+      const [rows] = await connection.execute(sql, [idx]);
+
+      if (rows.length === 0) {
+        res.status(404).send('자기소개서 찾을수 없음');
+        return;
+      }
+
+      res.json(rows[0]);
+      connection.end();
+    } catch (error) {
+      console.error('DB 오류:', error);
+      res.status(500).send('서버 오류');
+    }
+});
 
 
 // 마이페이지 자기소개서 상세 라우트

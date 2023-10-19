@@ -110,6 +110,22 @@ header{
     background-color: rgb(210, 200, 237);
 }
 
+.id {
+    display: flex;
+    width: 80%;
+    margin-left: 30%;
+    padding-top: 6%;
+    margin-bottom: 20px;
+}
+
+.id > h2 {
+    margin-right: 30px;
+}
+
+#users_id {
+    font-size: 24px;
+}
+
 .new_pw {
     display: flex;
     width: 80%;

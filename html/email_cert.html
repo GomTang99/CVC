@@ -40,14 +40,16 @@
                 <h1>이메일 인증번호를 입력해주세요.</h1>
             </div>
             <div class="box box2">
-                <input type="text">
-                <button type="submit" class="btn1" name="btn1"><a href="/pw_reset">인증하기</a></button>
+                <input type="text" id="enteredCode">
+                <button type="submit" id="verifyCodeBtn" class="btn1" name="btn1"><a href="/pw_reset">인증하기</a></button>
             </div>
 
+            <!--
             <div>
                 <input type="button" class="btn" name="btn" 
-                value="인증번호 재전송하기">
+                value="인증번호 재전송하기" id="resendVerification">
             </div>
+            -->
            
         </div>
 
@@ -55,39 +57,61 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    
     <script>
 
-    $(document).ready(function() {
-        // '인증하기' 버튼 클릭 이벤트
-        $(".btn1").click(function() {
-            // 입력된 인증번호 가져오기
-            var verificationCode = $("#verificationCodeInput").val();
-        
-            // 서버로 인증번호를 보내는 AJAX 요청
-            $.ajax({
-                type: "POST",
-                url: "/check_verification_code", // 서버 측 라우트 URL로 변경
-                data: {
-                    verificationCode: verificationCode
-                },
-                success: function(response) {
-                    // 서버로부터의 응답 처리
-                    if (response.success) {
-                        // 인증 성공: 비밀번호 재설정 페이지로 이동
-                        window.location.href = "/pw_reset"; // 리다이렉트 URL로 변경
-                    } else {
-                        alert("인증에 실패했습니다. 올바른 인증번호를 입력하세요.");
-                    }
-                },
-                error: function() {
-                    alert("서버와 통신 중 오류가 발생했습니다.");
-                }
-            });
-        });
-    });
+$(document).ready(function() {
+            $("#verifyCodeBtn").click(function() {
+                var enteredCode = $("#enteredCode").val();
 
-    </script>
+                if (enteredCode === "") {
+                    alert("인증 코드를 입력하세요.");
+                    return;
+                }
+
+                // 서버로 인증 코드를 보냅니다.
+                $.ajax({
+                    type: "POST",
+                    url: "/check_verification_code", // 서버 라우트
+                    data: {
+                        enteredCode: enteredCode
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert("인증이 성공적으로 완료되었습니다.");
+                            // 인증 성공 시 비밀번호 재설정 페이지로 이동
+                            //window.location.href = "/pw_reset";
+                        } else {
+                            alert("인증 코드가 유효하지 않습니다.");
+                        }
+                    },
+                    error: function() {
+                        alert("서버 오류: 인증 실패.");
+                    }
+                });
+            });
+
+            /*$("#resendVerification").click(function() {
+                // 서버로 이메일 재전송 요청을 보냅니다.
+                $.ajax({
+                    type: "POST",
+                    url: "/resend_verification_email", // 서버 라우트
+                    success: function(response) {
+                        if (response.success) {
+                            alert("인증 이메일을 다시 전송했습니다. 이메일을 확인하세요.");
+                        } else {
+                            alert("인증 이메일을 보내는 데 문제가 발생했습니다.");
+                        }
+                    },
+                    error: function() {
+                        alert("서버 오류: 이메일 재전송 실패.");
+                    }
+                });
+            });*/
+        });
     
+    </script>  
+            
 
 </body>
 

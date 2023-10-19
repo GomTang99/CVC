@@ -12,12 +12,12 @@
       <div class="header_top">
           <ul>
               <li><a href="/board/community">커뮤니티</a></li>|
-              <li><a href="/board/">참고문헌</a></li>|
+              <li><a href="/board/works_cited">참고문헌</a></li>|
               <li><a href="/board/AI_consult">AI 컨설팅</a></li>|
               <li><a href="/board/notice">공지사항</a></li>
           </ul>
           <ul class="login_register">
-                <li><a href="/user/mypage(login)">마이페이지</a></li>
+                <li><a href="/user/mypage_login">마이페이지</a></li>
                 <li><a href="/">로그아웃</a></li>
           </ul>
       </div>
@@ -35,24 +35,23 @@
       <div class="mypage_profile col">
         <img class="profile_avatar" id="previewImage" src="" alt="preview Image" />
         <button id="uploadBtn">이미지 업로드</button>
-        <input type="file" id="fileInput" accept="img/jpg, img/jpng, img/jpeg, img/png" />
+        <input type="file" id="fileInput" accept="image/jpg, image/jpng, image/jpeg, image/png" />
         <br />
-        <!-- 로그인된 사용자 이름 받기 -->
-        <span style="font-size: 20px">@사용자아이디</span>
+        <!-- 로그인된 사용자 이름 받기 --> 
+        <span style="font-size: 20px"><!--<%= userId %>--></span>
         <br />
+        <!--
         <p style="padding: 5px; border: 1px solid black">
-          간단한
-          자기소개입니다.ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
         </p>
         <br />
+        -->
         <span style="font-size: 18px">-자기소개서 보관함-</span>
         <div class="profile_cvContainer">
           <ul class="profile_cvContainer_ul">
-            <% posts.forEach(function(post) { %>
-              <li><span><%= post.idx %></span><span>✏️</span></li>
-              <li><span>2222</span><span>✏️</span></li>
-              <li><span>3333</span><span>✏️</span></li>
-              <li><span>4444</span><span>✏️</span></li>
+            <% posts.forEach(function(post)  { %>
+              <li><button id="loadCVButton" class="cvList" data-idx="<%= post.idx %>">
+                <span><%= post.idx %></span><span>✏️</span>
+              </button></li>
             <% }); %>
           </ul>
         </div>
@@ -70,35 +69,61 @@
           >나의 자기소개서</span
         >
         <br />
-        <span class="cv_title">1111</span>
+        <span class="cv_title"><%= posts[0].idx %></span>
         <label for="cv_1">1. 지원동기 및 입사 후포부</label>
-        <textarea class="cv_content" name="" id="cv_1"></textarea>
+        <textarea class="cv_content" name="" id="cv_1">
+          <%= posts[0].text_1 %>
+        </textarea>
         <span id="characterCount">0/400</span>
 
         <label for="cv_2">2. 경험(성장과정, 직무관련 경험 등)</label>
-        <textarea class="cv_content" name="" id="cv_2"></textarea>
+        <textarea class="cv_content" name="" id="cv_2">
+          <%= posts[0].text_2 %>
+        </textarea>
         <span id="characterCount">0/400</span>
 
         <label for="cv_3">3. 성격의 장단점</label>
-        <textarea class="cv_content" name="" id="cv_3"></textarea>
+        <textarea class="cv_content" name="" id="cv_3">
+          <%= posts[0].text_3 %>
+        </textarea>
         <span id="characterCount">0/400</span>
 
         <label for="cv_4">4. 직무역량</label>
-        <textarea class="cv_content" name="" id="cv_4"></textarea>
+        <textarea class="cv_content" name="" id="cv_4">
+          <%= posts[0].text_4 %>
+        </textarea>
         <span id="characterCount">0/400</span>
         <br />
         <div class="cv_btn">
-          <button class="cv_saveBtn">저장하기</button>
-          <button class="cv_deleteBtn">삭제</button>
+          <button class="cv_saveBtn">수정 및 저장</button>
         </div>
       </div>
     </div>
 
 
     <script>
-        
-    </script>
 
+      document.querySelectorAll('.cvList').forEach((button) => {
+    button.addEventListener('click', function () {
+    const idx = this.getAttribute('data-idx');
+
+    // 서버로 idx 전송
+    fetch(`/getCVContent?idx=${idx}`)
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById('cv_1').value = data.text_1;
+      document.getElementById('cv_2').value = data.text_2;
+      document.getElementById('cv_3').value = data.text_3;
+      document.getElementById('cv_4').value = data.text_4;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
+});
+
+
+    </script>
 
   </body>
 </html>

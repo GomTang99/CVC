@@ -54,15 +54,13 @@ boardRouter.get("/write_community", (req, res) => {
 
 // 게시글 작성페이지
 boardRouter.post("/write_community", (req, res) => {
-  if (req.session.user) {
+  if (req.session.user && req.session.user.type === 'user') {
     const name = req.session.user.name;
-
-    console.log(req.session.user);
     const subject = req.body.subject;
     const content = req.body.content;
 
-    // console.log(name, subject, content);
-
+    console.log(name);
+    
     // 현재 시간 구하기
     const writedate = new Date().toISOString().slice(0, 10);
 
@@ -76,9 +74,12 @@ boardRouter.post("/write_community", (req, res) => {
         return;
       }
 
-      console.log("Post saved sucessfully:", result);
-      res.redirect("/board/community"); // 글작성이 완료되면 게시글목록 페이지로 이동
+      console.log("Post saved successfully:", result);
+      res.redirect("/board/community"); // 글 작성이 완료되면 게시글 목록 페이지로 이동
     });
+  } else {
+    // 사용자가 로그인하지 않았거나, 권한이 없는 경우에 대한 처리를 추가할 수 있습니다.
+    res.redirect("/login"); // 또는 다른 적절한 처리
   }
   
 });
@@ -293,23 +294,6 @@ boardRouter.post('/notice/:postIdx/noticecomment', (req, res) => {
 
 // 유저 끝
 
-// 전문가 라우터
-
-boardRouter.get("/expertprofile", (req, res) => {
-  if (req.session.user) {
-      // 세션에 로그인 정보가 있는 경우
-      const user = req.session.user;
-      // 로그인된 사용자의 정보를 활용하여 원하는 작업 수행
-  
-      res.sendFile(process.cwd() + '/html/expertprofile.html', { user: user });
-    } else {
-      // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-      res.redirect('/login');
-    }
-  // res.sendFile(process.cwd() + "/html/expertprofile.html");
-});
-
-
 
 // AI컨설팅
 boardRouter.get("/AI_consult", async (req, res) => {
@@ -330,6 +314,14 @@ boardRouter.post("/AI_consult", async (req, res) => {
     res.status(500).json({ error: 'An error occurred while processing your request' });
   }
 });
+
+
+// 참고문헌
+boardRouter.get("/works_cited", (req, res) => {
+  res.sendFile(process.cwd() + "/html/works_cited.html");
+});
+
+
 
 
 export default boardRouter;

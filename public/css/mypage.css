@@ -22,6 +22,10 @@ a{
   color: initial;
 }
 
+button{
+  cursor: pointer;
+}
+
 
 .header_top{
   display: flex;

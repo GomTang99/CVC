@@ -23,6 +23,4 @@ export async function callChatGPT(prompt) {
         console.error("ChatGPT API 불러오기 중 오류:", error);
         return null;
     }
-}
-
-module.exports = { callChatGPT };
+}   

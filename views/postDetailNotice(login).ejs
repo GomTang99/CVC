@@ -16,7 +16,7 @@
         <div class="header_top">
             <ul>
                 <li><a href="/board/">참고문헌</a></li>|
-                <li><a href="/board/">AI 컨설팅</a></li>|
+                <li><a href="/board/AI_consult">AI 컨설팅</a></li>|
                 <li><a href="/board/notice">공지사항</a></li>
             </ul>
             <ul class="login_register">
@@ -33,40 +33,45 @@
             </div>
         </div>
       </header>
-
-        <div class="community_content content">
-            <div class="post-detail">
-                <h1><%= post.title %></h1>
-                <p class="name"><strong>작성자:</strong> <%= post.name %></p>
-                <p class="write-date"><strong>작성일:</strong> <%= post.writedate %></p>
-                <div class="post-content">
-                    <%= post.content %>
+      
+        <div class="wrap">
+            <div class="midwrap">
+                <div class="community_content content">
+                    <div class="post-detail">
+                        <h1><%= post.title %></h1>
+                        <p class="name"><strong>작성자:</strong> <%= post.name %></p>
+                        <p class="write-date"><strong>작성일:</strong> <%= post.writedate %></p>
+                        <div class="post-content">
+                            <%= post.content %>
+                        </div>
+                    </div>
+        
+                    <!-- 댓글표시 -->
+                    <div class="comments">
+                        <h2>댓글</h2>
+                        <ul>
+                          <% comments.forEach(function(comment) { %>
+                            <li>
+                              <strong><%= comment.author%></strong>
+                              <p><%= comment.content %></p>
+                            </li>
+                          <% }); %>
+                        </ul>
+                    </div>
+        
+                    <!-- 댓글 작성 폼 -->
+                    <div class="comment-form">
+                        <h3>댓글 작성</h3>
+                        <form action="/board/notice/<%= post.idx %>/noticecomment" method="post"> <!-- 게시글 ID를 POST요청으로 전달 -->
+                            <input type="hidden" name="postId" value="<%= post.idx %>">
+                            <input type="text" id="content" name="content">
+                            <button type="submit">댓글 작성</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <!-- 댓글표시 -->
-            <div class="comments">
-                <h2>댓글</h2>
-                <ul>
-                  <% comments.forEach(function(comment) { %>
-                    <li>
-                      <strong><%= comment.author%></strong>
-                      <p><%= comment.content %></p>
-                    </li>
-                  <% }); %>
-                </ul>
-            </div>
-
-            <!-- 댓글 작성 폼 -->
-            <div class="comment-form">
-                <h3>댓글 작성</h3>
-                <form action="/board/notice/<%= post.idx %>/noticecomment" method="post"> <!-- 게시글 ID를 POST요청으로 전달 -->
-                    <input type="hidden" name="postId" value="<%= post.idx %>">
-                    <input type="text" id="content" name="content">
-                    <button type="submit">댓글 작성</button>
-                </form>
-            </div>
         </div>
+        
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
