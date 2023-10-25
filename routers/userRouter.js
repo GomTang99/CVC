@@ -87,6 +87,12 @@ userRouter.get("/getCVContent", async (req, res) => {
 
 
 
+// 마이페이지 자기소개서 수정 / 저장
+userRouter.post('/updateCVText', (req, res) => {
+
+});
+
+
 
 // 파일 업로드를 저장할 디렉토리 설정
 const storage = multer.diskStorage({

@@ -111,6 +111,10 @@
     border-radius: 25px;
 }
 
+#sendBtn:hover {
+  background-color: rgba(210, 200, 237, .5);
+}
+
 .divider{
     width: 70%;
     margin: 0 auto;

@@ -1,11 +1,11 @@
 import express from "express";
 import conn from "../db.js";
 import mysql from "mysql2/promise";
+//import { callChatGPT } from "../public/js/chatgpt.js";
+
 
 const boardRouter = express.Router();
 const app = express();
-
-
 
 // 게시판 라우터
 // 게시판 목록 조회
@@ -296,24 +296,25 @@ boardRouter.post('/notice/:postIdx/noticecomment', (req, res) => {
 
 
 // AI컨설팅
-boardRouter.get("/AI_consult", async (req, res) => {
-  res.render('gptConsult');
-});
+// boardRouter.get("/AI_consult", async (req, res) => {
+//   res.render('gptConsult', {
+//     pass: true
+//   });
+// });
 
-boardRouter.post("/AI_consult", async (req, res) => {
-  const prompt = req.body.prompt;
-  try {
-    const response = await callChatGPT(prompt);
-    if (response) {
-      res.json({ response: response });
-    } else {
-      res.status(500).json({ error: 'Failed to get a response from ChatGPT API' });
-    }
-  } catch (error) {
-    console.error('An error occurred:', error);
-    res.status(500).json({ error: 'An error occurred while processing your request' });
-  }
-});
+// boardRouter.post('/ask', async (req, res) => {
+//   const prompt = req.body.prompt;
+//   const response = await callChatGPT(prompt);
+
+//   if (response) {
+//     res.json({ 'response': response });
+//   } else {
+//     res.status(500).json({ 'error' : 'Failed to get response from ChatGPT API'});
+//   }
+// });
+
+
+
 
 
 // 참고문헌

@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import session from "express-session";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import "./db.js";
 
@@ -19,8 +20,9 @@ app.use(express.static(__dirname + "/C.V.C"));
 app.use('/public', express.static('public'));
 app.use('/img', express.static('img'));
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.set("view engine", "ejs");
-
+app.use(cors());
 
 // 세션 미들웨어
 app.use(session({
