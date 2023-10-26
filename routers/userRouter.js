@@ -95,17 +95,7 @@ userRouter.post('/updateCVText', (req, res) => {
 
 
 // 파일 업로드를 저장할 디렉토리 설정
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // 업로드된 파일을 저장할 폴더 설정
-  },
-  filename: (req, file, cb) => {
-    const extname = path.extname(file.originalname);
-    cb(null, Date.now() + extname); // 파일 이름 설정 (고유한 이름으로 저장)
-  },
-});
 
-const upload = multer({ storage: storage });
 
 // 이미지 업로드 라우트
 userRouter.post('/user/uploadImage', upload.single('avatar'), (req, res) => {
