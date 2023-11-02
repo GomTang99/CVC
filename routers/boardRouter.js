@@ -1,7 +1,6 @@
 import express from "express";
 import conn from "../db.js";
 import mysql from "mysql2/promise";
-//import { callChatGPT } from "../public/js/chatgpt.js";
 
 
 const boardRouter = express.Router();
@@ -296,25 +295,10 @@ boardRouter.post('/notice/:postIdx/noticecomment', (req, res) => {
 
 
 // AI컨설팅
-// boardRouter.get("/AI_consult", async (req, res) => {
-//   res.render('gptConsult', {
-//     pass: true
-//   });
-// });
 
-// boardRouter.post('/ask', async (req, res) => {
-//   const prompt = req.body.prompt;
-//   const response = await callChatGPT(prompt);
-
-//   if (response) {
-//     res.json({ 'response': response });
-//   } else {
-//     res.status(500).json({ 'error' : 'Failed to get response from ChatGPT API'});
-//   }
-// });
-
-
-
+boardRouter.get("/AI_consult", async (req, res) => {
+  res.sendFile(process.cwd() + "/html/AI_consult.html");
+});
 
 
 // 참고문헌

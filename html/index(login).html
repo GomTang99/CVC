@@ -39,17 +39,21 @@
             <div class="in_section">
                 <div class="left">
                     <form action="/login" method="post" id="textForm">
-                        <textarea name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea>
-                        <textarea name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea>
-                        <textarea name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea>
-                        <textarea name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량"></textarea>
-                        <input type="submit" class="save" value="저장하기">
+                        <textarea onkeydown="counter1()" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea><br/>
+                        <span style="color: #000;" id="count1">(0 / 최대 1000자)</span><br/>
+                        <textarea onkeydown="counter2()" name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea><br/>
+                        <span style="color: #000;" id="count2">(0 / 최대 1000자)</span><br/>
+                        <textarea onkeydown="counter3()" name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea><br/>
+                        <span style="color: #000;" id="count3">(0 / 최대 1000자)</span><br/>
+                        <textarea onkeydown="counter4()" name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량"></textarea><br/>
+                        <span style="color: #000;" id="count4">(0 / 최대 1000자)</span>
                     </form>
                 </div>
                 <div class="right">
                     <div class="playlist">
                         <iframe width="600" height="400" src="https://www.youtube.com/embed/ov0Mbm6FHu8?autoplay=1&mute=1" title="자소서 쓸때 듣는 음악ㅣ딱 2시간 집중해서 글쓰기ㅣ가사 없는 음악 playlist" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
+                    <input type="submit" class="save" value="저장하기" >
                 </div>
             </div>
 
@@ -116,6 +120,92 @@
                 }
             });
         });
+
+
+        // 글자수 카운팅
+        document.addEventListener("DOMContentLoaded", () => {
+            const textForm = document.getElementById("textForm");
+
+            textForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                // FormData 객체를 사용하여 폼 데이터를 가져옵니다.
+                const formData = new FormData(textForm);
+
+                // FormData를 객체로 변환합니다.
+                const formDataObject = {};
+                formData.forEach((value, key) => {
+                    formDataObject[key] = value;
+                });
+
+                // JSON 형식으로 변환합니다.
+                const jsonData = JSON.stringify(formDataObject);
+
+                try {
+                    const response = await fetch("/saveText", {
+                        method: "POST",
+                        body: jsonData,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        alert("자기소개서 저장 완료!");
+                    } else {
+                        alert("자기소개서 저장 실패!");
+                    }
+                } catch (error) {
+                    console.error("데이터 전송 오류:", error);
+                }
+            });
+        });
+
+
+        function counter1(){
+            var content = document.getElementById('txt1').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('txt1').value=content;
+            }
+
+            document.getElementById('count1').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter1();
+
+        function counter2(){
+            var content = document.getElementById('txt2').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('txt2').value=content;
+            }
+
+            document.getElementById('count2').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter2();
+
+        function counter3(){
+            var content = document.getElementById('txt3').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('txt3').value=content;
+            }
+
+            document.getElementById('count3').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter3();
+
+        function counter4(){
+            var content = document.getElementById('txt4').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('txt4').value=content;
+            }
+
+            document.getElementById('count4').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter4();
 
 
     </script>

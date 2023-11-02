@@ -89,13 +89,45 @@ userRouter.get("/getCVContent", async (req, res) => {
 
 // 마이페이지 자기소개서 수정 / 저장
 userRouter.post('/updateCVText', (req, res) => {
+  if(req.session.user && req.session.user.type === 'user') {
+    const name = req.session.user.name;
+    const text1 = req.body.text1;
+    const text2 = req.body.text2;
+    const text3 = req.body.text3;
+    const text4 = req.body.text4;
+
+    const sql = 'UPDATE cvc.myapge (text_1, text_2, text_3, text_4) VALUES (?, ?, ?, ?)';
+    const value = [text1, text2, text3, text4];
+
+    conn.query(sql, value, (err, result) => {
+      if (err) {
+        console.error("Error :", err);
+        return;
+      }
+
+      console.log("success:", result);
+      res.redirect("/user/mypage_login");
+    });
+  } else {
+    res.redirect
+  }
 
 });
 
 
 
 // 파일 업로드를 저장할 디렉토리 설정
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // 업로드된 파일을 저장할 폴더 설정
+  },
+  filename: (req, file, cb) => {
+    const extname = path.extname(file.originalname);
+    cb(null, Date.now() + extname); // 파일 이름 설정 (고유한 이름으로 저장)
+  },
+});
 
+const upload = multer({ storage: storage });
 
 // 이미지 업로드 라우트
 userRouter.post('/user/uploadImage', upload.single('avatar'), (req, res) => {

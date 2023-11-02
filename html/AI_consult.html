@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/AI_Consult.css">
+    <title>AI 컨설팅</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header_top">
+            <ul>
+                <li><a href="/board/community">커뮤니티</a></li>|
+                <li><a href="/board/works_cited">참고문헌</a></li>|
+                <li><a href="/board/notice">공지사항</a></li>
+            </ul>
+            <ul class="login_register">
+              <li><a href="/user/mypage_login">마이페이지</a></li>
+              <li><a href="/">로그아웃</a></li>
+            </ul>
+        </div>
+        <div class="header_bottom">
+            <div class="logo">
+                <h1><a href="/"><img src="/public/img/logo.png" alt="logo"></a></h1>
+            </div>
+            <div class="sub_title">
+                <h1>AI 컨설팅</h1>
+            </div>
+        </div>
+      </header>
+
+      <!-- header_end -->
+
+<div class="main">
+    <h1>AI 컨설팅</h1>
+
+  <!-- <input type="text" id="keywords" name="keywords" required /> -->
+  <textarea name="keywords" id="keywords" cols="30" rows="10"></textarea>
+  <button id="btn" onclick="chatGPT()">입력</button>
+  <div id="result"></div>
+
+  <div id="loading">
+    <img src="https://studentrights.sen.go.kr/images/common/loading.gif">
+  </div>
+</div>
+  
+  <script src="../public/js/chatGPT.js"></script>
+
+
+    
+</body>
+</html>

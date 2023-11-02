@@ -71,28 +71,28 @@
         <br />
         <span class="cv_title"><%= posts[0].idx %></span>
         <label for="cv_1">1. 지원동기 및 입사 후포부</label>
-        <textarea class="cv_content" name="" id="cv_1">
+        <textarea onkeydown="counter1()" class="cv_content" name="" id="cv_1">
           <%= posts[0].text_1 %>
         </textarea>
-        <span id="characterCount">0/400</span>
+        <span id="characterCount1">0 / 최대 1000자</span>
 
         <label for="cv_2">2. 경험(성장과정, 직무관련 경험 등)</label>
-        <textarea class="cv_content" name="" id="cv_2">
+        <textarea onkeydown="counter2()" class="cv_content" name="" id="cv_2">
           <%= posts[0].text_2 %>
         </textarea>
-        <span id="characterCount">0/400</span>
+        <span id="characterCount2">0 / 최대 1000자</span>
 
         <label for="cv_3">3. 성격의 장단점</label>
-        <textarea class="cv_content" name="" id="cv_3">
+        <textarea onkeydown="counter3()" class="cv_content" name="" id="cv_3">
           <%= posts[0].text_3 %>
         </textarea>
-        <span id="characterCount">0/400</span>
+        <span id="characterCount3">0 / 최대 1000자</span>
 
         <label for="cv_4">4. 직무역량</label>
-        <textarea class="cv_content" name="" id="cv_4">
+        <textarea onkeydown="counter4()" class="cv_content" name="" id="cv_4">
           <%= posts[0].text_4 %>
         </textarea>
-        <span id="characterCount">0/400</span>
+        <span id="characterCount4">0 / 최대 1000자</span>
         <br />
         <div class="cv_btn">
           <button class="cv_saveBtn" id="saveBtn">수정 및 저장</button>
@@ -124,6 +124,52 @@
 
     // 자소서 수정 및 저장
 
+    
+
+    // 글자수 카운팅
+    function counter1(){
+            var content = document.getElementById('cv_1').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('cv_1').value=content;
+            }
+
+            document.getElementById('characterCount1').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter1();
+
+        function counter2(){
+            var content = document.getElementById('cv_2').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('cv_2').value=content;
+            }
+
+            document.getElementById('characterCount2').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter2();
+
+        function counter3(){
+            var content = document.getElementById('cv_3').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('cv_3').value=content;
+            }
+
+            document.getElementById('characterCount3').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter3();
+
+        function counter4(){
+            var content = document.getElementById('cv_4').value;
+            if(content.length > 1000){
+                content = content.substring(0,1000);
+                document.getElementById('cv_4').value=content;
+            }
+
+            document.getElementById('characterCount4').innerHTML='(' +content.length+' / 최대 1000자)'
+        };
+        counter4();
 
     </script>
 

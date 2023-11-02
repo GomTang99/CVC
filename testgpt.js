@@ -1,29 +1,35 @@
-import axios from "axios";
+process.env.OPENAI_API_KEY = "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";
 
-const apikey = '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';
-const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-
-// ChatGPT에 전달할 메시지
-const message = '번역: 사과를 영어로 뭐라고 하나요?';
-
-// API 요청을 보낼 데이터
-const requestData = {
-  prompt: message,
-  max_token: 50, // 반환되는 텍스트의 최대 길이
-  n: 1,  // 반환할 결과 수
-};
-
-// API 요청 보내기
-try {
-  const response = await axios.post(endpoint, requestData, {
+function chat(question) {
+  return fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
     headers: {
-      'Authorization': `Bearer ${apikey}`,
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
     },
-  });
-
-  const completion = response.data.choices[0].text;
-  console.log(completion);
-} catch (error) {
-  console.error('API 요청 중 오류 발생:', error);
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: question }],
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => data.choices[0].message.content);
 }
+
+chat("야!").then((answer) => console.log(answer));
+
+import { createInterface } from "readline";
+const rl = createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+console.log("💬 ChatGPT 터미널 챗앱 💬\n");
+rl.prompt();
+
+rl.on("line", (question) => {
+  chat(question).then((answer) => {
+    console.log(`🤖 ${answer}\n`);
+    rl.prompt();
+  });
+});
