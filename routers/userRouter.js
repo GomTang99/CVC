@@ -51,67 +51,42 @@ userRouter.get("/mypage_login", async (req, res) => {
 
 });
 
-// 마이페이지 자기소개서 내용 불러오기
-userRouter.get("/getCVContent", async (req, res) => {
-    try {
-      // 데이터베이스 연결 설정
-      const dbConfig = {
-        host: '127.0.0.1',
-        port: '3306',
-        user: 'root',
-        password: 'wnsdud5948!@',
-        database: 'CVC',
-      };
+// 마이페이지 자기소개서 수정 폼
+userRouter.get('/mypage/:postIdx', (req, res) => {
+  const postIdx = req.params.postIdx;
 
-      const idx = req.query.idx;
-
-      const sql = "SELECT text_1, text_2, text_3, text_4 FROM mypage WHERE idx = ?";
-      const [rows] = await connection.execute(sql, [idx]);
-
-      if (rows.length === 0) {
-        res.status(404).send('자기소개서 찾을수 없음');
-        return;
-      }
-
-      res.json(rows[0]);
-      connection.end();
-    } catch (error) {
-      console.error('DB 오류:', error);
-      res.status(500).send('서버 오류');
+  // 게시글 정보를 데이터베이스에서 조회
+  const sql = 'SELECT * FROM mypage WHERE idx = ?';
+  conn.query(sql, [postIdx], (err, result) => {
+    if (err) {
+      console.error('자기소개서 조회 오류:', err);
+      res.status(500).send('자기소개서 조회 중 오류 발생');
+      return;
     }
+
+    const post = result[0]; // 조회한 자기소개서 정보
+    //console.log(post);
+    res.render('mypage_edit', { post });
+  });
 });
 
 
-// 마이페이지 자기소개서 상세 라우트
+// 수정 엔드포인트
+userRouter.post('/edit_cvContent', (req, res) => {
+  const { txt1, txt2, txt3, txt4 } = req.body;
+  const postIdx = req.params.postIdx;
 
-
-
-
-// 마이페이지 자기소개서 수정 / 저장
-userRouter.post('/updateCVText', (req, res) => {
-  if(req.session.user && req.session.user.type === 'user') {
-    const name = req.session.user.name;
-    const text1 = req.body.text1;
-    const text2 = req.body.text2;
-    const text3 = req.body.text3;
-    const text4 = req.body.text4;
-
-    const sql = 'UPDATE cvc.myapge (text_1, text_2, text_3, text_4) VALUES (?, ?, ?, ?)';
-    const value = [text1, text2, text3, text4];
-
-    conn.query(sql, value, (err, result) => {
-      if (err) {
-        console.error("Error :", err);
-        return;
-      }
-
-      console.log("success:", result);
-      res.redirect("/user/mypage_login");
-    });
-  } else {
-    res.redirect
-  }
-
+  // 이하 SQL 쿼리문은 실제 데이터베이스와 연동되어야 합니다.
+  const sql = "UPDATE mypage SET text_1 = ?, text_2 = ?, text_3 = ?, text_4 = ? WHERE idx = ?";
+  conn.query(sql, [txt1, txt2, txt3, txt4, postIdx], (err, result) => {
+    if (err) {
+      console.error('자기소개서 업데이트 오류 :', err);
+      res.status(500).send('자기소개서 업데이트 중 오류 발생');
+      return;
+    }
+    console.log('자기소개서가 성공적으로 업데이트되었습니다.');
+    res.redirect('/user/mypage_login');
+  });
 });
 
 

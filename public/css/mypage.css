@@ -128,7 +128,7 @@ button{
     flex-direction: column;
     width: 100%;
     border: 3px dotted rgb(15, 14, 14);
-    margin-top: 5px;
+    margin-top: 50px;
   }
   .profile_cvContainer li {
     width: auto;
@@ -178,4 +178,26 @@ button{
     background-color: crimson;
     border: none;
     border-radius: 10px;
+  }
+
+  .cvList{
+    width: 100%;
+    display: flex;
+  }
+
+  .white-space{
+    width: 30%;
+    line-height: 24px;
+  }
+
+  .space-idx{
+    width: 10%;
+  }
+
+  .space-title{
+    width: 80%;
+  }
+
+  .space-img{
+    width: 10%;
   }
