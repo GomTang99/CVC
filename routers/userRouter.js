@@ -72,20 +72,24 @@ userRouter.get('/mypage/:postIdx', (req, res) => {
 
 
 // 수정 엔드포인트
-userRouter.post('/edit_cvContent', (req, res) => {
-  const { txt1, txt2, txt3, txt4 } = req.body;
+userRouter.post('/mypage/:postIdx/edit', (req, res) => {
+  const requestData = req.body;
+  console.log(requestData);
+  
   const postIdx = req.params.postIdx;
 
   // 이하 SQL 쿼리문은 실제 데이터베이스와 연동되어야 합니다.
   const sql = "UPDATE mypage SET text_1 = ?, text_2 = ?, text_3 = ?, text_4 = ? WHERE idx = ?";
-  conn.query(sql, [txt1, txt2, txt3, txt4, postIdx], (err, result) => {
+  const values = [requestData.txt1, requestData.txt2, requestData.txt3, requestData.txt4, postIdx];
+
+  conn.query(sql, values, (err, result) => {
     if (err) {
       console.error('자기소개서 업데이트 오류 :', err);
       res.status(500).send('자기소개서 업데이트 중 오류 발생');
-      return;
+    } else {
+      console.log('자기소개서가 성공적으로 업데이트되었습니다.');
+      res.redirect('/user/mypage_login');
     }
-    console.log('자기소개서가 성공적으로 업데이트되었습니다.');
-    res.redirect('/user/mypage_login');
   });
 });
 

@@ -44,7 +44,7 @@
             >자기소개서 수정</span>
           <br />
         </div>
-        <form action="/edit_cvContent" class="edit_area" method="post">
+        <form action="/user/mypage/<%= post.idx %>/edit" method="post" class="edit_area" method="post">
             <textarea onkeydown="counter1()" class="txt" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부">
                 <%= post.text_1 %>
             </textarea><br/>
