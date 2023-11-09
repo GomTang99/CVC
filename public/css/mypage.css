@@ -185,19 +185,24 @@ button{
     display: flex;
   }
 
+  .cvList > a{
+    width: 100%;
+    display: flex;
+  }
+
   .white-space{
-    width: 30%;
+    width: 100%;
     line-height: 24px;
   }
 
   .space-idx{
-    width: 10%;
+    width: 15%;
   }
 
   .space-title{
-    width: 80%;
+    width: 70%;
   }
 
   .space-img{
-    width: 10%;
+    width: 15%;
   }

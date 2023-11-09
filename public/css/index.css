@@ -105,8 +105,8 @@ header{
 
 .in_section{
     width: 80%;
-    height: 900px;
-    background-color: rgb(214, 190, 234);
+    height: 1000px;
+    background-color: rgb(212, 205, 220);
     margin: 150px auto;
     display: flex;
     justify-content: space-around;
@@ -116,20 +116,40 @@ header{
     padding-bottom: 25px;
 }
 
-.save{
-   margin-left: 150px;
-   margin-top: 100px;
-    right: 380px;
-    bottom: -500px;
-    width: 300px;
-    height: 80px;
-    border-radius: 25px;
-    border: 1px solid black;
+#textForm{
+    margin-left: 80px;
+    padding-right: 20px;
+    margin-top: 30px;
 }
 
-.save:hover {
-    border: 1px solid rgba(0, 0, 0, .5);
+#textForm > *{
+    resize: none;
 }
+
+textarea {
+    font-weight: bold;
+}
+
+.save{
+    position: absolute;
+   top: 1350px;
+    right: 21%;
+   width: 300px;
+   height: 80px;
+   border-radius: 25px;
+   border: none;
+   background-color: #8A7DB1;
+    font-size: 50px;
+    font-weight: 700;
+    color:#fff;
+    border: #8A7DB1;
+    cursor: pointer;
+}
+
+ .save:hover {
+    border: 1px solid white;
+    background-color: #9789c0;
+} 
 
 .left > textarea{
     width: 90%;
@@ -161,10 +181,6 @@ footer .footer_txt > p > b{
     margin: 0;
 }
 
-#textForm{
 
-    margin-left: 80px;
-
-}
 
 

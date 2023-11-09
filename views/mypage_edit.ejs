@@ -11,9 +11,9 @@
     <header>
         <div class="header_top">
             <ul>
-                <li><a href="/board/community">커뮤니티</a></li>|
-                <li><a href="/board/works_cited">참고문헌</a></li>|
-                <li><a href="/board/AI_consult">AI 컨설팅</a></li>|
+                <li><a href="/board/community">커뮤니티</a></li>
+                <li><a href="/board/works_cited">참고문헌</a></li>
+                <li><a href="/board/AI_consult">AI 컨설팅</a></li>
                 <li><a href="/board/notice">공지사항</a></li>
             </ul>
             <ul class="login_register">
@@ -23,7 +23,7 @@
         </div>
         <div class="header_bottom">
             <div class="logo">
-                <h1><a href="/"><img src="/public/img/logo.png" alt="logo"></a></h1>
+                <h1><a href=""><img src="/public/img/logo.png" alt="logo"></a></h1>
             </div>
             <div class="sub_title">
                 <h1>마이 페이지</h1>
@@ -44,25 +44,35 @@
             >자기소개서 수정</span>
           <br />
         </div>
-        <form action="/user/mypage/<%= post.idx %>/edit" method="post" class="edit_area" method="post">
-            <textarea onkeydown="counter1()" class="txt" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부">
-                <%= post.text_1 %>
-            </textarea><br/>
-            <span style="color: #000;" id="count1">(0 / 최대 1000자)</span><br/>
-            <textarea onkeydown="counter2()" class="txt" name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)">
-                <%= post.text_2 %>
-            </textarea><br/>
-            <span style="color: #000;" id="count2">(0 / 최대 1000자)</span><br/>
-            <textarea onkeydown="counter3()" class="txt" name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점">
-                <%= post.text_3 %>
-            </textarea><br/>
-            <span style="color: #000;" id="count3">(0 / 최대 1000자)</span><br/>
-            <textarea onkeydown="counter4()" class="txt" name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량">
-                <%= post.text_4 %>
-            </textarea><br/>
-            <span style="color: #000;" id="count4">(0 / 최대 1000자)</span>
-            <input type="submit" name="edit" id="edit_btn" class="btn" value="수정하기">
-        </form>
+        <div class="edit_container">
+            <form action="/user/mypage/<%= post.idx %>/edit" method="post" class="edit_area" method="post">
+                <textarea onkeyup="counter1()" class="txt" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부">
+                    <%= post.text_1 %>
+                </textarea>
+                <div class="count">
+                    <span style="color: #000;" id="count1">(0 / 최대 1000자)</span><br/>
+                </div>
+                <textarea onkeyup="counter2()" class="txt" name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)">
+                    <%= post.text_2 %>
+                </textarea>
+                <div class="count">
+                    <span style="color: #000;" id="count2">(0 / 최대 1000자)</span><br/>
+                </div>
+                <textarea onkeyup="counter3()" class="txt" name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점">
+                    <%= post.text_3 %>
+                </textarea>
+                <div class="count">
+                    <span style="color: #000;" id="count3">(0 / 최대 1000자)</span><br/>
+                </div>
+                <textarea onkeyup="counter4()" class="txt" name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량">
+                    <%= post.text_4 %>
+                </textarea>
+                <div class="count">
+                    <span style="color: #000;" id="count4">(0 / 최대 1000자)</span>
+                </div>
+                <input type="submit" name="edit" id="edit_btn" class="btn" value="수정하기">
+            </form>
+        </div>
       </div>
   
   

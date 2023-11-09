@@ -78,7 +78,6 @@ userRouter.post('/mypage/:postIdx/edit', (req, res) => {
   
   const postIdx = req.params.postIdx;
 
-  // 이하 SQL 쿼리문은 실제 데이터베이스와 연동되어야 합니다.
   const sql = "UPDATE mypage SET text_1 = ?, text_2 = ?, text_3 = ?, text_4 = ? WHERE idx = ?";
   const values = [requestData.txt1, requestData.txt2, requestData.txt3, requestData.txt4, postIdx];
 

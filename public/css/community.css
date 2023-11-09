@@ -94,42 +94,20 @@ a{
 
 
 .community_content {
-    flex-direction: column;
-    background-color: thistle;
-  }
-  .content_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 25px;
-    background-color: mediumpurple;
-    color: white;
-    padding: 10px;
-  }
-  .content_header span {
-    margin-left: 40px;
-  }
-  .content_communitySearchForm {
-    display: flex;
-    width: 30%;
-    margin-right: 20px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 30px;
-  }
-  .content_communitySearchForm input {
-    width: 90%;
-    font-size: 20px;
-    margin: 0px 10px;
-    border: none;
-  }
-  .content_communitySearchForm input:focus {
-    outline: none;
-  }
-  .content_communitySearchForm i {
-    color: black;
-    margin-right: 10px;
-  }
+  flex-direction: column;
+  background-color: #D4CDDC;
+}
+.content_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  background-color: #8A7DB1;
+  color: white;
+  padding: 10px;
+}
+ 
   
   .content_community {
     position: relative;
@@ -151,10 +129,11 @@ a{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 600;
     padding: 10px 0px;
     color: white;
-    background-color: mediumpurple;
+    background-color: #8A7DB1;
   }
 
   .community_list {
@@ -162,23 +141,25 @@ a{
     width: 100%;
     justify-content: space-between;
     padding: 10px 0px;
-    border-bottom: 1px solid black;
+    background-color: #fff;
+    align-items: center;
   }
 
   #postList {
     flex-direction: column;
+    border: 2px solid #8A7DB1;
   }
   
   #postList > .community_list:hover {
-    background-color: white;
+    background-color: #D4CDDC;
     transition: 0.2s ease-in-out;
     cursor: pointer;
   }
 
   #postList > .community_list{
-    border: 1px solid black;
-    border-radius: 25px;
+    width: 90%;
     margin: 10px 0px;
+    border-bottom: 2px solid #8A7DB1;
   }  
 
   #postList > .community_list > a{
@@ -200,12 +181,20 @@ a{
     width: 10%;
   }
 
-
   .write-click > a{
-    width: 5%;
+    width: 100px;
     line-height: 30px;
-    background-color: whitesmoke;
+    background-color: #fff;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
     position: absolute;
-    top: 1.3%;
+    top: 1%;
     right: 4%;
+    border-radius: 25px;
+  }
+
+  .write-click > a:hover{
+    background-color: #8A7DB1;
+    color: white;
   }

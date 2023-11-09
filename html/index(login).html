@@ -15,13 +15,13 @@
         <header>
             <div class="in_header">
                 <h1 class="logo">
-                    <a href=""><img src="../public/img/logo.png" alt="logo"></a>
+                    <a href="/login"><img src="../public/img/logo.png" alt="logo"></a>
                 </h1>
                 <ul class="menu_wrap">
                     <li><a href="/board/community">커뮤니티</a></li>
                     <li><a href="/board/works_cited">참고문헌</a></li>
                     <li><a href="/board/AI_consult">AI 컨설팅</a></li>
-                    <li><a href="/board/notice">고객센터 / 공지사항</a></li>
+                    <li><a href="/board/notice">공지사항</a></li>
                 </ul>
                 <ul class="menu_wrap_1">
                     <li><a href="/user/mypage_login">마이페이지</a></li>
@@ -39,13 +39,17 @@
             <div class="in_section">
                 <div class="left">
                     <form action="/login" method="post" id="textForm">
-                        <textarea onkeydown="counter1()" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea><br/>
+                        <h3>1. 지원동기 및 입사 후 포부</h3>
+                        <textarea onkeyup="counter1()" name="txt1" id="txt1" cols="100" rows="12" placeholder="1. 지원동기 및 입사 후 포부"></textarea><br/>
                         <span style="color: #000;" id="count1">(0 / 최대 1000자)</span><br/>
-                        <textarea onkeydown="counter2()" name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea><br/>
+                        <h3>2. 경험(성장과정, 직무관련 경험 등)</h2>
+                        <textarea onkeyup="counter2()" name="txt2" id="txt2" cols="100" rows="12" placeholder="2. 경험(성장과정, 직무관련 경험 등)"></textarea><br/>
                         <span style="color: #000;" id="count2">(0 / 최대 1000자)</span><br/>
-                        <textarea onkeydown="counter3()" name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea><br/>
+                        <h3>3. 성격의 장단점</h3>
+                        <textarea onkeyup="counter3()" name="txt3" id="txt3" cols="100" rows="12" placeholder="3. 성격의 장단점"></textarea><br/>
                         <span style="color: #000;" id="count3">(0 / 최대 1000자)</span><br/>
-                        <textarea onkeydown="counter4()" name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량"></textarea><br/>
+                        <h3>4. 직무역량</h3>
+                        <textarea onkeyup="counter4()" name="txt4" id="txt4" cols="100" rows="12" placeholder="4. 직무역량"></textarea><br/>
                         <span style="color: #000;" id="count4">(0 / 최대 1000자)</span>
                         <input type="submit" class="save" value="저장하기" >
                     </form>

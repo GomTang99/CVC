@@ -57,6 +57,7 @@
   .logo{
     padding-bottom: 30px;
     z-index: -2;
+    cursor: pointer;
   }
   
   #content1 > a{
@@ -103,10 +104,16 @@
   }
 
   .edit_area{
-    width: 100%;
+    width: 38%;
+    margin: 0 auto;
     margin-top: 30px;
     text-align: center;
   }
+
+  .count {
+    text-align: left;
+  }
+
 
   .txt{
     resize: none;

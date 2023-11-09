@@ -77,12 +77,27 @@ a{
     transform: translateX(-30px);
 }
 
+.content_1{
+    width: 80%;
+    border-bottom: 2px solid #8A7DB1;
+}
+
+.content_2{
+    width: 80%;
+    border-bottom: 2px solid #8A7DB1;
+}
+
+.content_3{
+    width: 80%;
+    border-bottom: 2px solid #8A7DB1;
+}
+
 
 /* header_end */
 
 .con_top{
     width: 100%;
-    background-color: rgb(249, 247, 252);
+    background-color: #8A7DB1;
     margin-top: 30px;
 }
 
@@ -101,6 +116,7 @@ label {
   font-weight: 600;
   text-align: center;
   color: #bbb;
+  font-size: 25px;
   border: 1px solid transparent;
 }
 
@@ -111,9 +127,10 @@ label:hover {
 
 /*input 클릭시, label 스타일*/
 input:checked + label {
-    color: #555;
-    border: 1px solid #ddd;
-    border-top: 2px solid rgb(92, 26, 123);
+    color: #fff;
+    font-size: 25px;
+    border: 1px solid #8A7DB1;
+    border-top: 3px solid rgb(92, 26, 123);
     border-bottom: 1px solid #ffffff;
 }
 
@@ -124,7 +141,7 @@ input:checked + label {
 }
 
 .con_bottom > *{
-    background-color: rgb(232, 226, 237);
+    background-color: rgb(249, 247, 252);
     height: 650px;
 }
 
