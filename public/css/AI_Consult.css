@@ -95,13 +95,11 @@ ul{
 
   .main{
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     text-align: center;
   }
 
-  .main > #keywords{
-    width: 80%;
-    height: 200px;
+  .main > .container > #keywords{
     font-size: 28px;
     resize: none;
     margin-top: 20px;
@@ -142,7 +140,7 @@ ul{
     z-index: 101;
   }
 
-  #result{
+  .container > #result{
     width: 80%;
     margin-left: 8.9%;
     margin-top: 10%;
@@ -189,8 +187,19 @@ ul{
   .btn-3d.purple:hover {background-color: #D19ECB;}
 
   p{
+    width: 80%;
     font-size: 24px;
     border: 3px solid rgba(200, 191, 231, .7);
     left: 10%;
+    margin-left: 80px;
+    border-radius: 25px;
   }
 
+  .container{
+    display: flex;
+    padding-bottom: 50px;
+  }
+
+  .container > #keywords{
+    resize: none;
+  }
