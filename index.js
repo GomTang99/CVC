@@ -12,7 +12,7 @@ import boardRouter from "./routers/boardRouter.js";
 
 const __dirname = path.resolve();
 
-const PORT = 5948;
+const port = process.env.PORT || 5948;
 
 const app = express();
 
@@ -43,7 +43,7 @@ app.use("/user", userRouter);
 app.use("/board", boardRouter);
 
 
-app.listen(5948, function() {
+app.listen(port, function() {
     console.log('서버 가동');
 });
 
