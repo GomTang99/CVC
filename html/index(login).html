@@ -125,47 +125,6 @@
             });
         });
 
-
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            const textForm = document.getElementById("textForm");
-
-            textForm.addEventListener("submit", async (event) => {
-                event.preventDefault();
-
-                // FormData 객체를 사용하여 폼 데이터를 가져옵니다.
-                const formData = new FormData(textForm);
-
-                // FormData를 객체로 변환합니다.
-                const formDataObject = {};
-                formData.forEach((value, key) => {
-                    formDataObject[key] = value;
-                });
-
-                // JSON 형식으로 변환합니다.
-                const jsonData = JSON.stringify(formDataObject);
-
-                try {
-                    const response = await fetch("/saveText", {
-                        method: "POST",
-                        body: jsonData,
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    });
-
-                    const data = await response.json();
-                    if (data.success) {
-                        alert("자기소개서 저장 완료!");
-                    } else {
-                        alert("자기소개서 저장 실패!");
-                    }
-                } catch (error) {
-                    console.error("데이터 전송 오류:", error);
-                }
-            });
-        });
-
         // 글자수 카운팅
         function counter1(){
             var content = document.getElementById('txt1').value;
