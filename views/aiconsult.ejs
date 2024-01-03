@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/AI_Consult.css">
+    <title>AI 컨설팅</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header_top">
+            <ul>
+                <li><a href="/board/community">커뮤니티</a></li>
+                <li><a href="/board/works_cited">참고문헌</a></li>
+                <li><a href="/board/notice">공지사항</a></li>
+            </ul>
+            <ul class="login_register">
+              <li><a href="/user/mypage_login">마이페이지</a></li>
+              <li><a href="/">로그아웃</a></li>
+            </ul>
+        </div>
+        <div class="header_bottom">
+            <div class="logo">
+                <h1><a href="/"><img src="/public/img/logo.png" alt="logo"></a></h1>
+            </div>
+            <div class="sub_title">
+                <h1>AI 컨설팅</h1>
+            </div>
+        </div>
+      </header>
+
+      <!-- header_end -->
+
+<div class="main">
+    <span
+          style="
+            font-size: 30px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: thistle;
+            color: white;
+          "
+          >자기소개서 보관함</span>
+        <div class="profile_cvContainer">
+          <ul class="profile_cvContainer_ul">
+            <% posts.forEach(function(post)  { %>
+              <li><button id="loadCVButton" class="cvList" data-idx="<%= post.idx %>">
+                <a href="/user/mypage/<%= post.idx %>">
+                <div class="white-space space-idx">
+                  <div><%= post.idx %></div>
+                </div>
+                <div class="white-space space-title">
+                  <div><%= post.text_1 %></div>
+                </div>
+                <div class="white-space space-img">
+                  <div>✏️</div>
+                </div>
+              </button>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+    <h1>AI 컨설팅</h1>
+
+  <div class="container">
+    <textarea name="keywords" id="keywords" cols="90" rows="20"></textarea>
+    <button id="btn" onclick="chatGPT()" class="btn-3d purple">입력</button>
+    <div id="result"></div>
+  </div>
+
+  <div id="loading">
+    <img src="https://studentrights.sen.go.kr/images/common/loading.gif">
+  </div>
+</div>
+  
+  <script src="../public/js/chatGPT.js"></script>
+
+
+    
+</body>
+</html>

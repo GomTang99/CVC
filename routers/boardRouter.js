@@ -301,6 +301,50 @@ boardRouter.get("/AI_consult", async (req, res) => {
 });
 
 
+//AI컨설팅 테스트(ejs)
+boardRouter.get("/AI_consult1", async (req, res) => {
+  try {
+    // 데이터베이스 연결 설정
+    const dbConfig = {
+      host: '127.0.0.1',
+      port: '3306',
+      user: 'root',
+      password: 'wnsdud5948!@',
+      database: 'CVC',
+    };
+
+    
+    // 데이터베이스 연결
+    const connection = await mysql.createConnection(dbConfig);
+
+    // 세션에서 사용자 ID 가져오기
+    const userName = req.session.user.name;
+
+    // 데이터베이스에서 마이페이지 정보 가져오기
+    const sql = 'SELECT * FROM mypage WHERE user_id = ?';
+    const [rows] = await connection.execute(sql, [userName]);
+
+    if (rows.length === 0) {
+      res.status(404).send('사용자 정보를 찾을 수 없음');
+      return;
+    }
+
+    const userMypageData = rows;
+
+    res.render('aiconsult', {
+      userId: userName,
+      posts: userMypageData,
+    });
+
+    // 연결 종료
+    connection.end();
+  } catch (error) {
+    console.error('DB 오류:', error);
+    res.status(500).send('서버 오류');
+  }
+
+});
+
 // 참고문헌
 boardRouter.get("/works_cited", (req, res) => {
   res.sendFile(process.cwd() + "/html/works_cited.html");

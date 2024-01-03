@@ -22,13 +22,13 @@ globalRouter.get("/", (req, res) => {
 
 // 자기소개서 저장
 globalRouter.post("/saveText", (req, res) => {
-  const userId = req.session.user.id; // 현재 로그인한 사용자의 이름
+  const userName = req.session.user.name; // 현재 로그인한 사용자의 이름
   const requestData = req.body;
 
   console.log("세션 내용:", req.session);
   const sql = `INSERT INTO cvc.mypage (user_id, text_1, text_2, text_3, text_4) VALUES (?, ?, ?, ?, ?)`;
   
-  const values = [userId, requestData.txt1, requestData.txt2, requestData.txt3, requestData.txt4];
+  const values = [userName, requestData.txt1, requestData.txt2, requestData.txt3, requestData.txt4];
 
   conn.query(sql, values, (err, result) => {
     if (err) {
@@ -37,7 +37,7 @@ globalRouter.post("/saveText", (req, res) => {
     } else {
       console.log('데이터가 성공적으로 삽입되었습니다.');
       res.json({ success: true, message: '데이터 전송 및 저장 성공!' });
-      //res.redirect("/login");
+      //res.redirect("/mypage(login)");
     }
   });
 });

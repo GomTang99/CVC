@@ -37,13 +37,13 @@ userRouter.get("/mypage_login", async (req, res) => {
 
     const userMypageData = rows;
 
+    // 연결 종료
+    connection.end();
     res.render('mypage(login)', {
       userId: userName,
       posts: userMypageData,
     });
 
-    // 연결 종료
-    connection.end();
   } catch (error) {
     console.error('DB 오류:', error);
     res.status(500).send('서버 오류');
